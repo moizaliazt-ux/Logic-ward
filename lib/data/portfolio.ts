@@ -239,3 +239,4 @@ export const portfolioProjects: CaseStudy[] = [
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
   return portfolioProjects.find((p) => p.slug === slug);
 }
+

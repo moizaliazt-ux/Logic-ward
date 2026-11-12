@@ -308,3 +308,4 @@ export const articlesData: Article[] = [
 export function getArticleBySlug(slug: string): Article | undefined {
   return articlesData.find((a) => a.slug === slug);
 }
+

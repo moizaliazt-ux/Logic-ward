@@ -399,3 +399,4 @@ export const solutionsData: SolutionItem[] = [
 export function getSolutionBySlug(slug: string): SolutionItem | undefined {
   return solutionsData.find((s) => s.slug === slug);
 }
+

@@ -6,20 +6,21 @@ import {
   Layers,
   Sparkles,
   CheckCircle2,
+  ShieldAlert,
 } from "lucide-react";
 import { portfolioProjects } from "@/lib/data/portfolio";
 
 export function FeaturedWork() {
   return (
-    <section className="py-20 md:py-28 relative">
+    <section className="py-20 md:py-28 relative bg-[#060a12] border-t border-slate-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl space-y-3">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-slate-900 text-cyan-400 border border-slate-800">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-slate-900 text-cyan-400 border border-slate-800">
               <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
               Reference Architectures & Engineering Demonstrations
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
               Selected Work & Technical Solutions
             </h2>
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
@@ -36,13 +37,13 @@ export function FeaturedWork() {
           </Link>
         </div>
 
-        {/* Explicit Disclosure Badge */}
-        <div className="mb-8 p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 text-xs text-slate-400 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-cyan-400" />
-            <span className="text-slate-300 font-medium">Transparency Notice:</span>
+        {/* Explicit Disclosure Badge per Brief Guidelines */}
+        <div className="mb-10 p-4 rounded-2xl bg-slate-950/80 border border-slate-800/80 text-xs text-slate-400 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <ShieldAlert className="w-4 h-4 text-amber-400 flex-shrink-0" />
+            <span className="text-slate-300 font-medium">Compliance & Verification Notice:</span>
             <span>
-              The projects below are clearly labeled Reference Implementations and Concept Case Studies illustrating our technical standards. Client confidential work remains protected under NDA.
+              The projects below are clearly labeled Reference Implementations and Concept Case Studies illustrating our technical standards. Client confidential work remains protected under bilateral NDAs.
             </span>
           </div>
         </div>
@@ -52,11 +53,11 @@ export function FeaturedWork() {
           {portfolioProjects.map((project) => (
             <div
               key={project.id}
-              className="rounded-2xl bg-[#090e1a] border border-slate-800 hover:border-slate-700 transition-all p-6 sm:p-8 flex flex-col justify-between space-y-6 group"
+              className="rounded-3xl bg-[#090e1a] border border-slate-800 hover:border-slate-700 transition-all p-6 sm:p-8 flex flex-col justify-between space-y-6 group shadow-xl"
             >
-              <div className="space-y-4">
+              <div className="space-y-5">
                 <div className="flex items-center justify-between flex-wrap gap-2">
-                  <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-cyan-950/80 text-cyan-300 border border-cyan-800/60">
+                  <span className="px-3 py-1 rounded-md text-[11px] font-mono font-medium bg-cyan-950/90 text-cyan-300 border border-cyan-800/60">
                     {project.projectBadge}
                   </span>
                   <span className="text-xs text-slate-400 font-medium">
@@ -65,7 +66,7 @@ export function FeaturedWork() {
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
                     {project.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -78,7 +79,7 @@ export function FeaturedWork() {
                   {project.techStack.map((tech, idx) => (
                     <span
                       key={idx}
-                      className="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-950 border border-slate-800 text-slate-400"
+                      className="px-2.5 py-1 rounded text-[11px] font-mono bg-slate-950 border border-slate-800 text-slate-400"
                     >
                       {tech}
                     </span>
@@ -86,11 +87,11 @@ export function FeaturedWork() {
                 </div>
 
                 {/* Key Technical Outcomes */}
-                <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800/70 space-y-2">
+                <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800/80 space-y-2">
                   <span className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block">
                     Verified Technical Outcomes:
                   </span>
-                  <div className="space-y-1.5 text-xs text-slate-400">
+                  <div className="space-y-2 text-xs text-slate-400">
                     {project.projectOutcomes.slice(0, 2).map((outcome, idx) => (
                       <div key={idx} className="flex items-start gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 mt-0.5 flex-shrink-0" />
@@ -107,7 +108,7 @@ export function FeaturedWork() {
               </div>
 
               <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
-                <span className="text-xs text-slate-500 font-mono">
+                <span className="text-xs text-slate-400 font-mono">
                   {project.category}
                 </span>
                 <Link

@@ -52,3 +52,4 @@ export default function PortfolioPage() {
     </div>
   );
 }
+

@@ -49,3 +49,4 @@ export const generalAgencyFAQs: FAQItem[] = [
       "The first step is a 30-minute discovery consultation. We review your current operational challenges, timeline, and technical requirements. Within 48 hours, we deliver a concise project outline with recommended technical architecture, timeline estimates, and budget ranges—with no obligation to proceed.",
   },
 ];
+

@@ -320,3 +320,4 @@ export default async function CaseStudyDetailPage({
     </div>
   );
 }
+
