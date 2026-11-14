@@ -1,47 +1,107 @@
 @import "tailwindcss";
 
+@theme {
+  /* Colors from User Inspiration & PRD Specification */
+  --color-warm-white: #dae7de;
+  --color-off-black: #091615;
+  --color-true-black: #050d0c;
+  --color-pine-dark: #0d1f1c;
+  --color-pine-surface: #132b27;
+  --color-spruce: #1a342e;
+  --color-emerald-accent: #2d584d;
+  --color-sage-muted: #94a49a;
+  --color-sage-light: #dae7de;
+  --color-pale-steel: #b7c7bd;
+
+  /* Typography Scale from PRD */
+  --text-hero-eyebrow: 12px;
+  --leading-hero-eyebrow: 1;
+  --tracking-hero-eyebrow: 0.96px;
+  --text-technical-label: 12px;
+  --leading-technical-label: 1;
+  --tracking-technical-label: 0.72px;
+  --text-nav: 14px;
+  --leading-nav: 1.25;
+  --tracking-nav: -0.14px;
+  --text-interface-text: 19px;
+  --leading-interface-text: 1.2;
+  --tracking-interface-text: -0.19px;
+  --text-feature-heading: 19px;
+  --leading-feature-heading: 1.2;
+  --tracking-feature-heading: -0.19px;
+  --text-card-heading: 28px;
+  --leading-card-heading: 1;
+  --tracking-card-heading: -0.56px;
+  --text-section-heading: 36px;
+  --leading-section-heading: 1;
+  --tracking-section-heading: -1.08px;
+  --text-hero-heading: 62px;
+  --leading-hero-heading: 0.93;
+  --tracking-hero-heading: -1.86px;
+
+  /* Spacing Scale from PRD */
+  --spacing-5: 5px;
+  --spacing-6: 6px;
+  --spacing-8: 8px;
+  --spacing-10: 10px;
+  --spacing-11: 11px;
+  --spacing-12: 12px;
+  --spacing-13: 13px;
+  --spacing-15: 15px;
+  --spacing-18: 18px;
+  --spacing-30: 30px;
+  --spacing-50: 50px;
+  --spacing-55: 55px;
+  --spacing-88: 88px;
+  --spacing-100: 100px;
+  --spacing-143: 143px;
+  --spacing-150: 150px;
+
+  /* Border Radii from PRD */
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-xl: 12px;
+  --radius-3xl: 24px;
+}
+
 @layer base {
   :root {
-    --background: #060a12;
-    --foreground: #f8fafc;
-    --card: #0c1322;
-    --card-border: #1e293b;
-    --accent: #0ea5e9;
-    --accent-cyan: #06b6d4;
+    --background: #091615;
+    --foreground: #dae7de;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01", "ss07";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 }
 
-/* Custom subtle scrollbar */
+/* Custom subtle pine scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #070b14;
+  background: #091615;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 4px;
+  background: #1a342e;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #2d584d;
 }
 
-/* Accessible focus ring */
+/* High-contrast focus state */
 *:focus-visible {
-  outline: 2px solid #0ea5e9;
+  outline: 2px solid #dae7de;
   outline-offset: 2px;
 }
 
-/* Smooth motion respecting user preference */
+/* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;

@@ -26,25 +26,25 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   const coreValues = [
     {
-      icon: <Code2 className="w-5 h-5 text-cyan-400" />,
+      icon: <Code2 className="w-5 h-5 text-[#dae7de]" />,
       title: "Clean Architecture Over Quick Hacks",
       description:
         "We build for longevity. Our databases are normalized, our code is typed, and our APIs are documented so systems scale smoothly as your transaction volume multiplies.",
     },
     {
-      icon: <ShieldCheck className="w-5 h-5 text-sky-400" />,
+      icon: <ShieldCheck className="w-5 h-5 text-[#94a49a]" />,
       title: "Absolute Transparency & IP Transfer",
       description:
         "We do not hold code hostage. You retain 100% intellectual property rights, source code ownership, and administrative credentials from day one of deployment.",
     },
     {
-      icon: <Target className="w-5 h-5 text-teal-400" />,
+      icon: <Target className="w-5 h-5 text-[#dae7de]" />,
       title: "Business Value Above Technical Vanity",
       description:
         "Technology exists to solve operational friction, generate revenue, or reduce overhead. If a feature does not move a business metric, we advise against building it.",
     },
     {
-      icon: <Clock className="w-5 h-5 text-blue-400" />,
+      icon: <Clock className="w-5 h-5 text-[#94a49a]" />,
       title: "Predictable, Milestone-Driven Timelines",
       description:
         "We scope thoroughly before kickoff. Bi-weekly sprints, interactive staging builds, and clear acceptance criteria protect you from budget inflation.",
@@ -97,19 +97,20 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full bg-[#071312] text-[#dae7de]">
       {/* Hero Header */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-[#060a12] via-[#091122] to-[#060a12] border-b border-slate-800/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 md:py-24 bg-gradient-to-b from-[#091615] via-[#0d1f1c] to-[#071312] border-b border-[#1a342e]">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#2d584d]/15 blur-[120px] rounded-full pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-slate-900 text-cyan-400 border border-slate-800">
-              <Globe2 className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-[0.72px] bg-[#0d1f1c] text-[#dae7de] border border-[#1a342e]">
+              <Globe2 className="w-3.5 h-3.5 text-[#94a49a]" />
               <span>About {siteConfig.name}</span>
             </div>
             <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
               One Dedicated Technology Partner for Your Entire Digital Ecosystem.
             </h1>
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+            <p className="text-base sm:text-lg text-[#94a49a] leading-relaxed">
               We bridge the gap between business objectives and modern software engineering. Based in Pakistan and collaborating with clients across North America, Europe, the Middle East, and worldwide.
             </p>
           </div>
@@ -119,8 +120,8 @@ export default function AboutPage() {
       {/* Agency Mission & Positioning */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-6 space-y-6 text-slate-300 leading-relaxed text-sm sm:text-base">
-            <span className="text-xs font-semibold uppercase tracking-wider text-cyan-400 block">
+          <div className="lg:col-span-6 space-y-6 text-[#94a49a] leading-relaxed text-sm sm:text-base">
+            <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de] block">
               Our Founding Thesis
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug">
@@ -138,38 +139,38 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-6">
-            <div className="rounded-2xl bg-[#090e1a] border border-slate-800 p-8 space-y-6">
-              <h3 className="text-lg font-bold text-white">
+            <div className="rounded-[24px] bg-[#0d1f1c] border border-[#1a342e] p-8 space-y-6 shadow-xl shadow-black/40">
+              <h3 className="text-lg font-bold text-white tracking-tight">
                 Global Delivery Model & Footprint
               </h3>
 
-              <div className="space-y-4 text-xs sm:text-sm text-slate-300">
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-                  <div className="text-white font-semibold flex items-center gap-2">
-                    <Globe2 className="w-4 h-4 text-cyan-400" />
+              <div className="space-y-4 text-xs sm:text-sm text-[#94a49a]">
+                <div className="p-4 rounded-xl bg-[#091615] border border-[#1a342e] space-y-1">
+                  <div className="text-[#dae7de] font-semibold flex items-center gap-2">
+                    <Globe2 className="w-4 h-4 text-[#dae7de]" />
                     <span>Primary Operational Hub</span>
                   </div>
-                  <p className="text-slate-400">
+                  <p className="text-[#94a49a]">
                     Pakistan (Lahore / Karachi engineering teams with high-speed fiber backbones and redundant power backup).
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-                  <div className="text-white font-semibold flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-sky-400" />
+                <div className="p-4 rounded-xl bg-[#091615] border border-[#1a342e] space-y-1">
+                  <div className="text-[#dae7de] font-semibold flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-[#94a49a]" />
                     <span>Time Zone Alignment</span>
                   </div>
-                  <p className="text-slate-400">
+                  <p className="text-[#94a49a]">
                     Active collaboration hours covering North American EST, European GMT, and Gulf Standard Time (GST).
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-                  <div className="text-white font-semibold flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <div className="p-4 rounded-xl bg-[#091615] border border-[#1a342e] space-y-1">
+                  <div className="text-[#dae7de] font-semibold flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-[#dae7de]" />
                     <span>Contractual & Legal Protections</span>
                   </div>
-                  <p className="text-slate-400">
+                  <p className="text-[#94a49a]">
                     Standard international bilateral NDAs, milestone escrow structures, and comprehensive IP transfer covenants.
                   </p>
                 </div>
@@ -180,16 +181,16 @@ export default function AboutPage() {
       </section>
 
       {/* Core Principles Grid */}
-      <section className="py-20 bg-slate-950/60 border-y border-slate-800/80">
+      <section className="py-20 bg-[#091615] border-y border-[#1a342e]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center space-y-3 mb-14">
-            <span className="text-xs font-semibold uppercase tracking-wider text-cyan-400">
+            <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de]">
               Guiding Principles
             </span>
             <h2 className="text-3xl font-bold text-white tracking-tight">
               Our Engineering Ethos
             </h2>
-            <p className="text-sm text-slate-300">
+            <p className="text-sm text-[#94a49a]">
               The non-negotiable principles that guide our technical decisions, code reviews, and client relationships.
             </p>
           </div>
@@ -198,13 +199,13 @@ export default function AboutPage() {
             {coreValues.map((val, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-[#090e1a] border border-slate-800 hover:border-slate-700 transition-colors space-y-3"
+                className="p-6 rounded-xl bg-[#0d1f1c] border border-[#1a342e] hover:border-[#2d584d] transition-colors space-y-3"
               >
-                <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg bg-[#091615] border border-[#1a342e] flex items-center justify-center">
                   {val.icon}
                 </div>
-                <h3 className="text-base font-bold text-white">{val.title}</h3>
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                <h3 className="text-base font-bold text-white tracking-tight">{val.title}</h3>
+                <p className="text-xs sm:text-sm text-[#94a49a] leading-relaxed">
                   {val.description}
                 </p>
               </div>
@@ -216,13 +217,13 @@ export default function AboutPage() {
       {/* Team Structure & Leadership (Labeled Placeholders per brief) */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="team">
         <div className="max-w-3xl space-y-3 mb-12">
-          <span className="text-xs font-semibold uppercase tracking-wider text-cyan-400">
+          <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de]">
             Organizational Structure
           </span>
           <h2 className="text-3xl font-bold text-white tracking-tight">
             Key Practice Areas & Leadership Roles
           </h2>
-          <p className="text-sm text-slate-300 leading-relaxed">
+          <p className="text-sm text-[#94a49a] leading-relaxed">
             Our engineering team is structured into specialized functional practices, ensuring deep domain expertise across each service division.
           </p>
         </div>
@@ -232,28 +233,28 @@ export default function AboutPage() {
           {teamRoles.map((role, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-[#090e1a] border border-slate-800 hover:border-slate-700 transition-all space-y-4"
+              className="p-6 rounded-xl bg-[#0d1f1c] border border-[#1a342e] hover:border-[#2d584d] transition-all space-y-4"
             >
               <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-slate-900 text-cyan-400 border border-slate-800">
+                <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-[#091615] text-[#dae7de] border border-[#1a342e]">
                   {role.department}
                 </span>
-                <h3 className="text-sm font-bold text-white pt-2">
+                <h3 className="text-sm font-bold text-white pt-2 tracking-tight">
                   {role.role}
                 </h3>
-                <div className="text-[11px] font-mono text-slate-400">
+                <div className="text-[11px] font-mono text-[#94a49a]">
                   {role.placeholderTag}
                 </div>
               </div>
 
-              <p className="text-xs text-slate-400 leading-relaxed border-t border-slate-800/80 pt-3">
+              <p className="text-xs text-[#94a49a] leading-relaxed border-t border-[#1a342e] pt-3">
                 {role.responsibilities}
               </p>
             </div>
           ))}
         </div>
 
-        <div className="mt-8 p-4 rounded-xl bg-slate-950/80 border border-dashed border-slate-800 text-center text-xs text-slate-400 max-w-3xl mx-auto">
+        <div className="mt-8 p-4 rounded-xl bg-[#0d1f1c]/80 border border-dashed border-[#1a342e] text-center text-xs text-[#94a49a] max-w-3xl mx-auto">
           [Team Notice: Specific officer names, LinkedIn profiles, and verified professional biographies are configured in agency onboarding documentation before client contract execution.]
         </div>
       </section>
@@ -262,4 +263,3 @@ export default function AboutPage() {
     </div>
   );
 }
-

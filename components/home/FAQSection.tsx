@@ -13,17 +13,17 @@ export function FAQSection() {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-[#050810] border-t border-slate-800/80">
+    <section className="py-20 md:py-28 bg-[#050e0d] border-t border-[#16332d]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-4 mb-14">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-slate-900 text-cyan-400 border border-slate-800">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#0d221f] text-[#dae7de] border border-[#1e463e]">
             <HelpCircle className="w-3.5 h-3.5" />
             Transparent Answers
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
             Frequently Asked Questions
           </h2>
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-[#b2c5bd] leading-relaxed max-w-xl mx-auto">
             Direct, plain-language answers regarding our pricing models, communication standards, intellectual property ownership, and technical workflows.
           </p>
         </div>
@@ -35,10 +35,10 @@ export function FAQSection() {
             return (
               <div
                 key={faq.id}
-                className={`rounded-2xl border transition-all ${
+                className={`rounded-3xl border transition-all shadow-md ${
                   isOpen
-                    ? "bg-[#090e1a] border-cyan-500/40 shadow-lg shadow-black/40"
-                    : "bg-[#080d18] border-slate-800 hover:border-slate-700"
+                    ? "bg-[#091a17] border-[#dae7de]/40 shadow-xl shadow-black/50"
+                    : "bg-[#071412] border-[#183832] hover:border-[#2d584d]"
                 }`}
               >
                 <button
@@ -52,8 +52,8 @@ export function FAQSection() {
                   <div
                     className={`w-7 h-7 rounded-full flex items-center justify-center border transition-all flex-shrink-0 ${
                       isOpen
-                        ? "bg-cyan-950 border-cyan-800 text-cyan-300 rotate-180"
-                        : "bg-slate-900 border-slate-800 text-slate-400"
+                        ? "bg-[#dae7de] border-[#dae7de] text-[#071312] rotate-180"
+                        : "bg-[#0e2622] border-[#1e463e] text-[#8ea79f]"
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -61,7 +61,7 @@ export function FAQSection() {
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/80 mt-1">
+                  <div className="px-6 pb-6 pt-1 text-xs sm:text-sm text-[#b2c5bd] leading-relaxed border-t border-[#16332d] mt-1">
                     {faq.answer}
                   </div>
                 )}
@@ -71,11 +71,11 @@ export function FAQSection() {
         </div>
 
         <div className="mt-10 text-center">
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-[#8ea79f]">
             Have a specialized technical question not addressed above?{" "}
             <Link
               href="/contact"
-              className="text-cyan-400 hover:text-cyan-300 font-semibold underline underline-offset-4 ml-1"
+              className="text-[#dae7de] hover:underline font-semibold underline underline-offset-4 ml-1"
             >
               Ask our engineering team directly
             </Link>
@@ -85,4 +85,3 @@ export function FAQSection() {
     </section>
   );
 }
-

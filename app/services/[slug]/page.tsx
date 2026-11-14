@@ -74,7 +74,7 @@ export default async function ServiceDetailPage({
   ];
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full bg-[#071312] text-[#dae7de]">
       <ServiceJsonLd
         name={service.title}
         description={service.shortDescription}
@@ -83,31 +83,32 @@ export default async function ServiceDetailPage({
       <BreadcrumbJsonLd items={breadcrumbs} />
 
       {/* Hero Header with Breadcrumbs */}
-      <section className="py-14 md:py-20 bg-gradient-to-b from-[#060a12] via-[#091122] to-[#060a12] border-b border-slate-800/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-14 md:py-20 bg-gradient-to-b from-[#091615] via-[#0d1f1c] to-[#071312] border-b border-[#1a342e]">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#2d584d]/15 blur-[120px] rounded-full pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Breadcrumb nav */}
           <nav
             aria-label="Breadcrumb"
-            className="flex items-center gap-1.5 text-xs text-slate-400 mb-6 flex-wrap"
+            className="flex items-center gap-1.5 text-xs text-[#94a49a] mb-6 flex-wrap"
           >
-            <Link href="/" className="hover:text-cyan-400 transition-colors">
+            <Link href="/" className="hover:text-[#dae7de] transition-colors">
               Home
             </Link>
-            <ChevronRight className="w-3 h-3 text-slate-600" />
-            <Link href="/services" className="hover:text-cyan-400 transition-colors">
+            <ChevronRight className="w-3 h-3 text-[#1a342e]" />
+            <Link href="/services" className="hover:text-[#dae7de] transition-colors">
               Services
             </Link>
-            <ChevronRight className="w-3 h-3 text-slate-600" />
-            <span className="text-slate-400">{service.categoryName}</span>
-            <ChevronRight className="w-3 h-3 text-slate-600" />
-            <span className="text-cyan-400 font-medium truncate max-w-[200px] sm:max-w-none">
+            <ChevronRight className="w-3 h-3 text-[#1a342e]" />
+            <span className="text-[#94a49a]">{service.categoryName}</span>
+            <ChevronRight className="w-3 h-3 text-[#1a342e]" />
+            <span className="text-[#dae7de] font-medium truncate max-w-[200px] sm:max-w-none">
               {service.title}
             </span>
           </nav>
 
           <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-slate-900 text-cyan-400 border border-slate-800">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-[0.72px] bg-[#0d1f1c] text-[#dae7de] border border-[#1a342e]">
+              <span className="w-2 h-2 rounded-full bg-[#dae7de] animate-pulse" />
               <span>{service.categoryName}</span>
             </div>
 
@@ -115,14 +116,14 @@ export default async function ServiceDetailPage({
               {service.heroHeadline}
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+            <p className="text-base sm:text-lg text-[#94a49a] leading-relaxed">
               {service.heroSubheadline}
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-4">
               <Link
                 href="/contact"
-                className="px-6 py-3.5 rounded-xl font-semibold text-slate-950 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 transition-all text-sm text-center shadow-lg shadow-cyan-950/40 inline-flex items-center justify-center gap-2 group"
+                className="px-6 py-3.5 rounded-lg font-semibold text-[#091615] bg-[#dae7de] hover:bg-white transition-all text-sm text-center shadow-lg shadow-black/40 inline-flex items-center justify-center gap-2 group"
               >
                 <span>Book a Consultation for this Service</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -132,9 +133,9 @@ export default async function ServiceDetailPage({
                 href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3.5 rounded-xl font-medium text-slate-200 bg-slate-900 border border-slate-800 hover:bg-slate-850 transition-colors text-sm text-center inline-flex items-center justify-center gap-2"
+                className="px-5 py-3.5 rounded-lg font-medium text-[#dae7de] bg-[#0d1f1c] border border-[#1a342e] hover:bg-[#132b27] transition-colors text-sm text-center inline-flex items-center justify-center gap-2"
               >
-                <PhoneCall className="w-4 h-4 text-emerald-400" />
+                <PhoneCall className="w-4 h-4 text-[#dae7de]" />
                 <span>WhatsApp Us</span>
               </a>
             </div>
@@ -150,14 +151,14 @@ export default async function ServiceDetailPage({
             {/* The Challenge / Client Problem */}
             <div className="space-y-6">
               <div className="space-y-2">
-                <span className="text-xs font-semibold uppercase tracking-wider text-rose-400 flex items-center gap-1.5">
+                <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#b7c7bd] flex items-center gap-1.5">
                   <AlertCircle className="w-4 h-4" />
                   The Operational Challenge
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                   {service.clientProblem.title}
                 </h2>
-                <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p className="text-sm sm:text-base text-[#94a49a] leading-relaxed">
                   {service.clientProblem.description}
                 </p>
               </div>
@@ -166,9 +167,9 @@ export default async function ServiceDetailPage({
                 {service.clientProblem.painPoints.map((pain, idx) => (
                   <div
                     key={idx}
-                    className="p-4 rounded-xl bg-slate-950/70 border border-slate-800/80 text-xs sm:text-sm text-slate-300 flex items-start gap-2.5"
+                    className="p-4 rounded-xl bg-[#091615] border border-[#1a342e] text-xs sm:text-sm text-[#94a49a] flex items-start gap-2.5"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#dae7de] mt-2 flex-shrink-0" />
                     <span className="leading-relaxed">{pain}</span>
                   </div>
                 ))}
@@ -176,16 +177,16 @@ export default async function ServiceDetailPage({
             </div>
 
             {/* Our Solution & Technical Pillars */}
-            <div className="space-y-6 pt-6 border-t border-slate-800/80">
+            <div className="space-y-6 pt-6 border-t border-[#1a342e]">
               <div className="space-y-2">
-                <span className="text-xs font-semibold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
+                <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de] flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4" />
                   Our Architectural Solution
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                   {service.ourSolution.title}
                 </h2>
-                <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p className="text-sm sm:text-base text-[#94a49a] leading-relaxed">
                   {service.ourSolution.description}
                 </p>
               </div>
@@ -194,12 +195,12 @@ export default async function ServiceDetailPage({
                 {service.ourSolution.pillars.map((pillar, idx) => (
                   <div
                     key={idx}
-                    className="p-5 rounded-xl bg-[#090e1a] border border-slate-800 space-y-2"
+                    className="p-5 rounded-xl bg-[#0d1f1c] border border-[#1a342e] space-y-2"
                   >
-                    <h3 className="text-sm font-bold text-white">
+                    <h3 className="text-sm font-bold text-white tracking-tight">
                       {pillar.title}
                     </h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">
+                    <p className="text-xs text-[#94a49a] leading-relaxed">
                       {pillar.detail}
                     </p>
                   </div>
@@ -208,15 +209,15 @@ export default async function ServiceDetailPage({
             </div>
 
             {/* Key Deliverables */}
-            <div className="space-y-6 pt-6 border-t border-slate-800/80">
+            <div className="space-y-6 pt-6 border-t border-[#1a342e]">
               <div className="space-y-1">
-                <span className="text-xs font-semibold uppercase tracking-wider text-cyan-400">
+                <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de]">
                   Tangible Outcomes
                 </span>
                 <h2 className="text-2xl font-bold text-white tracking-tight">
                   What We Deliver
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-400">
+                <p className="text-xs sm:text-sm text-[#94a49a]">
                   Concrete deliverables included with this service engagement:
                 </p>
               </div>
@@ -225,9 +226,9 @@ export default async function ServiceDetailPage({
                 {service.deliverables.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex items-start gap-2.5 text-xs sm:text-sm text-slate-300"
+                    className="p-3.5 rounded-xl bg-[#091615] border border-[#1a342e] flex items-start gap-2.5 text-xs sm:text-sm text-[#dae7de]"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-[#dae7de] mt-0.5 flex-shrink-0" />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -235,9 +236,9 @@ export default async function ServiceDetailPage({
             </div>
 
             {/* Step-by-Step Delivery Process */}
-            <div className="space-y-6 pt-6 border-t border-slate-800/80">
+            <div className="space-y-6 pt-6 border-t border-[#1a342e]">
               <div className="space-y-1">
-                <span className="text-xs font-semibold uppercase tracking-wider text-cyan-400">
+                <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de]">
                   Structured Lifecycle
                 </span>
                 <h2 className="text-2xl font-bold text-white tracking-tight">
@@ -249,16 +250,16 @@ export default async function ServiceDetailPage({
                 {service.process.map((step) => (
                   <div
                     key={step.step}
-                    className="p-4 rounded-xl bg-[#090e1a] border border-slate-800 flex items-start gap-4"
+                    className="p-4 rounded-xl bg-[#0d1f1c] border border-[#1a342e] flex items-start gap-4"
                   >
-                    <span className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 font-mono text-cyan-400 font-bold text-xs flex items-center justify-center flex-shrink-0">
+                    <span className="w-8 h-8 rounded-lg bg-[#091615] border border-[#1a342e] font-mono text-[#dae7de] font-bold text-xs flex items-center justify-center flex-shrink-0">
                       0{step.step}
                     </span>
                     <div className="space-y-0.5">
-                      <h3 className="text-sm font-bold text-white">
+                      <h3 className="text-sm font-bold text-white tracking-tight">
                         {step.title}
                       </h3>
-                      <p className="text-xs text-slate-400 leading-relaxed">
+                      <p className="text-xs text-[#94a49a] leading-relaxed">
                         {step.summary}
                       </p>
                     </div>
@@ -268,9 +269,9 @@ export default async function ServiceDetailPage({
             </div>
 
             {/* Service-Specific FAQs */}
-            <div className="space-y-6 pt-6 border-t border-slate-800/80">
+            <div className="space-y-6 pt-6 border-t border-[#1a342e]">
               <div className="space-y-1">
-                <span className="text-xs font-semibold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
+                <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de] flex items-center gap-1.5">
                   <HelpCircle className="w-4 h-4" />
                   Service FAQs
                 </span>
@@ -283,12 +284,12 @@ export default async function ServiceDetailPage({
                 {service.faqs.map((faq, idx) => (
                   <div
                     key={idx}
-                    className="p-5 rounded-xl bg-[#090e1a] border border-slate-800 space-y-2"
+                    className="p-5 rounded-xl bg-[#0d1f1c] border border-[#1a342e] space-y-2"
                   >
-                    <h3 className="text-sm font-semibold text-white">
+                    <h3 className="text-sm font-semibold text-white tracking-tight">
                       {faq.question}
                     </h3>
-                    <p className="text-xs text-slate-300 leading-relaxed">
+                    <p className="text-xs text-[#94a49a] leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>
@@ -300,14 +301,14 @@ export default async function ServiceDetailPage({
           {/* Right Sidebar */}
           <div className="lg:col-span-4 space-y-6">
             {/* Suitable For Card */}
-            <div className="p-6 rounded-2xl bg-[#090e1a] border border-slate-800 space-y-4">
-              <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+            <div className="p-6 rounded-[24px] bg-[#0d1f1c] border border-[#1a342e] space-y-4">
+              <h3 className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de]">
                 Suitable Use Cases & Teams
               </h3>
-              <ul className="space-y-2.5 text-xs text-slate-300">
+              <ul className="space-y-2.5 text-xs text-[#94a49a]">
                 {service.suitableFor.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#dae7de] mt-0.5 flex-shrink-0" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -315,17 +316,17 @@ export default async function ServiceDetailPage({
             </div>
 
             {/* Business Benefits Card */}
-            <div className="p-6 rounded-2xl bg-[#090e1a] border border-slate-800 space-y-4">
-              <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+            <div className="p-6 rounded-[24px] bg-[#0d1f1c] border border-[#1a342e] space-y-4">
+              <h3 className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de]">
                 Measurable Business ROI
               </h3>
               <div className="space-y-3">
                 {service.businessBenefits.map((b, idx) => (
                   <div key={idx} className="space-y-0.5">
-                    <h4 className="text-xs font-bold text-cyan-300">
+                    <h4 className="text-xs font-bold text-[#dae7de]">
                       {b.title}
                     </h4>
-                    <p className="text-xs text-slate-400 leading-relaxed">
+                    <p className="text-xs text-[#94a49a] leading-relaxed">
                       {b.detail}
                     </p>
                   </div>
@@ -334,22 +335,22 @@ export default async function ServiceDetailPage({
             </div>
 
             {/* Quick Consultation Trigger */}
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-950/40 via-slate-900 to-slate-950 border border-cyan-800/40 space-y-4">
+            <div className="p-6 rounded-[24px] bg-gradient-to-br from-[#1a342e] via-[#0d1f1c] to-[#091615] border border-[#2d584d] space-y-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-mono text-cyan-400 uppercase">
+                <span className="text-[11px] font-mono text-[#dae7de] uppercase tracking-wider">
                   Direct Inquiries
                 </span>
-                <h3 className="text-base font-bold text-white">
+                <h3 className="text-base font-bold text-white tracking-tight">
                   Discuss this service with an engineer
                 </h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-[#94a49a]">
                   Receive an architectural review and estimate within 24 hours.
                 </p>
               </div>
 
               <Link
                 href="/contact"
-                className="w-full py-2.5 rounded-lg text-xs font-semibold text-slate-950 bg-cyan-400 hover:bg-cyan-300 transition-colors block text-center"
+                className="w-full py-2.5 rounded-lg text-xs font-semibold text-[#091615] bg-[#dae7de] hover:bg-white transition-colors block text-center"
               >
                 Schedule Technical Scoping
               </Link>
@@ -357,8 +358,8 @@ export default async function ServiceDetailPage({
 
             {/* Related Services */}
             {service.relatedServiceSlugs.length > 0 && (
-              <div className="p-6 rounded-2xl bg-[#090e1a] border border-slate-800 space-y-3">
-                <h3 className="text-xs font-bold text-white uppercase tracking-wider">
+              <div className="p-6 rounded-[24px] bg-[#0d1f1c] border border-[#1a342e] space-y-3">
+                <h3 className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de]">
                   Related Services
                 </h3>
                 <div className="space-y-2">
@@ -369,10 +370,10 @@ export default async function ServiceDetailPage({
                       <Link
                         key={rel.slug}
                         href={`/services/${rel.slug}`}
-                        className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 hover:border-cyan-800 flex items-center justify-between text-xs text-slate-300 hover:text-white transition-colors group"
+                        className="p-2.5 rounded-lg bg-[#091615] border border-[#1a342e] hover:border-[#2d584d] flex items-center justify-between text-xs text-[#94a49a] hover:text-[#dae7de] transition-colors group"
                       >
                         <span className="truncate pr-2">{rel.title}</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-slate-600 group-hover:text-cyan-400 flex-shrink-0" />
+                        <ArrowRight className="w-3.5 h-3.5 text-[#94a49a] group-hover:text-[#dae7de] flex-shrink-0" />
                       </Link>
                     );
                   })}
@@ -387,4 +388,3 @@ export default async function ServiceDetailPage({
     </div>
   );
 }
-

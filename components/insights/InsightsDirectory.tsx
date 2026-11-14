@@ -35,19 +35,19 @@ export function InsightsDirectory() {
   return (
     <div className="space-y-10">
       {/* Search & Category Filter */}
-      <div className="p-6 rounded-2xl bg-[#090e1a] border border-slate-800 space-y-4">
+      <div className="p-6 rounded-[24px] bg-[#0d1f1c] border border-[#1a342e] space-y-4 shadow-xl shadow-black/40">
         <div className="relative">
-          <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#94a49a] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search articles by topic, keyword, or technology (e.g. ERP, AEO, Next.js, Automation)..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#091615] border border-[#1a342e] text-sm text-[#dae7de] placeholder-[#94a49a]/60 focus:outline-none focus:border-[#2d584d] transition-colors"
           />
         </div>
 
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none pt-2 border-t border-slate-800/80">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none pt-2 border-t border-[#1a342e]">
           {categories.map((c) => {
             const isSelected = selectedCategory === c;
             return (
@@ -56,8 +56,8 @@ export function InsightsDirectory() {
                 onClick={() => setSelectedCategory(c)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all border ${
                   isSelected
-                    ? "bg-cyan-500/10 border-cyan-500/40 text-cyan-300"
-                    : "bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200"
+                    ? "bg-[#dae7de] border-[#dae7de] text-[#091615] font-semibold"
+                    : "bg-[#091615] border-[#1a342e] text-[#94a49a] hover:text-[#dae7de] hover:border-[#2d584d]"
                 }`}
               >
                 {c}
@@ -69,16 +69,16 @@ export function InsightsDirectory() {
 
       {/* Articles Grid */}
       {filteredArticles.length === 0 ? (
-        <div className="p-12 text-center rounded-2xl bg-slate-950/40 border border-dashed border-slate-800">
-          <p className="text-slate-400 text-sm">
-            No articles found matching "{searchTerm}".
+        <div className="p-12 text-center rounded-[24px] bg-[#0d1f1c] border border-dashed border-[#1a342e]">
+          <p className="text-[#94a49a] text-sm">
+            No articles found matching &quot;{searchTerm}&quot;.
           </p>
           <button
             onClick={() => {
               setSearchTerm("");
               setSelectedCategory("All");
             }}
-            className="text-xs font-semibold text-cyan-400 hover:underline mt-2 inline-block"
+            className="text-xs font-mono text-[#dae7de] hover:underline mt-2 inline-block"
           >
             Clear Filters
           </button>
@@ -88,43 +88,41 @@ export function InsightsDirectory() {
           {filteredArticles.map((article) => (
             <article
               key={article.id}
-              className="rounded-2xl bg-[#090e1a] border border-slate-800 hover:border-slate-700 transition-all p-6 sm:p-8 flex flex-col justify-between space-y-5 group"
+              className="rounded-[24px] bg-[#0d1f1c] border border-[#1a342e] hover:border-[#2d584d] transition-all p-6 sm:p-8 flex flex-col justify-between space-y-5 group shadow-xl shadow-black/40"
             >
               <div className="space-y-4">
-                <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-cyan-950/80 text-cyan-300 border border-cyan-800/60">
+                <div className="flex items-center justify-between text-xs text-[#94a49a]">
+                  <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-[#091615] text-[#dae7de] border border-[#1a342e]">
                     {article.category}
                   </span>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 font-mono text-[11px]">
                     <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {article.publishDate}
+                      <Calendar className="w-3.5 h-3.5 text-[#94a49a]" />
+                      <span>{article.publishDate}</span>
                     </span>
-                    <span>•</span>
                     <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" />
-                      {article.readTime}
+                      <Clock className="w-3.5 h-3.5 text-[#94a49a]" />
+                      <span>{article.readTime}</span>
                     </span>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <h2 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
+                  <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#dae7de] transition-colors tracking-tight">
                     <Link href={`/insights/${article.slug}`}>
                       {article.title}
                     </Link>
                   </h2>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3">
+                  <p className="text-xs sm:text-sm text-[#94a49a] leading-relaxed">
                     {article.excerpt}
                   </p>
                 </div>
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 pt-1">
+                <div className="flex flex-wrap gap-1.5 pt-2">
                   {article.tags.map((tag, idx) => (
                     <span
                       key={idx}
-                      className="px-2 py-0.5 rounded text-[11px] bg-slate-950 border border-slate-800 text-slate-400"
+                      className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#091615] border border-[#1a342e] text-[#94a49a]"
                     >
                       #{tag}
                     </span>
@@ -132,13 +130,13 @@ export function InsightsDirectory() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs">
-                <span className="text-slate-400 font-mono">
-                  By {article.author.role.split(",")[0]}
+              <div className="pt-4 border-t border-[#1a342e] flex items-center justify-between">
+                <span className="text-xs text-[#94a49a] font-mono">
+                  By {article.author.name}
                 </span>
                 <Link
                   href={`/insights/${article.slug}`}
-                  className="font-semibold text-cyan-400 group-hover:text-cyan-300 inline-flex items-center gap-1"
+                  className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-[#dae7de] group-hover:underline"
                 >
                   <span>Read Article</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -151,4 +149,3 @@ export function InsightsDirectory() {
     </div>
   );
 }
-

@@ -30,67 +30,68 @@ export default function SolutionsPage() {
   const getIcon = (id: string) => {
     switch (id) {
       case "erp-enterprise":
-        return <Building2 className="w-6 h-6 text-cyan-400" />;
+        return <Building2 className="w-5 h-5 text-[#dae7de]" />;
       case "crm-pipeline":
-        return <Users2 className="w-6 h-6 text-sky-400" />;
+        return <Users2 className="w-5 h-5 text-[#94a49a]" />;
       case "school-college":
-        return <GraduationCap className="w-6 h-6 text-teal-400" />;
+        return <GraduationCap className="w-5 h-5 text-[#dae7de]" />;
       case "hrm-payroll":
-        return <Users2 className="w-6 h-6 text-indigo-400" />;
+        return <Users2 className="w-5 h-5 text-[#94a49a]" />;
       case "inventory-stock":
-        return <Boxes className="w-6 h-6 text-blue-400" />;
+        return <Boxes className="w-5 h-5 text-[#dae7de]" />;
       case "pos-billing":
-        return <Receipt className="w-6 h-6 text-emerald-400" />;
+        return <Receipt className="w-5 h-5 text-[#94a49a]" />;
       case "gym-membership":
-        return <Dumbbell className="w-6 h-6 text-purple-400" />;
+        return <Dumbbell className="w-5 h-5 text-[#dae7de]" />;
       case "agriculture-business":
-        return <Wheat className="w-6 h-6 text-amber-400" />;
+        return <Wheat className="w-5 h-5 text-[#94a49a]" />;
       case "booking-workflow":
-        return <CalendarCheck className="w-6 h-6 text-cyan-400" />;
+        return <CalendarCheck className="w-5 h-5 text-[#dae7de]" />;
       case "dashboards-bi":
-        return <BarChart3 className="w-6 h-6 text-teal-400" />;
+        return <BarChart3 className="w-5 h-5 text-[#94a49a]" />;
       default:
-        return <Building2 className="w-6 h-6 text-cyan-400" />;
+        return <Building2 className="w-5 h-5 text-[#dae7de]" />;
     }
   };
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full bg-[#071312] text-[#dae7de]">
       {/* Header Banner */}
-      <section className="py-16 md:py-20 bg-gradient-to-b from-[#060a12] via-[#091122] to-[#060a12] border-b border-slate-800/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 md:py-20 bg-gradient-to-b from-[#091615] via-[#0d1f1c] to-[#071312] border-b border-[#1a342e]">
+        <div className="absolute top-0 left-1/3 w-96 h-96 bg-[#2d584d]/15 blur-[120px] rounded-full pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-slate-900 text-cyan-400 border border-slate-800">
-              <Layers className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-[0.72px] bg-[#0d1f1c] text-[#dae7de] border border-[#1a342e]">
+              <Layers className="w-3.5 h-3.5 text-[#94a49a]" />
               <span>Operational Systems Architecture</span>
             </div>
             <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
               Business Management Systems & Custom ERPs
             </h1>
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-              Eliminate disconnected spreadsheets and rigid per-user SaaS licenses. We engineer purpose-built operational software tailored to your company's actual approval matrices, tax rules, and daily workflows.
+            <p className="text-base sm:text-lg text-[#94a49a] leading-relaxed">
+              Eliminate disconnected spreadsheets and rigid per-user SaaS licenses. We engineer purpose-built operational software tailored to your company&apos;s actual approval matrices, tax rules, and daily workflows.
             </p>
           </div>
         </div>
       </section>
 
       {/* Main Solutions Deep Dive */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-20">
-        {solutionsData.map((solution, idx) => (
+      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-16">
+        {solutionsData.map((solution) => (
           <div
             key={solution.id}
             id={solution.slug}
-            className="rounded-3xl bg-[#090e1a] border border-slate-800 p-8 sm:p-10 lg:p-12 relative overflow-hidden scroll-mt-24"
+            className="rounded-[24px] bg-[#0d1f1c] border border-[#1a342e] p-8 sm:p-10 lg:p-12 relative overflow-hidden scroll-mt-24 shadow-xl shadow-black/40"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
               {/* Left Column: Solution Identity & Adaptation */}
               <div className="lg:col-span-5 space-y-6">
                 <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-2xl bg-slate-900 border border-slate-800">
+                  <div className="p-3 rounded-xl bg-[#091615] border border-[#1a342e]">
                     {getIcon(solution.id)}
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/60">
+                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-[#091615] text-[#dae7de] border border-[#1a342e]">
                       {solution.badge}
                     </span>
                     <h2 className="text-2xl font-bold text-white tracking-tight mt-1">
@@ -100,34 +101,34 @@ export default function SolutionsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-sm font-semibold text-cyan-300">
+                  <h3 className="text-sm font-semibold text-[#dae7de]">
                     {solution.tagline}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#94a49a] leading-relaxed">
                     {solution.shortSummary}
                   </p>
                 </div>
 
                 {/* Workflow Adaptation Notice */}
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800/80 space-y-1.5">
-                  <span className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block">
+                <div className="p-4 rounded-xl bg-[#091615] border border-[#1a342e] space-y-1.5">
+                  <span className="text-[11px] font-mono uppercase tracking-[0.72px] text-[#dae7de] block">
                     Workflow Customization:
                   </span>
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <p className="text-xs text-[#94a49a] leading-relaxed">
                     {solution.workflowAdaptation}
                   </p>
                 </div>
 
                 {/* Tech Highlights */}
                 <div className="pt-2">
-                  <span className="text-[11px] text-slate-400 block mb-2 font-mono">
+                  <span className="text-[11px] text-[#94a49a] block mb-2 font-mono">
                     Targeted Sectors: {solution.targetIndustry}
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {solution.technicalHighlights.map((tech, i) => (
                       <span
                         key={i}
-                        className="px-2.5 py-1 rounded text-[11px] font-mono bg-slate-900 border border-slate-800 text-slate-300"
+                        className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-[#091615] border border-[#1a342e] text-[#dae7de]"
                       >
                         {tech}
                       </span>
@@ -138,7 +139,7 @@ export default function SolutionsPage() {
                 <div className="pt-4">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-semibold text-slate-950 bg-cyan-400 hover:bg-cyan-300 transition-colors shadow-sm shadow-cyan-950/40"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-xs font-semibold text-[#091615] bg-[#dae7de] hover:bg-white transition-colors shadow-sm"
                   >
                     <span>Request Scoping for this System</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -150,16 +151,16 @@ export default function SolutionsPage() {
               <div className="lg:col-span-7 space-y-6">
                 {/* Core Modules Grid */}
                 <div className="space-y-3">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-cyan-400">
+                  <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de]">
                     Included Architectural Modules
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {solution.coreModules.map((mod, i) => (
                       <div
                         key={i}
-                        className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 flex items-start gap-2 text-xs sm:text-sm text-slate-200"
+                        className="p-3.5 rounded-xl bg-[#091615] border border-[#1a342e] flex items-start gap-2 text-xs sm:text-sm text-[#dae7de]"
                       >
-                        <CheckCircle2 className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
+                        <CheckCircle2 className="w-4 h-4 text-[#dae7de] mt-0.5 flex-shrink-0" />
                         <span>{mod}</span>
                       </div>
                     ))}
@@ -167,20 +168,20 @@ export default function SolutionsPage() {
                 </div>
 
                 {/* Key Capabilities */}
-                <div className="space-y-3 pt-4 border-t border-slate-800/80">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <div className="space-y-3 pt-4 border-t border-[#1a342e]">
+                  <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#94a49a]">
                     Operational Highlights
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {solution.keyCapabilities.map((cap, i) => (
                       <div
                         key={i}
-                        className="p-4 rounded-xl bg-slate-950/40 border border-slate-800/60 space-y-1"
+                        className="p-4 rounded-xl bg-[#091615]/60 border border-[#1a342e] space-y-1"
                       >
-                        <h4 className="text-xs font-bold text-white">
+                        <h4 className="text-xs font-bold text-white tracking-tight">
                           {cap.title}
                         </h4>
-                        <p className="text-[11px] text-slate-400 leading-relaxed">
+                        <p className="text-[11px] text-[#94a49a] leading-relaxed">
                           {cap.detail}
                         </p>
                       </div>
@@ -197,4 +198,3 @@ export default function SolutionsPage() {
     </div>
   );
 }
-

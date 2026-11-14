@@ -28,13 +28,11 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
-  // Close menus on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     setServicesOpen(false);
   }, [pathname]);
 
-  // Handle scroll state for navbar shadow/blur
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -46,112 +44,77 @@ export function Navbar() {
   const getCategoryIcon = (id: string) => {
     switch (id) {
       case "software-systems":
-        return <Code2 className="w-4 h-4 text-cyan-400" />;
+        return <Code2 className="w-4 h-4 text-[#dae7de]" />;
       case "ai-automation":
-        return <Bot className="w-4 h-4 text-sky-400" />;
+        return <Bot className="w-4 h-4 text-[#94a49a]" />;
       case "web-ecommerce":
-        return <Globe className="w-4 h-4 text-teal-400" />;
+        return <Globe className="w-4 h-4 text-[#dae7de]" />;
       case "mobile-development":
-        return <Smartphone className="w-4 h-4 text-blue-400" />;
+        return <Smartphone className="w-4 h-4 text-[#94a49a]" />;
       case "digital-marketing":
-        return <TrendingUp className="w-4 h-4 text-indigo-400" />;
+        return <TrendingUp className="w-4 h-4 text-[#dae7de]" />;
       case "it-infrastructure":
-        return <Server className="w-4 h-4 text-emerald-400" />;
+        return <Server className="w-4 h-4 text-[#94a49a]" />;
       case "content-creative":
-        return <PenTool className="w-4 h-4 text-purple-400" />;
+        return <PenTool className="w-4 h-4 text-[#dae7de]" />;
       default:
-        return <Code2 className="w-4 h-4 text-cyan-400" />;
+        return <Code2 className="w-4 h-4 text-[#dae7de]" />;
     }
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full">
-      {/* Top Announcement Bar */}
-      <div className="w-full bg-slate-950/90 border-b border-slate-800/80 px-4 py-1.5 text-xs text-slate-400 flex items-center justify-between backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-cyan-950/70 text-cyan-300 border border-cyan-800/50">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-              Global Engineering
-            </span>
-            <span className="hidden sm:inline text-slate-300">
-              Serving ambitious teams in Pakistan, USA, UK, UAE & Worldwide.
-            </span>
-          </div>
-          <div className="flex items-center gap-4 text-slate-400">
-            <a
-              href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-cyan-400 transition-colors flex items-center gap-1 font-medium text-[11px]"
-            >
-              <span>WhatsApp: {siteConfig.contact.whatsappDisplay}</span>
-              <ExternalLink className="w-2.5 h-2.5" />
-            </a>
-            <span className="hidden md:inline text-slate-700">•</span>
-            <span className="hidden md:inline text-slate-400 text-[11px]">
-              Response within 24h
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Navbar */}
+    <header className="sticky top-0 z-50 w-full pt-2 px-3 sm:px-6">
+      {/* Translucent Floating Global Navigation Bar (Per PRD specification: 12px radius, 57px blur, 10px gaps, 6px controls) */}
       <nav
-        className={`w-full transition-all duration-200 border-b ${
+        className={`max-w-7xl mx-auto rounded-xl transition-all duration-300 border ${
           scrolled
-            ? "bg-[#060a12]/95 backdrop-blur-md border-slate-800/90 shadow-lg shadow-black/40 py-3.5"
-            : "bg-[#060a12]/80 backdrop-blur-sm border-slate-800/50 py-4"
+            ? "bg-[#091615]/90 backdrop-blur-[57px] border-[#1a342e] shadow-2xl shadow-black/80 py-2.5 px-4"
+            : "bg-[#0d1f1c]/80 backdrop-blur-[57px] border-[#1a342e]/70 shadow-lg py-3 px-5"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Brand Logo */}
+        <div className="flex items-center justify-between">
+          {/* Wordmark Logo */}
           <Link
             href="/"
             className="flex items-center gap-2.5 group focus:outline-none"
             aria-label={`${siteConfig.name} Home`}
           >
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-700 flex items-center justify-center font-bold text-white shadow-md shadow-cyan-950/40 border border-cyan-400/30 group-hover:border-cyan-300 transition-colors">
-              <span className="text-base tracking-tight font-mono">LW</span>
+            <div className="w-8 h-8 rounded-md bg-[#1a342e] border border-[#2d584d] flex items-center justify-center font-bold text-[#dae7de] font-mono text-xs">
+              LW
             </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1">
-                <span className="text-xl font-bold tracking-tight text-white group-hover:text-cyan-300 transition-colors">
-                  {siteConfig.name}
-                </span>
-                <span className="text-cyan-400 font-bold text-lg">.</span>
-              </div>
-              <span className="text-[10px] text-slate-400 tracking-wider uppercase font-medium -mt-1 hidden sm:block">
-                Digital Solutions
+            <div className="flex items-center gap-1.5">
+              <span className="text-base font-medium tracking-tight text-[#dae7de] group-hover:text-white transition-colors uppercase font-mono">
+                {siteConfig.name}
               </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#dae7de]" />
             </div>
           </Link>
 
-          {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center gap-1">
+          {/* Desktop Nav Items (PRD: 14px / 14px, weight 400, -0.14px tracking, 10px gap) */}
+          <div className="hidden lg:flex items-center gap-2.5 text-[14px] leading-[14px] tracking-[-0.14px]">
             <Link
               href="/"
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-md transition-colors ${
                 pathname === "/"
-                  ? "text-cyan-400 bg-slate-900/80"
-                  : "text-slate-300 hover:text-white hover:bg-slate-900/50"
+                  ? "text-[#dae7de] bg-[#1a342e]/60 font-medium"
+                  : "text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]/40"
               }`}
             >
-              Home
+              INTRO
             </Link>
 
             <Link
               href="/about"
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-md transition-colors ${
                 pathname === "/about"
-                  ? "text-cyan-400 bg-slate-900/80"
-                  : "text-slate-300 hover:text-white hover:bg-slate-900/50"
+                  ? "text-[#dae7de] bg-[#1a342e]/60 font-medium"
+                  : "text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]/40"
               }`}
             >
-              About
+              ABOUT
             </Link>
 
-            {/* Services Dropdown Trigger */}
+            {/* Services Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setServicesOpen(true)}
@@ -159,62 +122,61 @@ export function Navbar() {
             >
               <Link
                 href="/services"
-                className={`px-3 py-1.5 rounded-md text-sm font-medium inline-flex items-center gap-1 transition-colors ${
+                className={`px-3 py-1.5 rounded-md inline-flex items-center gap-1 transition-colors ${
                   pathname.startsWith("/services")
-                    ? "text-cyan-400 bg-slate-900/80"
-                    : "text-slate-300 hover:text-white hover:bg-slate-900/50"
+                    ? "text-[#dae7de] bg-[#1a342e]/60 font-medium"
+                    : "text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]/40"
                 }`}
                 aria-expanded={servicesOpen}
               >
-                <span>Services</span>
+                <span>SERVICES</span>
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    servicesOpen ? "rotate-180 text-cyan-400" : "text-slate-400"
+                    servicesOpen ? "rotate-180 text-[#dae7de]" : "text-[#94a49a]"
                   }`}
                 />
               </Link>
 
               {/* Mega Menu Dropdown */}
               {servicesOpen && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[840px] z-50">
-                  <div className="bg-[#0b101d] border border-slate-800 rounded-xl shadow-2xl shadow-black/80 p-6 backdrop-blur-xl">
-                    <div className="flex items-center justify-between pb-4 border-b border-slate-800/80 mb-4">
+                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2.5 w-[860px] z-50">
+                  <div className="bg-[#091615] border border-[#1a342e] rounded-xl shadow-2xl shadow-black/90 p-6 backdrop-blur-[57px]">
+                    <div className="flex items-center justify-between pb-3.5 border-b border-[#1a342e] mb-4">
                       <div className="flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-cyan-400" />
-                        <span className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
-                          Full-Service Technology Spectrum
+                        <span className="text-[12px] font-mono font-bold uppercase tracking-[0.72px] text-[#dae7de]">
+                          TECHNOLOGY PORTFOLIO SPECTRUM
                         </span>
                       </div>
                       <Link
                         href="/services"
-                        className="text-xs text-cyan-400 hover:text-cyan-300 font-medium inline-flex items-center gap-1 group"
+                        className="text-[12px] font-mono text-[#dae7de] hover:underline inline-flex items-center gap-1 group"
                       >
-                        Explore all 40+ services
+                        EXPLORE ALL 40+ SERVICES
                         <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                       </Link>
                     </div>
 
                     <div className="grid grid-cols-3 gap-5">
                       {serviceCategories.slice(0, 6).map((cat) => (
-                        <div key={cat.id} className="space-y-2">
+                        <div key={cat.id} className="space-y-1.5">
                           <Link
                             href={`/services/${cat.featuredSlug}`}
-                            className="flex items-center gap-2 text-sm font-semibold text-white hover:text-cyan-300 transition-colors group"
+                            className="flex items-center gap-2 text-[13px] font-medium text-[#dae7de] hover:text-white transition-colors group"
                           >
-                            <span className="p-1 rounded bg-slate-900 border border-slate-800 group-hover:border-cyan-800">
+                            <span className="p-1 rounded bg-[#0d1f1c] border border-[#1a342e]">
                               {getCategoryIcon(cat.id)}
                             </span>
                             <span className="leading-snug">{cat.title}</span>
                           </Link>
-                          <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                          <p className="text-[11px] text-[#94a49a] line-clamp-2 leading-relaxed">
                             {cat.shortSummary}
                           </p>
-                          <ul className="space-y-1 pt-1">
+                          <ul className="space-y-0.5 pt-0.5">
                             {cat.services.slice(0, 3).map((sub) => (
                               <li key={sub.slug}>
                                 <Link
                                   href={`/services/${sub.slug}`}
-                                  className="text-xs text-slate-400 hover:text-slate-200 transition-colors block py-0.5 hover:translate-x-0.5 duration-150"
+                                  className="text-[11px] text-[#94a49a] hover:text-[#dae7de] transition-colors block py-0.5"
                                 >
                                   • {sub.title}
                                 </Link>
@@ -225,18 +187,16 @@ export function Navbar() {
                       ))}
                     </div>
 
-                    <div className="mt-5 pt-4 border-t border-slate-800/80 bg-slate-950/40 -mx-6 -mb-6 p-4 rounded-b-xl flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <span className="text-xs text-slate-400">
-                          Need custom scoping or multi-department architecture?
-                        </span>
-                      </div>
+                    <div className="mt-5 pt-3.5 border-t border-[#1a342e] bg-[#050d0c] -mx-6 -mb-6 p-4 rounded-b-xl flex items-center justify-between">
+                      <span className="text-[12px] text-[#94a49a]">
+                        Need custom enterprise scoping or multi-department architecture?
+                      </span>
                       <Link
                         href="/contact"
-                        className="text-xs font-semibold text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-700 transition-colors inline-flex items-center gap-1.5"
+                        className="text-[12px] font-mono font-bold text-[#091615] bg-[#dae7de] hover:bg-white px-3 py-1.5 rounded-md transition-colors inline-flex items-center gap-1.5"
                       >
-                        Request Technical Scoping
-                        <ArrowRight className="w-3 h-3 text-cyan-400" />
+                        REQUEST SCOPING
+                        <ArrowRight className="w-3 h-3" />
                       </Link>
                     </div>
                   </div>
@@ -246,89 +206,84 @@ export function Navbar() {
 
             <Link
               href="/solutions"
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-md transition-colors ${
                 pathname === "/solutions"
-                  ? "text-cyan-400 bg-slate-900/80"
-                  : "text-slate-300 hover:text-white hover:bg-slate-900/50"
+                  ? "text-[#dae7de] bg-[#1a342e]/60 font-medium"
+                  : "text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]/40"
               }`}
             >
-              Solutions
+              SOLUTIONS
             </Link>
 
             <Link
               href="/portfolio"
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-md transition-colors ${
                 pathname.startsWith("/portfolio")
-                  ? "text-cyan-400 bg-slate-900/80"
-                  : "text-slate-300 hover:text-white hover:bg-slate-900/50"
+                  ? "text-[#dae7de] bg-[#1a342e]/60 font-medium"
+                  : "text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]/40"
               }`}
             >
-              Portfolio
+              PORTFOLIO
             </Link>
 
             <Link
               href="/insights"
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-md transition-colors ${
                 pathname.startsWith("/insights")
-                  ? "text-cyan-400 bg-slate-900/80"
-                  : "text-slate-300 hover:text-white hover:bg-slate-900/50"
+                  ? "text-[#dae7de] bg-[#1a342e]/60 font-medium"
+                  : "text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]/40"
               }`}
             >
-              Insights
+              INSIGHTS
             </Link>
 
             <Link
               href="/contact"
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-md transition-colors ${
                 pathname === "/contact"
-                  ? "text-cyan-400 bg-slate-900/80"
-                  : "text-slate-300 hover:text-white hover:bg-slate-900/50"
+                  ? "text-[#dae7de] bg-[#1a342e]/60 font-medium"
+                  : "text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]/40"
               }`}
             >
-              Contact
+              CONTACT
             </Link>
           </div>
 
-          {/* Action CTAs */}
-          <div className="hidden lg:flex items-center gap-3">
+          {/* Action Buttons (PRD: 6px radius, compact Warm White button and Black outline button) */}
+          <div className="hidden lg:flex items-center gap-2">
             <a
               href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-medium text-slate-300 hover:text-white px-3 py-2 rounded-lg border border-slate-800 hover:border-slate-700 transition-colors flex items-center gap-1.5"
+              className="text-[12px] font-mono font-medium text-[#dae7de] px-3.5 py-2 rounded-md border border-[#1a342e] bg-[#0d1f1c] hover:bg-[#132b27] transition-colors flex items-center gap-1.5"
             >
-              <PhoneCall className="w-3.5 h-3.5 text-emerald-400" />
-              <span>WhatsApp</span>
+              <PhoneCall className="w-3.5 h-3.5 text-[#dae7de]" />
+              <span>WHATSAPP</span>
             </a>
 
             <Link
               href="/contact"
-              className="text-xs font-semibold text-slate-950 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 px-4 py-2 rounded-lg shadow-sm shadow-cyan-950/50 transition-all duration-150 flex items-center gap-1.5"
+              className="text-[12px] font-mono font-bold text-[#091615] bg-[#dae7de] hover:bg-white px-4 py-2 rounded-md transition-all flex items-center gap-1.5 shadow-sm"
             >
-              <span>Book a Consultation</span>
+              <span>BOOK CONSULTATION</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Toggle */}
           <div className="flex items-center gap-2 lg:hidden">
             <Link
               href="/contact"
-              className="text-xs font-semibold text-slate-950 bg-cyan-400 px-3 py-1.5 rounded-md"
+              className="text-[11px] font-mono font-bold text-[#091615] bg-[#dae7de] px-3 py-1.5 rounded-md"
             >
-              Let's Talk
+              LET'S TALK
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="p-1.5 rounded-md text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]"
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
@@ -336,95 +291,81 @@ export function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden w-full bg-[#070b14] border-b border-slate-800 px-5 py-6 space-y-4 max-h-[85vh] overflow-y-auto">
-          <div className="space-y-1">
+        <div className="lg:hidden mt-2 max-w-7xl mx-auto rounded-xl bg-[#091615] border border-[#1a342e] p-5 space-y-4 shadow-2xl">
+          <div className="space-y-1 text-sm font-mono uppercase">
             <Link
               href="/"
-              className={`block px-3 py-2 rounded-lg text-base font-medium ${
-                pathname === "/" ? "bg-cyan-950/40 text-cyan-400" : "text-slate-200"
+              className={`block px-3 py-2 rounded-md ${
+                pathname === "/" ? "bg-[#1a342e] text-[#dae7de]" : "text-[#94a49a]"
               }`}
             >
-              Home
+              HOME
             </Link>
             <Link
               href="/about"
-              className={`block px-3 py-2 rounded-lg text-base font-medium ${
-                pathname === "/about" ? "bg-cyan-950/40 text-cyan-400" : "text-slate-200"
+              className={`block px-3 py-2 rounded-md ${
+                pathname === "/about" ? "bg-[#1a342e] text-[#dae7de]" : "text-[#94a49a]"
               }`}
             >
-              About Agency
+              ABOUT
             </Link>
             <Link
               href="/services"
-              className={`block px-3 py-2 rounded-lg text-base font-medium ${
-                pathname.startsWith("/services") ? "bg-cyan-950/40 text-cyan-400" : "text-slate-200"
+              className={`block px-3 py-2 rounded-md ${
+                pathname.startsWith("/services") ? "bg-[#1a342e] text-[#dae7de]" : "text-[#94a49a]"
               }`}
             >
-              All Services (7 Categories)
+              SERVICES (ALL 7 CATEGORIES)
             </Link>
-
-            {/* Quick Mobile Service Links */}
-            <div className="pl-4 border-l border-slate-800 space-y-1.5 my-2">
-              {serviceCategories.map((cat) => (
-                <Link
-                  key={cat.id}
-                  href={`/services/${cat.featuredSlug}`}
-                  className="block py-1 text-xs text-slate-400 hover:text-cyan-300"
-                >
-                  • {cat.title}
-                </Link>
-              ))}
-            </div>
-
             <Link
               href="/solutions"
-              className={`block px-3 py-2 rounded-lg text-base font-medium ${
-                pathname === "/solutions" ? "bg-cyan-950/40 text-cyan-400" : "text-slate-200"
+              className={`block px-3 py-2 rounded-md ${
+                pathname === "/solutions" ? "bg-[#1a342e] text-[#dae7de]" : "text-[#94a49a]"
               }`}
             >
-              Business Solutions & ERP
+              SOLUTIONS & ERP
             </Link>
             <Link
               href="/portfolio"
-              className={`block px-3 py-2 rounded-lg text-base font-medium ${
-                pathname.startsWith("/portfolio") ? "bg-cyan-950/40 text-cyan-400" : "text-slate-200"
+              className={`block px-3 py-2 rounded-md ${
+                pathname.startsWith("/portfolio") ? "bg-[#1a342e] text-[#dae7de]" : "text-[#94a49a]"
               }`}
             >
-              Case Studies & Portfolio
+              PORTFOLIO
             </Link>
             <Link
               href="/insights"
-              className={`block px-3 py-2 rounded-lg text-base font-medium ${
-                pathname.startsWith("/insights") ? "bg-cyan-950/40 text-cyan-400" : "text-slate-200"
+              className={`block px-3 py-2 rounded-md ${
+                pathname.startsWith("/insights") ? "bg-[#1a342e] text-[#dae7de]" : "text-[#94a49a]"
               }`}
             >
-              Articles & Insights
+              INSIGHTS
             </Link>
             <Link
               href="/contact"
-              className={`block px-3 py-2 rounded-lg text-base font-medium ${
-                pathname === "/contact" ? "bg-cyan-950/40 text-cyan-400" : "text-slate-200"
+              className={`block px-3 py-2 rounded-md ${
+                pathname === "/contact" ? "bg-[#1a342e] text-[#dae7de]" : "text-[#94a49a]"
               }`}
             >
-              Contact Us
+              CONTACT
             </Link>
           </div>
 
-          <div className="pt-4 border-t border-slate-800 space-y-2">
+          <div className="pt-3 border-t border-[#1a342e] space-y-2">
             <Link
               href="/contact"
-              className="w-full py-2.5 text-center text-sm font-semibold rounded-lg bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 block shadow-md"
+              className="w-full py-2.5 text-center text-xs font-mono font-bold rounded-md bg-[#dae7de] text-[#091615] block"
             >
-              Book a Free Consultation
+              BOOK A FREE CONSULTATION
             </Link>
             <a
               href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-2.5 text-center text-sm font-medium rounded-lg bg-slate-900 border border-slate-800 text-slate-200 flex items-center justify-center gap-2"
+              className="w-full py-2 text-center text-xs font-mono rounded-md bg-[#0d1f1c] border border-[#1a342e] text-[#dae7de] flex items-center justify-center gap-1.5"
             >
-              <PhoneCall className="w-4 h-4 text-emerald-400" />
-              <span>WhatsApp Direct ({siteConfig.contact.whatsappDisplay})</span>
+              <PhoneCall className="w-3.5 h-3.5" />
+              <span>WHATSAPP DIRECT</span>
             </a>
           </div>
         </div>
@@ -432,4 +373,3 @@ export function Navbar() {
     </header>
   );
 }
-

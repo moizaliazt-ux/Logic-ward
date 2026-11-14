@@ -93,172 +93,190 @@ export default async function ArticleDetailPage({
   };
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full bg-[#071312] text-[#dae7de]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
       <BreadcrumbJsonLd items={breadcrumbs} />
 
-      {/* Article Header */}
-      <section className="py-14 md:py-20 bg-gradient-to-b from-[#060a12] via-[#091122] to-[#060a12] border-b border-slate-800/80">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Hero Header */}
+      <section className="relative py-14 md:py-20 bg-gradient-to-b from-[#091615] via-[#0d1f1c] to-[#071312] border-b border-[#1a342e]">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#2d584d]/15 blur-[120px] rounded-full pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Breadcrumbs */}
           <nav
             aria-label="Breadcrumb"
-            className="flex items-center gap-1.5 text-xs text-slate-400 mb-6 flex-wrap"
+            className="flex items-center gap-1.5 text-xs text-[#94a49a] mb-6 flex-wrap"
           >
-            <Link href="/" className="hover:text-cyan-400 transition-colors">
+            <Link href="/" className="hover:text-[#dae7de] transition-colors">
               Home
             </Link>
-            <ChevronRight className="w-3 h-3 text-slate-600" />
-            <Link href="/insights" className="hover:text-cyan-400 transition-colors">
+            <ChevronRight className="w-3 h-3 text-[#1a342e]" />
+            <Link href="/insights" className="hover:text-[#dae7de] transition-colors">
               Insights
             </Link>
-            <ChevronRight className="w-3 h-3 text-slate-600" />
-            <span className="text-cyan-400 font-medium truncate max-w-[200px] sm:max-w-none">
+            <ChevronRight className="w-3 h-3 text-[#1a342e]" />
+            <span className="text-[#dae7de] font-medium truncate max-w-[200px] sm:max-w-none">
               {article.title}
             </span>
           </nav>
 
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 flex-wrap text-xs text-slate-400">
-              <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-cyan-950 text-cyan-300 border border-cyan-800/60">
+          <div className="max-w-4xl space-y-4">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="px-3 py-1 rounded-full text-xs font-mono uppercase tracking-[0.72px] bg-[#0d1f1c] text-[#dae7de] border border-[#1a342e]">
                 {article.category}
               </span>
-              <span className="flex items-center gap-1">
-                <Calendar className="w-3.5 h-3.5" />
-                {article.publishDate}
+              <span className="text-xs font-mono text-[#94a49a] flex items-center gap-1">
+                <Calendar className="w-3 h-3" />
+                <span>{article.publishDate}</span>
               </span>
-              <span>•</span>
-              <span className="flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5" />
-                {article.readTime}
+              <span className="text-xs font-mono text-[#94a49a] flex items-center gap-1">
+                <Clock className="w-3 h-3" />
+                <span>{article.readTime}</span>
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
+            <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
               {article.title}
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+            <p className="text-base sm:text-lg text-[#94a49a] leading-relaxed">
               {article.excerpt}
             </p>
 
-            {/* Author Byline */}
-            <div className="pt-4 flex items-center gap-3 border-t border-slate-800/80">
-              <div className="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-cyan-400">
-                <User className="w-4 h-4" />
+            <div className="flex items-center gap-3 pt-3 border-t border-[#1a342e]">
+              <div className="w-10 h-10 rounded-full bg-[#091615] border border-[#1a342e] flex items-center justify-center font-bold text-xs font-mono text-[#dae7de]">
+                LW
               </div>
-              <div>
-                <div className="text-xs font-semibold text-white">
-                  {article.author.name}
-                </div>
-                <div className="text-[11px] text-slate-400">
-                  {article.author.role}
-                </div>
+              <div className="text-xs font-mono">
+                <div className="font-semibold text-white">{article.author.name}</div>
+                <div className="text-[#94a49a]">{article.author.role}</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Article Content Layout */}
-      <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      {/* Main Content Layout */}
+      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          {/* Table of Contents Sticky (Desktop) */}
-          <aside className="hidden lg:block lg:col-span-4 space-y-6">
-            <div className="sticky top-28 p-6 rounded-2xl bg-[#090e1a] border border-slate-800 space-y-4">
-              <div className="flex items-center gap-2 pb-2 border-b border-slate-800/80">
-                <BookOpen className="w-4 h-4 text-cyan-400" />
-                <span className="text-xs font-semibold text-white uppercase tracking-wider">
-                  Table of Contents
-                </span>
-              </div>
-              <nav className="space-y-1.5 text-xs">
-                {article.tableOfContents.map((toc) => (
-                  <a
-                    key={toc.id}
-                    href={`#${toc.id}`}
-                    className="block py-1 text-slate-400 hover:text-cyan-300 transition-colors leading-relaxed"
-                  >
-                    • {toc.title}
-                  </a>
-                ))}
-              </nav>
-
-              <div className="pt-4 border-t border-slate-800/80 space-y-2">
-                <span className="text-[11px] font-semibold text-white block">
-                  Have questions on this topic?
-                </span>
-                <Link
-                  href="/contact"
-                  className="w-full py-2 rounded-lg text-xs font-semibold text-slate-950 bg-cyan-400 hover:bg-cyan-300 transition-colors block text-center"
-                >
-                  Consult an Architect
-                </Link>
-              </div>
-            </div>
-          </aside>
-
           {/* Main Article Body */}
-          <div className="lg:col-span-8 space-y-12">
-            {article.contentSections.map((section) => (
-              <section
-                key={section.id}
-                id={section.id}
-                className="space-y-4 scroll-mt-28"
-              >
-                <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  {section.heading}
-                </h2>
+          <article className="lg:col-span-8 space-y-12">
+            {/* Takeaways Box */}
+            <div className="p-6 rounded-[24px] bg-[#0d1f1c] border border-[#1a342e] space-y-3 shadow-xl shadow-black/40">
+              <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de] flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" />
+                Core Takeaways for Engineering & Leadership
+              </span>
+              <ul className="space-y-2 text-xs sm:text-sm text-[#94a49a]">
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#dae7de] mt-2 flex-shrink-0" />
+                  <span>
+                    Direct architecture alignment between engineering constraints and commercial requirements prevents late-stage scope blowups.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#dae7de] mt-2 flex-shrink-0" />
+                  <span>
+                    Deterministic fallback workflows protect operational integrity even when third-party microservices degrade.
+                  </span>
+                </li>
+              </ul>
+            </div>
 
-                <div className="space-y-3.5 text-sm sm:text-base text-slate-300 leading-relaxed">
-                  {section.paragraphs.map((p, pIdx) => (
-                    <p key={pIdx}>{p}</p>
+            {/* Structured Sections */}
+            <div className="space-y-12 text-[#94a49a] leading-relaxed text-sm sm:text-base">
+              {article.contentSections.map((sec) => (
+                <div key={sec.id} id={sec.id} className="space-y-4 scroll-mt-24">
+                  <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                    {sec.heading}
+                  </h2>
+                  <div className="space-y-4 text-[#94a49a]">
+                    {sec.paragraphs.map((p, pIdx) => (
+                      <p key={pIdx}>{p}</p>
+                    ))}
+                  </div>
+                  {sec.callout && (
+                    <div className="p-5 rounded-xl bg-[#091615] border border-[#2d584d] space-y-2 mt-4">
+                      <div className="text-xs font-mono font-bold text-[#dae7de] uppercase tracking-wider">
+                        {sec.callout.title}
+                      </div>
+                      <p className="text-xs text-[#94a49a] leading-relaxed">
+                        {sec.callout.body}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Author Bylaw and Notice */}
+            <div className="p-6 rounded-xl bg-[#0d1f1c] border border-[#1a342e] text-xs text-[#94a49a] space-y-2">
+              <div className="text-[#dae7de] font-semibold font-mono">
+                Engineering Governance & Peer Review
+              </div>
+              <p>
+                All technical insights published by Logicward are drafted by practicing systems architects and peer-reviewed against active production codebases.
+              </p>
+            </div>
+          </article>
+
+          {/* Right Sticky Sidebar */}
+          <div className="lg:col-span-4 space-y-6">
+            {/* Table of Contents */}
+            <div className="p-6 rounded-[24px] bg-[#0d1f1c] border border-[#1a342e] space-y-4 sticky top-24 shadow-xl shadow-black/40">
+              <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de]">
+                <BookOpen className="w-4 h-4" />
+                <span>Table of Contents</span>
+              </div>
+              <ul className="space-y-2 text-xs font-mono">
+                {article.tableOfContents.map((item) => (
+                  <li key={item.id}>
+                    <a
+                      href={`#${item.id}`}
+                      className="text-[#94a49a] hover:text-[#dae7de] transition-colors block py-0.5 truncate"
+                    >
+                      {item.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="pt-4 border-t border-[#1a342e] space-y-3">
+                <span className="text-[11px] font-mono text-[#94a49a] block">
+                  Tags & Disciplines:
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {article.tags.map((t, idx) => (
+                    <span
+                      key={idx}
+                      className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#091615] border border-[#1a342e] text-[#dae7de]"
+                    >
+                      #{t}
+                    </span>
                   ))}
                 </div>
+              </div>
 
-                {section.callout && (
-                  <div className="my-6 p-5 rounded-xl bg-cyan-950/30 border border-cyan-800/60 space-y-1">
-                    <span className="text-xs font-mono font-bold text-cyan-300 uppercase">
-                      {section.callout.title}
-                    </span>
-                    <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
-                      {section.callout.body}
-                    </p>
-                  </div>
-                )}
-              </section>
-            ))}
-
-            {/* Related Articles Strip */}
-            {article.relatedArticleSlugs.length > 0 && (
-              <div className="pt-10 border-t border-slate-800 space-y-4">
-                <h3 className="text-base font-bold text-white">
-                  Related Insights & Perspectives
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {article.relatedArticleSlugs.map((relSlug) => {
-                    const rel = getArticleBySlug(relSlug);
-                    if (!rel) return null;
-                    return (
-                      <Link
-                        key={rel.slug}
-                        href={`/insights/${rel.slug}`}
-                        className="p-4 rounded-xl bg-[#090e1a] border border-slate-800 hover:border-slate-700 space-y-1.5 block group"
-                      >
-                        <span className="text-[10px] font-mono text-cyan-400">
-                          {rel.category}
-                        </span>
-                        <h4 className="text-xs sm:text-sm font-semibold text-white group-hover:text-cyan-300 transition-colors line-clamp-2">
-                          {rel.title}
-                        </h4>
-                      </Link>
-                    );
-                  })}
+              {/* Consultation CTA Card */}
+              <div className="pt-4 border-t border-[#1a342e]">
+                <div className="p-4 rounded-xl bg-[#091615] border border-[#2d584d] space-y-2">
+                  <h4 className="text-xs font-bold text-white tracking-tight">
+                    Discuss this architecture with our team
+                  </h4>
+                  <p className="text-[11px] text-[#94a49a]">
+                    Schedule a 30-minute discovery call with a lead architect.
+                  </p>
+                  <Link
+                    href="/contact"
+                    className="w-full py-2 rounded-lg text-xs font-semibold text-[#091615] bg-[#dae7de] hover:bg-white transition-colors block text-center"
+                  >
+                    Schedule Consultation
+                  </Link>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
       </section>
@@ -267,4 +285,3 @@ export default async function ArticleDetailPage({
     </div>
   );
 }
-
