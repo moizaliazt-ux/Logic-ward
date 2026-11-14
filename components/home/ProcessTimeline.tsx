@@ -6,7 +6,6 @@ import {
   Code2,
   Rocket,
   RefreshCw,
-  ArrowRight,
 } from "lucide-react";
 
 export function ProcessTimeline() {
@@ -21,7 +20,7 @@ export function ProcessTimeline() {
     },
     {
       step: "02",
-      icon: <Compass className="w-5 h-5 text-[#8ea79f]" />,
+      icon: <Compass className="w-5 h-5 text-[#94a49a]" />,
       title: "Plan",
       subtitle: "Architecture & Schema Design",
       description:
@@ -37,7 +36,7 @@ export function ProcessTimeline() {
     },
     {
       step: "04",
-      icon: <Code2 className="w-5 h-5 text-[#8ea79f]" />,
+      icon: <Code2 className="w-5 h-5 text-[#94a49a]" />,
       title: "Build",
       subtitle: "Sprint-Based Engineering",
       description:
@@ -53,7 +52,7 @@ export function ProcessTimeline() {
     },
     {
       step: "06",
-      icon: <RefreshCw className="w-5 h-5 text-[#8ea79f]" />,
+      icon: <RefreshCw className="w-5 h-5 text-[#94a49a]" />,
       title: "Improve",
       subtitle: "Telemetry & Ongoing Support",
       description:
@@ -62,16 +61,16 @@ export function ProcessTimeline() {
   ];
 
   return (
-    <section className="py-20 md:py-28 bg-[#050e0d] border-t border-[#16332d]">
+    <section className="py-20 md:py-28 bg-[#091615] border-t border-[#1a342e]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#dae7de]">
+          <span className="text-[12px] font-mono uppercase tracking-[0.72px] text-[#94a49a]">
             Delivery Methodology
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-normal text-[#dae7de] tracking-[-1.08px]">
             Our 6-Step Engineering Process
           </h2>
-          <p className="text-sm sm:text-base text-[#b2c5bd] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#94a49a] leading-relaxed">
             Every project follows a disciplined, predictable lifecycle designed to eliminate technical surprises, avoid scope creep, and ensure timely production delivery.
           </p>
         </div>
@@ -81,27 +80,27 @@ export function ProcessTimeline() {
           {steps.map((item, index) => (
             <div
               key={index}
-              className="p-6 rounded-3xl bg-[#091a17] border border-[#1a3832] hover:border-[#2d584d] transition-all space-y-4 relative group shadow-xl"
+              className="p-6 rounded-xl bg-[#0d1f1c] border border-[#1a342e] hover:border-[#43634f] transition-all space-y-4 relative group shadow-xl"
             >
               <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-2xl bg-[#0e2622] border border-[#1e463e] flex items-center justify-center group-hover:border-[#dae7de]/40 transition-colors">
+                <div className="w-10 h-10 rounded-lg bg-[#132b27] border border-[#1a342e] flex items-center justify-center group-hover:border-[#dae7de]/40 transition-colors">
                   {item.icon}
                 </div>
-                <span className="text-2xl font-mono font-bold text-[#1f453e] group-hover:text-[#dae7de]/60 transition-colors">
+                <span className="text-2xl font-mono font-bold text-[#1a342e] group-hover:text-[#dae7de]/60 transition-colors">
                   {item.step}
                 </span>
               </div>
 
               <div className="space-y-1">
-                <h3 className="text-lg font-bold text-white group-hover:text-[#dae7de] transition-colors">
+                <h3 className="text-lg font-normal text-[#dae7de] tracking-[-0.5px] group-hover:text-white transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-xs font-medium text-[#dae7de]">
+                <p className="text-xs font-mono uppercase tracking-[0.72px] text-[#94a49a]">
                   {item.subtitle}
                 </p>
               </div>
 
-              <p className="text-xs sm:text-sm text-[#8ea79f] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#94a49a] leading-relaxed">
                 {item.description}
               </p>
             </div>

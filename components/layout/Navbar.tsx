@@ -16,8 +16,6 @@ import {
   Server,
   PenTool,
   PhoneCall,
-  Sparkles,
-  ExternalLink,
 } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { serviceCategories } from "@/lib/data/services";
@@ -27,11 +25,13 @@ export function Navbar() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
 
-  useEffect(() => {
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setMobileMenuOpen(false);
     setServicesOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -263,7 +263,7 @@ export function Navbar() {
 
             <Link
               href="/contact"
-              className="text-[12px] font-mono font-bold text-[#091615] bg-[#dae7de] hover:bg-white px-4 py-2 rounded-md transition-all flex items-center gap-1.5 shadow-sm"
+              className="text-[12px] font-mono font-bold text-[#091615] bg-[#dae7de] hover:bg-white px-4 py-2 rounded-[6px] transition-all flex items-center gap-1.5 shadow-sm"
             >
               <span>BOOK CONSULTATION</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -274,9 +274,9 @@ export function Navbar() {
           <div className="flex items-center gap-2 lg:hidden">
             <Link
               href="/contact"
-              className="text-[11px] font-mono font-bold text-[#091615] bg-[#dae7de] px-3 py-1.5 rounded-md"
+              className="text-[11px] font-mono font-bold text-[#091615] bg-[#dae7de] px-3 py-1.5 rounded-[6px]"
             >
-              LET'S TALK
+              LET&apos;S TALK
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

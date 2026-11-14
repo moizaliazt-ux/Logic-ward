@@ -3,21 +3,17 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
-  ArrowLeft,
   ArrowRight,
   CheckCircle2,
   AlertCircle,
   HelpCircle,
   PhoneCall,
-  Sparkles,
-  Layers,
   ChevronRight,
   ShieldCheck,
 } from "lucide-react";
 import {
   getServiceBySlug,
   getAllServiceSlugs,
-  serviceCategories,
 } from "@/lib/data/services";
 import { siteConfig } from "@/lib/site-config";
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";

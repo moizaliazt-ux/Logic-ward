@@ -13,9 +13,7 @@ import {
   CalendarCheck,
   CheckCircle2,
   ArrowRight,
-  ShieldCheck,
   Layers,
-  Sparkles,
 } from "lucide-react";
 import { solutionsData } from "@/lib/data/solutions";
 import { ConversionCTA } from "@/components/home/ConversionCTA";

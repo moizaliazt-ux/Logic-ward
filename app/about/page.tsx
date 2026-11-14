@@ -1,18 +1,11 @@
 import React from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import {
   ShieldCheck,
   Globe2,
-  Users2,
   Code2,
-  Cpu,
   Target,
-  Sparkles,
-  ArrowRight,
-  CheckCircle2,
   Clock,
-  Layers,
 } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { ConversionCTA } from "@/components/home/ConversionCTA";

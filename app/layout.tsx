@@ -85,7 +85,7 @@ export default function RootLayout({
         <OrganizationJsonLd />
         <WebsiteJsonLd />
       </head>
-      <body className="min-h-full flex flex-col bg-[#071312] text-[#f2f7f4] selection:bg-[#2d584d]/50 selection:text-[#dae7de]">
+      <body className="min-h-full flex flex-col bg-[#091615] text-[#dae7de] selection:bg-[#2d584d]/50 selection:text-[#dae7de]">
         <Navbar />
         <main className="flex-1 flex flex-col">{children}</main>
         <Footer />

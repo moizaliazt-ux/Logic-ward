@@ -8,9 +8,6 @@ import {
   MapPin,
   Clock,
   ShieldCheck,
-  Calendar,
-  MessageSquare,
-  Globe2,
   ExternalLink,
 } from "lucide-react";
 
@@ -22,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="flex flex-col w-full bg-[#071312] text-[#dae7de]">
+    <div className="flex flex-col w-full bg-[#091615] text-[#dae7de]">
       {/* Header Banner */}
       <section className="relative py-16 md:py-20 bg-gradient-to-b from-[#091615] via-[#0d1f1c] to-[#071312] border-b border-[#1a342e]">
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#2d584d]/15 blur-[120px] rounded-full pointer-events-none" />

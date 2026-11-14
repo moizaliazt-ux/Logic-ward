@@ -5,14 +5,9 @@ import Link from "next/link";
 import {
   Calendar,
   Clock,
-  ArrowLeft,
-  ArrowRight,
   ChevronRight,
-  Share2,
   BookOpen,
   Sparkles,
-  PhoneCall,
-  User,
 } from "lucide-react";
 import { getArticleBySlug, articlesData } from "@/lib/data/insights";
 import { siteConfig } from "@/lib/site-config";

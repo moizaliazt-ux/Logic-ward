@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
-import { serviceCategories, detailedServices } from "@/lib/data/services";
+import { detailedServices } from "@/lib/data/services";
 import { solutionsData } from "@/lib/data/solutions";
 import { portfolioProjects } from "@/lib/data/portfolio";
 import { articlesData } from "@/lib/data/insights";

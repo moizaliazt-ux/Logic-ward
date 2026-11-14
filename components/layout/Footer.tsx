@@ -8,31 +8,30 @@ import {
   Clock,
   ShieldCheck,
   Globe2,
-  Code2,
 } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { serviceCategories } from "@/lib/data/services";
 
 export function Footer() {
-  const currentYear = 2026;
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="w-full bg-[#040b0a] text-[#8ea79f] border-t border-[#142c27]">
       {/* Upper Brand / Consultation Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
-        <div className="bg-gradient-to-r from-[#091a17] via-[#091a17]/70 to-[#0f2824] border border-[#1b3e37] rounded-3xl p-8 sm:p-10 mb-16 relative overflow-hidden shadow-2xl">
+        <div className="bg-gradient-to-r from-[#091a17] via-[#091a17]/70 to-[#0f2824] border border-[#1b3e37] rounded-xl p-8 sm:p-10 mb-16 relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#dae7de]/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
 
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10">
             <div className="max-w-2xl space-y-3">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#0e2622] text-[#dae7de] border border-[#1e463e]">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[6px] text-xs font-mono uppercase tracking-[0.72px] bg-[#0e2622] text-[#dae7de] border border-[#1e463e]">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#dae7de]" />
                 Trusted Engineering Partner
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-normal text-[#dae7de] tracking-[-1.08px]">
                 Ready to engineer technology that moves your business forward?
               </h2>
-              <p className="text-sm sm:text-base text-[#b2c5bd] leading-relaxed">
+              <p className="text-sm sm:text-base text-[#94a49a] leading-relaxed">
                 Schedule a 30-minute discovery consultation. We review your requirements, scope technical architecture, and provide realistic timelines with zero obligation.
               </p>
             </div>
@@ -40,7 +39,7 @@ export function Footer() {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <Link
                 href="/contact"
-                className="px-8 py-4 rounded-full font-bold text-[#071312] bg-[#dae7de] hover:bg-[#eaf3ec] transition-all text-sm text-center shadow-lg shadow-black/40"
+                className="px-6 py-3.5 rounded-[6px] font-mono text-xs font-bold uppercase text-[#071312] bg-[#dae7de] hover:bg-white transition-all text-center shadow-lg shadow-black/40"
               >
                 Book a Free Consultation
               </Link>
@@ -48,7 +47,7 @@ export function Footer() {
                 href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-4 rounded-full font-medium text-[#dae7de] bg-[#0d221f] hover:bg-[#132e29] border border-[#1e463e] transition-colors text-sm text-center inline-flex items-center justify-center gap-2"
+                className="px-5 py-3.5 rounded-[6px] font-mono text-xs font-bold uppercase text-[#dae7de] bg-[#0d221f] hover:bg-[#132e29] border border-[#1e463e] transition-colors text-center inline-flex items-center justify-center gap-2"
               >
                 <span>WhatsApp Us</span>
                 <ArrowUpRight className="w-4 h-4 text-[#dae7de]" />

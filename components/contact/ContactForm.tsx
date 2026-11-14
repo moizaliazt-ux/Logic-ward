@@ -4,12 +4,9 @@ import React, { useState } from "react";
 import {
   Send,
   CheckCircle2,
-  AlertCircle,
   PhoneCall,
   Loader2,
   Lock,
-  MessageSquare,
-  Sparkles,
 } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { serviceCategories } from "@/lib/data/services";

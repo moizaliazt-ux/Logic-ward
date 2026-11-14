@@ -3,16 +3,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
-  ArrowLeft,
-  ArrowRight,
   ChevronRight,
   CheckCircle2,
   AlertCircle,
   Cpu,
   Layers,
-  Sparkles,
-  PhoneCall,
-  ShieldCheck,
 } from "lucide-react";
 import {
   getCaseStudyBySlug,
