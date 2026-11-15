@@ -3,69 +3,65 @@ import {
   Code,
   Smartphone,
   Database,
-  Bot,
   Network,
-  Cpu,
-  Server,
-  Layers,
 } from "lucide-react";
 
 export function TechStackMatrix() {
   const stackCategories = [
     {
-      title: "Frontend & Web Architecture",
-      icon: <Code className="w-5 h-5 text-[#dae7de]" />,
+      title: "Frontend & Web Engineering",
+      icon: <Code className="w-5 h-5 text-brand-accent" />,
       items: [
-        { name: "Next.js 16 (App Router)", detail: "Server Components & Edge Caching" },
-        { name: "TypeScript", detail: "Strict type safety across domain models" },
-        { name: "React 19", detail: "Concurrent features & Optimistic UI" },
-        { name: "Tailwind CSS", detail: "Custom design tokens & responsive systems" },
+        { name: "Next.js 16 (App Router)", detail: "React Server Components, static rendering, and caching options" },
+        { name: "TypeScript", detail: "Strict type safety across domain models and API contracts" },
+        { name: "React 19", detail: "Concurrent features, optimistic state transitions, Actions" },
+        { name: "Tailwind CSS", detail: "Custom variable-driven design tokens and zero-runtime styles" },
       ],
     },
     {
       title: "Backend & Relational Data",
-      icon: <Database className="w-5 h-5 text-[#8ea79f]" />,
+      icon: <Database className="w-5 h-5 text-brand-accent" />,
       items: [
-        { name: "PostgreSQL", detail: "Partitioned tables & transactional integrity" },
-        { name: "Node.js & Python FastAPI", detail: "High-throughput asynchronous APIs" },
-        { name: "Redis", detail: "In-memory caching & background task queues" },
-        { name: "Docker", detail: "Containerized deployments & reproducibility" },
+        { name: "PostgreSQL", detail: "Partitioned tables, relational schemas, ACID-compliant transactions" },
+        { name: "Node.js & FastAPI", detail: "Asynchronous RESTful and GraphQL API patterns" },
+        { name: "Redis", detail: "In-memory caching, distributed rate limiting, and message brokers" },
+        { name: "Docker", detail: "Reproducible containerization for multi-environment staging" },
       ],
     },
     {
-      title: "Mobile Application Stacks",
-      icon: <Smartphone className="w-5 h-5 text-[#dae7de]" />,
+      title: "Mobile App Development",
+      icon: <Smartphone className="w-5 h-5 text-brand-accent" />,
       items: [
-        { name: "Flutter", detail: "Cross-platform 60fps native compilation" },
-        { name: "React Native", detail: "Unified TypeScript mobile codebase" },
-        { name: "Native Android & iOS", detail: "Swift / Kotlin for specialized device SDKs" },
-        { name: "SQLite / Hive", detail: "Offline-first resilient local data storage" },
+        { name: "Flutter", detail: "Cross-platform UI development for supported mobile platforms" },
+        { name: "React Native", detail: "Unified TypeScript mobile codebase for iOS and Android" },
+        { name: "Native iOS (Swift) & Android (Kotlin)", detail: "Specialized low-level hardware integration" },
+        { name: "SQLite & Offline Sync", detail: "Local caching ensuring uninterrupted field usage" },
       ],
     },
     {
-      title: "Network & IT Infrastructure",
-      icon: <Network className="w-5 h-5 text-[#8ea79f]" />,
+      title: "Cloud, DevOps & Network IT",
+      icon: <Network className="w-5 h-5 text-brand-accent" />,
       items: [
-        { name: "MikroTik & RouterOS", detail: "Multi-WAN failover & bandwidth shaping" },
-        { name: "Ubiquiti UniFi", detail: "Commercial mesh Wi-Fi & roaming handoff" },
-        { name: "Cisco & Fortinet", detail: "Hardware firewall rules & site-to-site VPNs" },
-        { name: "Ubuntu / Linux Servers", detail: "Hardened OS installs, cron & systemd" },
+        { name: "AWS & Vercel Edge", detail: "Multi-region serverless routing and CDN asset delivery" },
+        { name: "MikroTik & RouterOS", detail: "Multi-WAN routing, failover configuration, and QoS" },
+        { name: "Ubiquiti UniFi & Cisco", detail: "Enterprise Wi-Fi roaming and IPSec site-to-site VPNs" },
+        { name: "3-2-1 Encrypted Backups", detail: "Automated off-site database snapshots and recovery drills" },
       ],
     },
   ];
 
   return (
-    <section className="py-20 bg-[#050e0d] border-t border-[#16332d]">
+    <section className="py-20 md:py-28 bg-brand-surface  text-brand-text border-b border-brand-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#dae7de]">
-            Proven Engineering Stacks
+          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-brand-accent">
+            TECHNOLOGY ECOSYSTEM
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-            Technologies We Genuinely Build With
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-brand-text">
+            Practical Stacks Engineered for Reliability
           </h2>
-          <p className="text-sm sm:text-base text-[#b2c5bd] leading-relaxed">
-            We avoid novelty libraries that break next year. We specialize in modern, battle-tested technologies that deliver long-term maintainability, speed, and security.
+          <p className="text-sm sm:text-base text-brand-muted leading-relaxed">
+            Technology choices depend on project requirements, integrations, hosting constraints, and ongoing maintenance needs.
           </p>
         </div>
 
@@ -73,28 +69,31 @@ export function TechStackMatrix() {
           {stackCategories.map((cat, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-3xl bg-[#091a17] border border-[#1a3832] hover:border-[#2d584d] transition-colors space-y-4 shadow-xl"
+              className="p-6 rounded-2xl bg-brand-card border border-brand-border hover:border-brand-accent/50 transition-all space-y-5 flex flex-col justify-between"
             >
-              <div className="flex items-center gap-2.5 pb-2 border-b border-[#16332d]">
-                <div className="p-2.5 rounded-2xl bg-[#0e2622] border border-[#1e463e]">
+              <div className="space-y-4">
+                <div className="w-10 h-10 rounded-xl bg-brand-surface border border-brand-border flex items-center justify-center">
                   {cat.icon}
                 </div>
-                <h3 className="text-sm font-bold text-white leading-tight">
+                <h3 className="text-base font-bold text-brand-text">
                   {cat.title}
                 </h3>
+                <div className="space-y-3 pt-1 border-t border-brand-border">
+                  {cat.items.map((item, itemIdx) => (
+                    <div key={itemIdx} className="space-y-0.5">
+                      <span className="text-xs font-bold font-mono text-brand-secondary block">
+                        {item.name}
+                      </span>
+                      <span className="text-[11px] text-brand-muted leading-tight block">
+                        {item.detail}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className="space-y-3">
-                {cat.items.map((item, i) => (
-                  <div key={i} className="space-y-0.5">
-                    <div className="text-xs font-mono font-semibold text-[#dae7de]">
-                      {item.name}
-                    </div>
-                    <div className="text-[11px] text-[#8ea79f] leading-relaxed">
-                      {item.detail}
-                    </div>
-                  </div>
-                ))}
+              <div className="pt-3 border-t border-brand-border text-[10px] font-mono text-brand-accent uppercase tracking-wider">
+                Project-specific selection
               </div>
             </div>
           ))}

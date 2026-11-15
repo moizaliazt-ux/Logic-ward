@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
-  ShieldCheck,
   Code2,
   Zap,
   PhoneCall,
@@ -13,6 +12,7 @@ import {
   Cpu,
   Network,
   ChevronRight,
+  Terminal,
 } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 
@@ -20,17 +20,13 @@ export function Hero() {
   const [activeTab, setActiveTab] = useState<"software" | "web" | "ai" | "infra">("software");
 
   return (
-    <section className="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-32 bg-[#091615]">
-      {/* Background Ambience: Diffuse Forest Spotlight from Top-Left */}
-      <div className="absolute top-0 left-0 w-[650px] h-[650px] bg-gradient-to-br from-[#8ea79f]/12 via-[#2d584d]/15 to-transparent blur-[140px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-[#1a3832]/20 blur-[130px] rounded-full pointer-events-none" />
-
-      {/* Subtle Matrix Texture Overlay */}
+    <section className="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-32 bg-brand-surface text-brand-text">
+      {/* Engineering Grid Texture Overlay */}
       <div
         className="absolute inset-0 opacity-[0.025] pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #dae7de 1px, transparent 1px), linear-gradient(to bottom, #dae7de 1px, transparent 1px)",
+            "linear-gradient(to right, #F5F7FA 1px, transparent 1px), linear-gradient(to bottom, #F5F7FA 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }}
       />
@@ -39,95 +35,93 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           {/* Left Column: Bold Editorial Messaging & Conversion Triggers */}
           <div className="lg:col-span-7 space-y-7 text-left">
-            {/* Capability Tag */}
-            <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-[6px] text-xs font-mono uppercase tracking-[0.72px] bg-[#0d1f1c] border border-[#1a342e] text-[#94a49a] shadow-sm backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-[#dae7de] animate-pulse" />
-              <span className="text-[#dae7de]">Full-Service IT & Software Agency</span>
-              <span className="text-[#1a342e]">•</span>
-              <span className="text-[#94a49a]">Pakistan & Worldwide</span>
+            {/* PRD Section 5.2 Eyebrow */}
+            <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider bg-brand-card border border-brand-border text-brand-secondary shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
+              <span className="text-brand-accent font-semibold">SOFTWARE • DIGITAL PRODUCTS • BUSINESS SYSTEMS</span>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-[62px] font-normal tracking-[-1.86px] text-[#dae7de] leading-[1.08]">
-              Technology That Moves Your{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#dae7de] via-[#b2c5bd] to-[#8ea79f]">
-                Business Forward.
+            {/* PRD Section 2.2 Primary Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-[62px] font-bold tracking-tight text-brand-text leading-[1.08]">
+              Build smarter. Move your{" "}
+              <span className="text-brand-accent">
+                business forward.
               </span>
             </h1>
 
-            {/* Sub-copy */}
-            <p className="text-base sm:text-lg text-[#94a49a] max-w-2xl leading-relaxed">
-              We engineer custom software systems, scalable ERPs, high-converting web and mobile applications, practical AI workflows, and resilient IT infrastructure—delivering enterprise craft without vendor lock-in.
+            {/* PRD Section 2.2 Supporting Message */}
+            <p className="text-base sm:text-lg text-brand-secondary max-w-2xl leading-relaxed">
+              From custom software and digital products to business automation and cloud-ready platforms, Logicward turns complex business needs into practical technology.
             </p>
 
             {/* Engineering Pillars Checklist */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs sm:text-sm text-[#94a49a] max-w-xl">
-              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-[#0d1f1c] border border-[#1a342e]">
-                <CheckCircle2 className="w-4 h-4 text-[#dae7de] flex-shrink-0" />
-                <span className="text-[#dae7de]">100% IP & Source Code Ownership</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs sm:text-sm text-brand-secondary max-w-xl">
+              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-brand-card border border-brand-border">
+                <CheckCircle2 className="w-4 h-4 text-brand-accent flex-shrink-0" />
+                <span className="text-brand-text font-medium">Contractual Code & IP Ownership</span>
               </div>
-              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-[#0d1f1c] border border-[#1a342e]">
-                <CheckCircle2 className="w-4 h-4 text-[#dae7de] flex-shrink-0" />
-                <span className="text-[#dae7de]">Sub-Second Global Edge Performance</span>
+              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-brand-card border border-brand-border">
+                <CheckCircle2 className="w-4 h-4 text-brand-accent flex-shrink-0" />
+                <span className="text-brand-text font-medium">Performance-Focused Architecture</span>
               </div>
-              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-[#0d1f1c] border border-[#1a342e]">
-                <CheckCircle2 className="w-4 h-4 text-[#dae7de] flex-shrink-0" />
-                <span className="text-[#dae7de]">Deterministic AI Scoped to Real ROI</span>
+              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-brand-card border border-brand-border">
+                <CheckCircle2 className="w-4 h-4 text-brand-accent flex-shrink-0" />
+                <span className="text-brand-text font-medium">Pragmatic, Scoped Automation</span>
               </div>
-              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-[#0d1f1c] border border-[#1a342e]">
-                <CheckCircle2 className="w-4 h-4 text-[#dae7de] flex-shrink-0" />
-                <span className="text-[#dae7de]">Transparent Milestone Governance</span>
+              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-brand-card border border-brand-border">
+                <CheckCircle2 className="w-4 h-4 text-brand-accent flex-shrink-0" />
+                <span className="text-brand-text font-medium">Milestone-Based Staging Reviews</span>
               </div>
             </div>
 
-            {/* Call to Actions */}
+            {/* PRD Section 5.2 Calls to Action */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
               <Link
                 href="/contact"
-                className="px-6 py-3.5 rounded-[6px] font-mono text-xs font-bold uppercase text-[#091615] bg-[#dae7de] hover:bg-white transition-all text-center shadow-xl shadow-black/40 inline-flex items-center justify-center gap-2 group"
+                className="px-6 py-3.5 rounded-lg text-sm font-semibold text-brand-background bg-brand-accent hover:bg-brand-accent-hover transition-all text-center shadow-sm shadow-brand-background/20 inline-flex items-center justify-center gap-2 group"
               >
-                <span>Book a Free Consultation</span>
+                <span>Start a Project</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
 
               <Link
-                href="/services"
-                className="px-5 py-3.5 rounded-[6px] font-mono text-xs font-bold uppercase text-[#dae7de] bg-[#0d1f1c] hover:bg-[#132b27] border border-[#1a342e] hover:border-[#43634f] transition-colors text-center inline-flex items-center justify-center gap-2"
+                href="/work"
+                className="px-5 py-3.5 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-text bg-brand-card hover:bg-brand-elevated border border-brand-border hover:border-brand-accent/50 transition-colors text-center inline-flex items-center justify-center gap-2"
               >
-                <span>Explore 40+ Services</span>
+                <span>Explore Our Work</span>
               </Link>
 
               <a
                 href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3.5 rounded-[6px] font-mono text-xs font-bold uppercase text-[#dae7de] hover:text-white bg-[#0d1f1c] hover:bg-[#132b27] border border-[#1a342e] hover:border-[#43634f] transition-colors text-center inline-flex items-center justify-center gap-2"
+                className="px-4 py-3.5 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-text bg-brand-card hover:bg-brand-elevated border border-brand-border hover:border-brand-accent/50 transition-colors text-center inline-flex items-center justify-center gap-2"
                 title="Direct WhatsApp Inquiry"
               >
-                <PhoneCall className="w-4 h-4 text-[#dae7de]" />
-                <span>WhatsApp</span>
+                <PhoneCall className="w-4 h-4 text-brand-accent" />
+                <span className="font-mono text-xs">WhatsApp</span>
               </a>
             </div>
 
-            {/* Quick Metrics Bar */}
-            <div className="pt-4 border-t border-[#1a342e] flex flex-wrap items-center gap-6 text-xs text-[#94a49a]">
+            {/* Verified Capability Standards Bar (PRD Section 5.3) */}
+            <div className="pt-4 border-t border-brand-border flex flex-wrap items-center gap-6 text-xs text-brand-muted">
               <div>
-                <span className="text-[#dae7de] font-bold font-mono text-sm block">40+</span>
-                <span>Active Services</span>
+                <span className="text-brand-text font-bold font-mono text-sm block">Full-Stack</span>
+                <span>Software & Systems</span>
               </div>
-              <div className="w-px h-7 bg-[#1a342e]" />
+              <div className="w-px h-7 bg-brand-elevated" />
               <div>
-                <span className="text-[#dae7de] font-bold font-mono text-sm block">&lt;24h</span>
-                <span>Response Guarantee</span>
+                <span className="text-brand-text font-bold font-mono text-sm block">100% Transfer</span>
+                <span>Code & IP Handover</span>
               </div>
-              <div className="w-px h-7 bg-[#1a342e]" />
+              <div className="w-px h-7 bg-brand-elevated" />
               <div>
-                <span className="text-[#dae7de] font-bold font-mono text-sm block">100%</span>
-                <span>Code Transfer</span>
+                <span className="text-brand-text font-bold font-mono text-sm block">Milestone SOW</span>
+                <span>Staging Demonstrations</span>
               </div>
-              <div className="w-px h-7 bg-[#1a342e]" />
+              <div className="w-px h-7 bg-brand-elevated" />
               <div>
-                <span className="text-[#dae7de] font-bold font-mono text-sm block">Global</span>
+                <span className="text-brand-text font-bold font-mono text-sm block">International</span>
                 <span>PK / US / UK / UAE</span>
               </div>
             </div>
@@ -136,39 +130,36 @@ export function Hero() {
           {/* Right Column: Live Interactive Architecture Console */}
           <div className="lg:col-span-5 relative">
             <div className="relative mx-auto max-w-lg lg:max-w-none">
-              {/* Outer Diffuse Forest Glow */}
-              <div className="absolute -inset-2 rounded-xl bg-gradient-to-r from-[#2d584d]/30 to-[#8ea79f]/10 blur-2xl opacity-75 pointer-events-none" />
-
               {/* Main Console Box */}
-              <div className="relative rounded-xl bg-[#0d1f1c] border border-[#1a342e] shadow-2xl shadow-black/90 overflow-hidden">
+              <div className="relative rounded-2xl bg-brand-card border border-brand-border shadow-md overflow-hidden">
                 {/* Window Header */}
-                <div className="px-5 py-3.5 bg-[#091615] border-b border-[#1a342e] flex items-center justify-between">
+                <div className="px-5 py-3.5 bg-brand-background border-b border-brand-border flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 rounded-full bg-[#132b27]" />
-                    <span className="w-3 h-3 rounded-full bg-[#2d584d]" />
-                    <span className="w-3 h-3 rounded-full bg-[#dae7de]" />
-                    <span className="ml-2 text-xs font-mono text-[#94a49a]">
-                      logicward-architecture-v1
+                    <span className="w-3 h-3 rounded-full bg-brand-accent" />
+                    <span className="w-3 h-3 rounded-full bg-brand-accent" />
+                    <span className="w-3 h-3 rounded-full bg-brand-accent" />
+                    <span className="ml-2 text-xs font-mono text-brand-muted">
+                      logicward-architecture-v2
                     </span>
                   </div>
-                  <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-[6px] text-[10px] font-mono uppercase tracking-[0.72px] bg-[#132b27] text-[#dae7de] border border-[#1a342e]">
-                    <Zap className="w-3 h-3 text-[#dae7de]" />
-                    <span>PRODUCTION VERIFIED</span>
+                  <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-brand-surface  text-brand-accent border border-brand-border">
+                    <Zap className="w-3 h-3 text-brand-accent" />
+                    <span>REFERENCE ARCHITECTURE</span>
                   </div>
                 </div>
 
                 {/* Interactive Console Tabs */}
-                <div className="grid grid-cols-4 border-b border-[#1a342e] bg-[#091615]/60 text-[11px] font-mono">
+                <div className="grid grid-cols-4 border-b border-brand-border  bg-brand-background/80 text-[11px] font-mono">
                   <button
                     onClick={() => setActiveTab("software")}
                     className={`py-2.5 px-2 text-center transition-colors border-b-2 flex items-center justify-center gap-1.5 ${
                       activeTab === "software"
-                        ? "border-[#dae7de] text-[#dae7de] bg-[#132b27] font-semibold"
-                        : "border-transparent text-[#94a49a] hover:text-[#dae7de]"
+                        ? "border-brand-accent text-brand-text bg-brand-surface font-semibold"
+                        : "border-transparent text-brand-muted hover:text-brand-text"
                     }`}
                   >
-                    <Database className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">ERP/Software</span>
+                    <Database className="w-3.5 h-3.5 text-brand-accent" />
+                    <span className="hidden sm:inline">ERP/Core</span>
                     <span className="sm:hidden">ERP</span>
                   </button>
 
@@ -176,11 +167,11 @@ export function Hero() {
                     onClick={() => setActiveTab("web")}
                     className={`py-2.5 px-2 text-center transition-colors border-b-2 flex items-center justify-center gap-1.5 ${
                       activeTab === "web"
-                        ? "border-[#dae7de] text-[#dae7de] bg-[#132b27] font-semibold"
-                        : "border-transparent text-[#94a49a] hover:text-[#dae7de]"
+                        ? "border-brand-accent text-brand-text bg-brand-surface font-semibold"
+                        : "border-transparent text-brand-muted hover:text-brand-text"
                     }`}
                   >
-                    <Code2 className="w-3.5 h-3.5" />
+                    <Code2 className="w-3.5 h-3.5 text-brand-accent" />
                     <span className="hidden sm:inline">Web/Apps</span>
                     <span className="sm:hidden">Web</span>
                   </button>
@@ -189,11 +180,11 @@ export function Hero() {
                     onClick={() => setActiveTab("ai")}
                     className={`py-2.5 px-2 text-center transition-colors border-b-2 flex items-center justify-center gap-1.5 ${
                       activeTab === "ai"
-                        ? "border-[#dae7de] text-[#dae7de] bg-[#132b27] font-semibold"
-                        : "border-transparent text-[#94a49a] hover:text-[#dae7de]"
+                        ? "border-brand-accent text-brand-text bg-brand-surface font-semibold"
+                        : "border-transparent text-brand-muted hover:text-brand-text"
                     }`}
                   >
-                    <Cpu className="w-3.5 h-3.5" />
+                    <Cpu className="w-3.5 h-3.5 text-brand-accent" />
                     <span className="hidden sm:inline">AI Workflows</span>
                     <span className="sm:hidden">AI</span>
                   </button>
@@ -202,144 +193,181 @@ export function Hero() {
                     onClick={() => setActiveTab("infra")}
                     className={`py-2.5 px-2 text-center transition-colors border-b-2 flex items-center justify-center gap-1.5 ${
                       activeTab === "infra"
-                        ? "border-[#dae7de] text-[#dae7de] bg-[#132b27] font-semibold"
-                        : "border-transparent text-[#94a49a] hover:text-[#dae7de]"
+                        ? "border-brand-accent text-brand-text bg-brand-surface font-semibold"
+                        : "border-transparent text-brand-muted hover:text-brand-text"
                     }`}
                   >
-                    <Network className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">IT/Networks</span>
+                    <Network className="w-3.5 h-3.5 text-brand-accent" />
+                    <span className="hidden sm:inline">Network/IT</span>
                     <span className="sm:hidden">IT</span>
                   </button>
                 </div>
 
-                {/* Console Tab Content */}
-                <div className="p-6 space-y-4 font-mono text-xs">
+                {/* Console Content Screen */}
+                <div className="p-6 space-y-5 text-left text-xs font-mono">
                   {activeTab === "software" && (
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between text-[#94a49a] text-[11px] pb-1 border-b border-[#1a342e]">
-                        <span>MODULE: ENTERPRISE_ERP_CORE</span>
-                        <span className="text-[#dae7de]">STATUS: ACTIVE</span>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between text-[11px] text-brand-muted border-b border-brand-border pb-2">
+                        <span className="flex items-center gap-1.5 text-brand-text">
+                          <Terminal className="w-3.5 h-3.5 text-brand-accent" />
+                          ARCHITECTURE: MODULAR ERP & RELATIONAL SCHEMA
+                        </span>
+                        <span className="text-brand-accent">ACID COMPLIANT</span>
                       </div>
-                      <div className="p-4 rounded-xl bg-[#091615] border border-[#1a342e] space-y-2">
-                        <div className="text-[#dae7de] font-medium flex items-center justify-between">
-                          <span>PostgreSQL Relational Ledger</span>
-                          <span className="text-[10px] text-[#dae7de] font-mono px-2 py-0.5 rounded-[6px] bg-[#132b27] border border-[#1a342e]">ACID Compliant</span>
-                        </div>
-                        <p className="text-[11px] text-[#94a49a] font-sans leading-relaxed">
-                          Multi-location warehouse stock decrementation, tax compliance (FBR & VAT), and role-governed approval hierarchies.
+
+                      <div className="bg-brand-background p-3.5 rounded-xl border border-brand-border space-y-2 text-brand-secondary">
+                        <p className="text-[11px] text-brand-accent">
+                          {"// High-Integrity Transactional Pipeline"}
+                        </p>
+                        <p className="text-[11px] leading-relaxed">
+                          SCHEMA: PostgreSQL Normalization + Redis Query Caching
+                          <br />
+                          TRANSACTIONS: Row-level write locks preventing stock over-allocation
+                          <br />
+                          RECONCILIATION: Structured financial ledger balancing
+                          <br />
+                          MIGRATION: Versioned database migration scripts
                         </p>
                       </div>
+
                       <div className="grid grid-cols-2 gap-2 text-[11px]">
-                        <div className="p-3 rounded-lg bg-[#091615]/80 border border-[#1a342e] text-[#dae7de]">
-                          <span className="text-[#94a49a] block text-[10px]">INVENTORY SYNC</span>
-                          &lt;100ms Latency
+                        <div className="p-2.5 rounded-lg bg-brand-surface border border-brand-border">
+                          <span className="text-brand-muted block text-[10px]">SCALABILITY</span>
+                          <span className="text-brand-text font-bold">Partitioned Tables</span>
                         </div>
-                        <div className="p-3 rounded-lg bg-[#091615]/80 border border-[#1a342e] text-[#dae7de]">
-                          <span className="text-[#94a49a] block text-[10px]">IP OWNERSHIP</span>
-                          100% Client Handoff
+                        <div className="p-2.5 rounded-lg bg-brand-surface border border-brand-border">
+                          <span className="text-brand-muted block text-[10px]">DATA INTEGRITY</span>
+                          <span className="text-brand-accent font-bold">Foreign Key Constraints</span>
                         </div>
                       </div>
                     </div>
                   )}
 
                   {activeTab === "web" && (
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between text-[#94a49a] text-[11px] pb-1 border-b border-[#1a342e]">
-                        <span>FRAMEWORK: NEXT_16_APP_ROUTER</span>
-                        <span className="text-[#dae7de]">TURBOPACK READY</span>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between text-[11px] text-brand-muted border-b border-brand-border pb-2">
+                        <span className="flex items-center gap-1.5 text-brand-text">
+                          <Terminal className="w-3.5 h-3.5 text-brand-accent" />
+                          STACK: NEXT.JS 16 APP ROUTER + REACT 19
+                        </span>
+                        <span className="text-brand-accent">SSR + RSC</span>
                       </div>
-                      <div className="p-4 rounded-xl bg-[#091615] border border-[#1a342e] space-y-2">
-                        <div className="text-[#dae7de] font-medium flex items-center justify-between">
-                          <span>Edge Server Components</span>
-                          <span className="text-[10px] text-[#dae7de] font-mono px-2 py-0.5 rounded-[6px] bg-[#132b27] border border-[#1a342e]">0.7s LCP Score</span>
-                        </div>
-                        <p className="text-[11px] text-[#94a49a] font-sans leading-relaxed">
-                          Statically prerendered marketing pages, dynamic streaming interfaces, and cross-platform Flutter/React Native mobile applications.
+
+                      <div className="bg-brand-background p-3.5 rounded-xl border border-brand-border space-y-2 text-brand-secondary">
+                        <p className="text-[11px] text-brand-accent">
+                          {"// Performance-Focused Architecture"}
+                        </p>
+                        <p className="text-[11px] leading-relaxed">
+                          RENDERING: React Server Components by default
+                          <br />
+                          BUNDLE: Client JavaScript strictly reserved for interactive islands
+                          <br />
+                          RESPONSIVE: Touch-optimized mobile navigation drawer
+                          <br />
+                          STRUCTURED DATA: Schema.org microdata for search engines
                         </p>
                       </div>
+
                       <div className="grid grid-cols-2 gap-2 text-[11px]">
-                        <div className="p-3 rounded-lg bg-[#091615]/80 border border-[#1a342e] text-[#dae7de]">
-                          <span className="text-[#94a49a] block text-[10px]">LIGHTHOUSE</span>
-                          98+ Performance
+                        <div className="p-2.5 rounded-lg bg-brand-surface border border-brand-border">
+                          <span className="text-brand-muted block text-[10px]">OPTIMIZATION</span>
+                          <span className="text-brand-text font-bold">Core Web Vitals Best Practices</span>
                         </div>
-                        <div className="p-3 rounded-lg bg-[#091615]/80 border border-[#1a342e] text-[#dae7de]">
-                          <span className="text-[#94a49a] block text-[10px]">SEARCH VISIBILITY</span>
-                          AEO & Schema Native
+                        <div className="p-2.5 rounded-lg bg-brand-surface border border-brand-border">
+                          <span className="text-brand-muted block text-[10px]">DEPLOYMENT</span>
+                          <span className="text-brand-accent font-bold">Global Edge CDN Distribution</span>
                         </div>
                       </div>
                     </div>
                   )}
 
                   {activeTab === "ai" && (
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between text-[#94a49a] text-[11px] pb-1 border-b border-[#1a342e]">
-                        <span>PIPELINE: DETERMINISTIC_AI_ENGINE</span>
-                        <span className="text-[#dae7de]">STRICT SCOPING</span>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between text-[11px] text-brand-muted border-b border-brand-border pb-2">
+                        <span className="flex items-center gap-1.5 text-brand-text">
+                          <Terminal className="w-3.5 h-3.5 text-brand-accent" />
+                          PIPELINE: PRAGMATIC WORKFLOW AUTOMATION
+                        </span>
+                        <span className="text-brand-accent">SCHEMA VALIDATED</span>
                       </div>
-                      <div className="p-4 rounded-xl bg-[#091615] border border-[#1a342e] space-y-2">
-                        <div className="text-[#dae7de] font-medium flex items-center justify-between">
-                          <span>Document & Lead Triage</span>
-                          <span className="text-[10px] text-[#dae7de] font-mono px-2 py-0.5 rounded-[6px] bg-[#132b27] border border-[#1a342e]">Zero Public Leak</span>
-                        </div>
-                        <p className="text-[11px] text-[#94a49a] font-sans leading-relaxed">
-                          Commercial enterprise zero-retention APIs extracting PDF invoices and qualifying inbound inquiries with human review triggers.
+
+                      <div className="bg-brand-background p-3.5 rounded-xl border border-brand-border space-y-2 text-brand-secondary">
+                        <p className="text-[11px] text-brand-accent">
+                          {"// Practical Automation Without Hype"}
+                        </p>
+                        <p className="text-[11px] leading-relaxed">
+                          TRIAGE: Rules-based and model-assisted lead classification
+                          <br />
+                          EXTRACTION: Structured JSON data extraction from documents
+                          <br />
+                          GUARDRAILS: Human review thresholds for high-stakes actions
+                          <br />
+                          INTEGRATION: Standardized REST webhook payloads to CRM
                         </p>
                       </div>
+
                       <div className="grid grid-cols-2 gap-2 text-[11px]">
-                        <div className="p-3 rounded-lg bg-[#091615]/80 border border-[#1a342e] text-[#dae7de]">
-                          <span className="text-[#94a49a] block text-[10px]">RESPONSE SPEED</span>
-                          Under 90 Seconds
+                        <div className="p-2.5 rounded-lg bg-brand-surface border border-brand-border">
+                          <span className="text-brand-muted block text-[10px]">APPROACH</span>
+                          <span className="text-brand-text font-bold">Deterministic Pipelines</span>
                         </div>
-                        <div className="p-3 rounded-lg bg-[#091615]/80 border border-[#1a342e] text-[#dae7de]">
-                          <span className="text-[#94a49a] block text-[10px]">SAFEGUARDS</span>
-                          Human-in-the-Loop
+                        <div className="p-2.5 rounded-lg bg-brand-surface border border-brand-border">
+                          <span className="text-brand-muted block text-[10px]">OVERSIGHT</span>
+                          <span className="text-brand-accent font-bold">Human-in-the-Loop Review</span>
                         </div>
                       </div>
                     </div>
                   )}
 
                   {activeTab === "infra" && (
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between text-[#94a49a] text-[11px] pb-1 border-b border-[#1a342e]">
-                        <span>TOPOLOGY: ENTERPRISE_NETWORKING</span>
-                        <span className="text-[#dae7de]">FAILOVER ACTIVE</span>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between text-[11px] text-brand-muted border-b border-brand-border pb-2">
+                        <span className="flex items-center gap-1.5 text-brand-text">
+                          <Terminal className="w-3.5 h-3.5 text-brand-accent" />
+                          TOPOLOGY: ROUTER, SWITCH & CLOUD RESILIENCY
+                        </span>
+                        <span className="text-brand-accent">REDUNDANT ROUTING</span>
                       </div>
-                      <div className="p-4 rounded-xl bg-[#091615] border border-[#1a342e] space-y-2">
-                        <div className="text-[#dae7de] font-medium flex items-center justify-between">
-                          <span>MikroTik & Cisco Firewall</span>
-                          <span className="text-[10px] text-[#dae7de] font-mono px-2 py-0.5 rounded-[6px] bg-[#132b27] border border-[#1a342e]">Dual-WAN 99.9%</span>
-                        </div>
-                        <p className="text-[11px] text-[#94a49a] font-sans leading-relaxed">
-                          Isolated office VLANs for guest, biometric, and finance devices, automated WireGuard VPN tunnels, and encrypted cloud backups.
+
+                      <div className="bg-brand-background p-3.5 rounded-xl border border-brand-border space-y-2 text-brand-secondary">
+                        <p className="text-[11px] text-brand-accent">
+                          {"// Network Infrastructure & Security"}
+                        </p>
+                        <p className="text-[11px] leading-relaxed">
+                          ROUTING: Multi-WAN configuration and bandwidth shaping
+                          <br />
+                          SECURITY: Hardware firewall filtering and secure VPN tunnels
+                          <br />
+                          BACKUPS: 3-2-1 backup strategy with encrypted off-site copies
+                          <br />
+                          MONITORING: Automated ping and uptime telemetry alerts
                         </p>
                       </div>
+
                       <div className="grid grid-cols-2 gap-2 text-[11px]">
-                        <div className="p-3 rounded-lg bg-[#091615]/80 border border-[#1a342e] text-[#dae7de]">
-                          <span className="text-[#94a49a] block text-[10px]">FAILOVER TIME</span>
-                          &lt;3s Seamless
+                        <div className="p-2.5 rounded-lg bg-brand-surface border border-brand-border">
+                          <span className="text-brand-muted block text-[10px]">ARCHITECTURE</span>
+                          <span className="text-brand-text font-bold">Multi-ISP Gateway</span>
                         </div>
-                        <div className="p-3 rounded-lg bg-[#091615]/80 border border-[#1a342e] text-[#dae7de]">
-                          <span className="text-[#94a49a] block text-[10px]">BACKUP STRATEGY</span>
-                          3-2-1 Automated
+                        <div className="p-2.5 rounded-lg bg-brand-surface border border-brand-border">
+                          <span className="text-brand-muted block text-[10px]">STANDARDS</span>
+                          <span className="text-brand-accent font-bold">Encrypted VPN Protocols</span>
                         </div>
                       </div>
                     </div>
                   )}
-                </div>
 
-                {/* Console Footer */}
-                <div className="px-5 py-3.5 bg-[#091615] border-t border-[#1a342e] flex items-center justify-between text-[11px]">
-                  <div className="flex items-center gap-1.5 text-[#94a49a]">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#dae7de]" />
-                    <span>Bilateral NDA & SLA Protected</span>
+                  {/* Scoping CTA Link inside Console */}
+                  <div className="pt-3 border-t border-brand-border flex items-center justify-between text-[11px]">
+                    <span className="text-brand-muted">Want to inspect raw architectural specs?</span>
+                    <Link
+                      href="/contact"
+                      className="text-brand-accent hover:text-brand-text font-semibold inline-flex items-center gap-1"
+                    >
+                      <span>Request TRD Blueprint</span>
+                      <ChevronRight className="w-3 h-3" />
+                    </Link>
                   </div>
-                  <Link
-                    href="/contact"
-                    className="text-[#dae7de] hover:underline font-mono uppercase font-bold tracking-[0.72px] inline-flex items-center gap-1"
-                  >
-                    <span>Request Technical Review</span>
-                    <ChevronRight className="w-3 h-3" />
-                  </Link>
                 </div>
               </div>
             </div>

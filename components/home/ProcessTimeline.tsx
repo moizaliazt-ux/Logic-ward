@@ -1,10 +1,10 @@
 import React from "react";
 import {
   Search,
-  Compass,
+  FileText,
   Palette,
   Code2,
-  Rocket,
+  CheckCheck,
   RefreshCw,
 } from "lucide-react";
 
@@ -12,66 +12,66 @@ export function ProcessTimeline() {
   const steps = [
     {
       step: "01",
-      icon: <Search className="w-5 h-5 text-[#dae7de]" />,
+      icon: <Search className="w-5 h-5 text-brand-accent" />,
       title: "Discover",
-      subtitle: "Workflow & Technical Audit",
+      subtitle: "Users, Goals & Constraints",
       description:
-        "We interview your team leads, analyze existing operational bottlenecks, inspect legacy databases, and clarify business objectives before writing a line of code.",
+        "We interview your stakeholders, audit existing operational bottlenecks, inspect legacy databases, and clarify core business objectives before writing any code.",
     },
     {
       step: "02",
-      icon: <Compass className="w-5 h-5 text-[#94a49a]" />,
-      title: "Plan",
-      subtitle: "Architecture & Schema Design",
+      icon: <FileText className="w-5 h-5 text-brand-accent" />,
+      title: "Define",
+      subtitle: "Scope & Acceptance Criteria",
       description:
-        "We map relational schemas, API contracts, security models, and deployment infrastructure. We establish realistic milestones and a fixed timeline.",
+        "We document detailed technical requirements (TRD), database schema normalizations, API contracts, milestone roadmaps, and agreed acceptance criteria.",
     },
     {
       step: "03",
-      icon: <Palette className="w-5 h-5 text-[#dae7de]" />,
+      icon: <Palette className="w-5 h-5 text-brand-accent" />,
       title: "Design",
-      subtitle: "Interactive Figma Prototypes",
+      subtitle: "Flows & Prototypes",
       description:
-        "We create clickable desktop and mobile prototypes with accessible typography, design tokens, and validated user journey funnels for client approval.",
+        "We create clickable desktop and mobile Figma prototypes, establishing design tokens, typography hierarchy, and validated user journeys for client approval.",
     },
     {
       step: "04",
-      icon: <Code2 className="w-5 h-5 text-[#94a49a]" />,
+      icon: <Code2 className="w-5 h-5 text-brand-accent" />,
       title: "Build",
-      subtitle: "Sprint-Based Engineering",
+      subtitle: "Iterative Sprints & Demos",
       description:
-        "Bi-weekly development sprints with continuous integration. You review progress directly on private staging servers and provide feedback early.",
+        "Bi-weekly development sprints with continuous integration. You test working software increments directly on private staging servers and provide feedback early.",
     },
     {
       step: "05",
-      icon: <Rocket className="w-5 h-5 text-[#dae7de]" />,
-      title: "Launch",
-      subtitle: "Zero-Downtime Deployment",
+      icon: <CheckCheck className="w-5 h-5 text-brand-accent" />,
+      title: "Validate & Launch",
+      subtitle: "QA, Security & Handover",
       description:
-        "Rigorous performance testing, security audits, database migration from legacy files, SSL configuration, and zero-downtime production deployment.",
+        "Quality assurance, agreed security checks, data migration, deployment planning, and source-code and IP handover.",
     },
     {
       step: "06",
-      icon: <RefreshCw className="w-5 h-5 text-[#94a49a]" />,
+      icon: <RefreshCw className="w-5 h-5 text-brand-accent" />,
       title: "Improve",
-      subtitle: "Telemetry & Ongoing Support",
+      subtitle: "Support & Enhancements",
       description:
-        "Real-time error tracking, automated daily backups, scheduled OS/security patching, and continuous feature iterations backed by guaranteed SLAs.",
+        "Monitoring, backups, security updates, and enhancements can be scoped under a defined post-launch support agreement.",
     },
   ];
 
   return (
-    <section className="py-20 md:py-28 bg-[#091615] border-t border-[#1a342e]">
+    <section className="py-20 md:py-28 bg-brand-surface border-b border-brand-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-          <span className="text-[12px] font-mono uppercase tracking-[0.72px] text-[#94a49a]">
-            Delivery Methodology
+          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-brand-accent">
+            PREDICTABLE ENGINEERING LIFECYCLE
           </span>
-          <h2 className="text-3xl sm:text-4xl font-normal text-[#dae7de] tracking-[-1.08px]">
-            Our 6-Step Engineering Process
+          <h2 className="text-3xl sm:text-4xl font-bold text-brand-text tracking-tight">
+            Our 6-Stage Delivery Process
           </h2>
-          <p className="text-sm sm:text-base text-[#94a49a] leading-relaxed">
-            Every project follows a disciplined, predictable lifecycle designed to eliminate technical surprises, avoid scope creep, and ensure timely production delivery.
+          <p className="text-sm sm:text-base text-brand-secondary leading-relaxed">
+            A documented delivery approach helps surface risks, manage scope, and coordinate work against the schedule agreed for each project.
           </p>
         </div>
 
@@ -80,29 +80,35 @@ export function ProcessTimeline() {
           {steps.map((item, index) => (
             <div
               key={index}
-              className="p-6 rounded-xl bg-[#0d1f1c] border border-[#1a342e] hover:border-[#43634f] transition-all space-y-4 relative group shadow-xl"
+              className="p-7 rounded-2xl bg-brand-card border border-brand-border hover:border-brand-accent/50 hover:shadow-sm transition-all flex flex-col justify-between space-y-4 group"
             >
-              <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-lg bg-[#132b27] border border-[#1a342e] flex items-center justify-center group-hover:border-[#dae7de]/40 transition-colors">
-                  {item.icon}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 rounded-xl bg-brand-elevated border border-brand-border flex items-center justify-center group-hover:border-brand-accent transition-colors">
+                    {item.icon}
+                  </div>
+                  <span className="text-2xl font-bold font-mono text-brand-secondary group-hover:text-brand-accent/30 transition-colors">
+                    {item.step}
+                  </span>
                 </div>
-                <span className="text-2xl font-mono font-bold text-[#1a342e] group-hover:text-[#dae7de]/60 transition-colors">
-                  {item.step}
-                </span>
-              </div>
 
-              <div className="space-y-1">
-                <h3 className="text-lg font-normal text-[#dae7de] tracking-[-0.5px] group-hover:text-white transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-xs font-mono uppercase tracking-[0.72px] text-[#94a49a]">
-                  {item.subtitle}
+                <div>
+                  <h3 className="text-lg font-bold text-brand-text group-hover:text-brand-accent transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs font-semibold text-brand-accent uppercase tracking-wider mt-0.5">
+                    {item.subtitle}
+                  </p>
+                </div>
+
+                <p className="text-xs sm:text-sm text-brand-secondary leading-relaxed">
+                  {item.description}
                 </p>
               </div>
 
-              <p className="text-xs sm:text-sm text-[#94a49a] leading-relaxed">
-                {item.description}
-              </p>
+              <div className="pt-3 border-t border-brand-border text-[11px] font-mono text-brand-muted">
+                Stage {item.step} Deliverables Signed Off Prior to Next Phase
+              </div>
             </div>
           ))}
         </div>

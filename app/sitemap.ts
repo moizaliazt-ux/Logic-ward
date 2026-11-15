@@ -1,14 +1,18 @@
 import { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
-import { detailedServices } from "@/lib/data/services";
+import {
+  getAllServiceSlugs,
+  getServiceBySlug,
+} from "@/lib/data/services";
 import { solutionsData } from "@/lib/data/solutions";
 import { portfolioProjects } from "@/lib/data/portfolio";
 import { articlesData } from "@/lib/data/insights";
+import { industriesData } from "@/lib/data/industries";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
 
-  // Static routes
+  // Static core routes
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}`,
@@ -17,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/about`,
+      url: `${baseUrl}/company`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
@@ -35,10 +39,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/portfolio`,
+      url: `${baseUrl}/industries`,
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 0.8,
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/work`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/insights`,
@@ -73,24 +83,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // Service Detail pages
-  const serviceRoutes: MetadataRoute.Sitemap = detailedServices.map((service) => ({
-    url: `${baseUrl}/services/${service.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 0.85,
-  }));
+  const serviceRoutes: MetadataRoute.Sitemap = getAllServiceSlugs()
+    .filter((slug) => getServiceBySlug(slug)?.slug === slug)
+    .map((slug) => ({
+      url: `${baseUrl}/services/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    }));
 
-  // Solution pages (hash or direct)
+  // Solution detail pages
   const solutionRoutes: MetadataRoute.Sitemap = solutionsData.map((solution) => ({
     url: `${baseUrl}/solutions/${solution.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  // Industry Detail pages
+  const industryRoutes: MetadataRoute.Sitemap = industriesData.map((ind) => ({
+    url: `${baseUrl}/industries/${ind.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.8,
   }));
 
-  // Case Study pages
-  const portfolioRoutes: MetadataRoute.Sitemap = portfolioProjects.map((project) => ({
-    url: `${baseUrl}/portfolio/${project.slug}`,
+  // Case Study pages (/work and /portfolio)
+  const workRoutes: MetadataRoute.Sitemap = portfolioProjects.map((project) => ({
+    url: `${baseUrl}/work/${project.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.75,
@@ -104,12 +124,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [
+  const routes = [
     ...staticRoutes,
     ...serviceRoutes,
     ...solutionRoutes,
-    ...portfolioRoutes,
+    ...industryRoutes,
+    ...workRoutes,
     ...insightRoutes,
   ];
-}
 
+  const seenUrls = new Set<string>();
+  return routes.filter((route) => {
+    if (seenUrls.has(route.url)) {
+      return false;
+    }
+
+    seenUrls.add(route.url);
+    return true;
+  });
+}

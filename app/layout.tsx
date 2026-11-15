@@ -79,13 +79,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
         <OrganizationJsonLd />
         <WebsiteJsonLd />
       </head>
-      <body className="min-h-full flex flex-col bg-[#091615] text-[#dae7de] selection:bg-[#2d584d]/50 selection:text-[#dae7de]">
+      <body className="min-h-full flex flex-col bg-brand-background text-brand-text font-sans selection:bg-brand-accent/20 selection:text-brand-text">
         <Navbar />
         <main className="flex-1 flex flex-col">{children}</main>
         <Footer />

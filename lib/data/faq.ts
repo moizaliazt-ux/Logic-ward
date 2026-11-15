@@ -18,7 +18,7 @@ export const generalAgencyFAQs: FAQItem[] = [
     category: "Operations & Delivery",
     question: "How do you manage communication with international clients across time zones?",
     answer:
-      "We regularly collaborate with clients across North America, the UK, Europe, the UAE, and worldwide. We establish dedicated shared communication channels (Slack / Microsoft Teams / WhatsApp), hold scheduled weekly video syncs via Google Meet, and provide access to live staging environments where you can test progress after every sprint. Our engineering team overlaps with EST, GMT, and GST business hours.",
+      "Communication channels, meeting cadence, and working-hour overlap can be agreed during project scoping. Depending on the engagement, teams may use shared messaging channels, scheduled video calls, and staging environments for reviews.",
   },
   {
     id: "ip-code-ownership",
@@ -32,21 +32,21 @@ export const generalAgencyFAQs: FAQItem[] = [
     category: "AI & Capabilities",
     question: "Can any manual workflow in our company be automated with AI?",
     answer:
-      "No. We deliberately do not promise that every business workflow can or should be automated. AI excels at structured data extraction, lead qualification, tier-one inquiry routing, and document parsing. Workflows requiring high-stakes negotiation, subjective brand strategy, or nuanced human empathy are kept with your team. We only recommend automation after a detailed feasibility audit verifies clear ROI and security boundaries.",
+      "No. Not every workflow is a suitable candidate. Structured data extraction, inquiry routing, and document parsing may be worth assessing, while high-stakes or subjective decisions often need human judgment. A feasibility review should consider expected value, error handling, and security boundaries before implementation.",
   },
   {
     id: "post-launch-maintenance",
     category: "Support & Maintenance",
     question: "What level of support do you provide after launch?",
     answer:
-      "Every project includes a standard post-launch warranty period (typically 30 to 60 days) during which any bugs or configuration defects are remediated at zero additional cost. Following warranty, clients can choose between flexible ad-hoc support or scheduled monthly maintenance retainers covering security updates, server monitoring, backups, and feature enhancements.",
+      "Warranty coverage and duration should be defined in the project agreement. Ongoing support can be scoped separately for maintenance, monitoring, backups, and planned enhancements.",
   },
   {
     id: "getting-started-consultation",
     category: "Engagements & Pricing",
     question: "What is the process to get started on a project?",
     answer:
-      "The first step is a 30-minute discovery consultation. We review your current operational challenges, timeline, and technical requirements. Within 48 hours, we deliver a concise project outline with recommended technical architecture, timeline estimates, and budget ranges—with no obligation to proceed.",
+      "Start by sharing your goals, current workflow, constraints, and any relevant systems. After reviewing the information, Logicward can discuss a suitable discovery and scoping process; scope, schedule, and budget depend on the requirements.",
   },
 ];
 

@@ -10,10 +10,12 @@ import {
   PhoneCall,
   ChevronRight,
   ShieldCheck,
+  Sparkles,
 } from "lucide-react";
 import {
   getServiceBySlug,
   getAllServiceSlugs,
+  getRelatedServices,
 } from "@/lib/data/services";
 import { siteConfig } from "@/lib/site-config";
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
@@ -41,6 +43,9 @@ export async function generateMetadata({
   return {
     title: `${service.title} — ${service.categoryName}`,
     description: service.shortDescription,
+    alternates: {
+      canonical: `${siteConfig.url}/services/${service.slug}`,
+    },
     openGraph: {
       title: `${service.title} | ${siteConfig.name}`,
       description: service.shortDescription,
@@ -63,14 +68,17 @@ export default async function ServiceDetailPage({
     notFound();
   }
 
+  const relatedServices = getRelatedServices(service.relatedServiceSlugs);
+
   const breadcrumbs = [
     { name: "Home", url: siteConfig.url },
     { name: "Services", url: `${siteConfig.url}/services` },
+    { name: service.categoryName, url: `${siteConfig.url}/services` },
     { name: service.title, url: `${siteConfig.url}/services/${service.slug}` },
   ];
 
   return (
-    <div className="flex flex-col w-full bg-[#071312] text-[#dae7de]">
+    <div className="flex flex-col w-full bg-brand-surface  text-brand-text">
       <ServiceJsonLd
         name={service.title}
         description={service.shortDescription}
@@ -78,308 +86,411 @@ export default async function ServiceDetailPage({
       />
       <BreadcrumbJsonLd items={breadcrumbs} />
 
-      {/* Hero Header with Breadcrumbs */}
-      <section className="relative py-14 md:py-20 bg-gradient-to-b from-[#091615] via-[#0d1f1c] to-[#071312] border-b border-[#1a342e]">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#2d584d]/15 blur-[120px] rounded-full pointer-events-none" />
+      {/* 1. Breadcrumbs & 2. Service-Specific Hero & CTA (PRD § 6.2) */}
+      <section className="relative py-14 md:py-20 bg-brand-surface  text-brand-text border-b border-brand-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Breadcrumb nav */}
+          {/* Breadcrumb Navigation */}
           <nav
             aria-label="Breadcrumb"
-            className="flex items-center gap-1.5 text-xs text-[#94a49a] mb-6 flex-wrap"
+            className="flex items-center gap-1.5 text-xs text-brand-muted mb-6 flex-wrap"
           >
-            <Link href="/" className="hover:text-[#dae7de] transition-colors">
+            <Link href="/" className="hover:text-brand-text transition-colors">
               Home
             </Link>
-            <ChevronRight className="w-3 h-3 text-[#1a342e]" />
-            <Link href="/services" className="hover:text-[#dae7de] transition-colors">
+            <ChevronRight className="w-3 h-3 text-brand-secondary" />
+            <Link href="/services" className="hover:text-brand-text transition-colors">
               Services
             </Link>
-            <ChevronRight className="w-3 h-3 text-[#1a342e]" />
-            <span className="text-[#94a49a]">{service.categoryName}</span>
-            <ChevronRight className="w-3 h-3 text-[#1a342e]" />
-            <span className="text-[#dae7de] font-medium truncate max-w-[200px] sm:max-w-none">
+            <ChevronRight className="w-3 h-3 text-brand-secondary" />
+            <span className="text-brand-muted">{service.categoryName}</span>
+            <ChevronRight className="w-3 h-3 text-brand-secondary" />
+            <span className="text-brand-text font-medium truncate max-w-[200px] sm:max-w-none">
               {service.title}
             </span>
           </nav>
 
-          <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-[0.72px] bg-[#0d1f1c] text-[#dae7de] border border-[#1a342e]">
-              <span className="w-2 h-2 rounded-full bg-[#dae7de] animate-pulse" />
-              <span>{service.categoryName}</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-8 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md text-xs font-mono uppercase tracking-wider bg-brand-card border border-brand-border  text-brand-accent">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>{service.categoryName}</span>
+              </div>
+              <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-brand-text leading-tight">
+                {service.heroHeadline}
+              </h1>
+              <p className="text-base sm:text-lg text-brand-secondary leading-relaxed max-w-2xl">
+                {service.heroSubheadline}
+              </p>
+
+              {/* Scope Checklist */}
+              <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-mono text-brand-secondary">
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-brand-accent" />
+                  <span>Contractual IP Handover</span>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-brand-accent" />
+                  <span>Documented TRD Specifications</span>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-brand-accent" />
+                  <span>Staging Demonstrations</span>
+                </span>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 pt-3">
+                <Link
+                  href="/contact"
+                  className="px-6 py-3 rounded-lg text-sm font-semibold text-brand-background bg-brand-accent hover:bg-brand-accent-hover transition-all inline-flex items-center gap-2 shadow-sm shadow-brand-background/20"
+                >
+                  <span>Request Scoping for this Service</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <a
+                  href={`https://wa.me/${siteConfig.contact.whatsappNumber}?text=Hello%20Logicward,%20I%20am%20interested%20in%20scoping%20${encodeURIComponent(service.title)}.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-text bg-brand-card border border-brand-border hover:bg-brand-elevated transition-colors inline-flex items-center gap-2"
+                >
+                  <PhoneCall className="w-4 h-4 text-brand-accent" />
+                  <span>WhatsApp Inquiry</span>
+                </a>
+              </div>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
-              {service.heroHeadline}
-            </h1>
-
-            <p className="text-base sm:text-lg text-[#94a49a] leading-relaxed">
-              {service.heroSubheadline}
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-4">
-              <Link
-                href="/contact"
-                className="px-6 py-3.5 rounded-lg font-semibold text-[#091615] bg-[#dae7de] hover:bg-white transition-all text-sm text-center shadow-lg shadow-black/40 inline-flex items-center justify-center gap-2 group"
-              >
-                <span>Book a Consultation for this Service</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-
-              <a
-                href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-3.5 rounded-lg font-medium text-[#dae7de] bg-[#0d1f1c] border border-[#1a342e] hover:bg-[#132b27] transition-colors text-sm text-center inline-flex items-center justify-center gap-2"
-              >
-                <PhoneCall className="w-4 h-4 text-[#dae7de]" />
-                <span>WhatsApp Us</span>
-              </a>
+            {/* Quick Service Specification Card */}
+            <div className="lg:col-span-4 p-6 rounded-2xl bg-brand-card border border-brand-border text-xs font-mono space-y-4 shadow-md">
+              <span className="text-brand-accent uppercase font-bold tracking-wider block">
+                DELIVERY FRAMEWORK
+              </span>
+              <div className="space-y-2.5 text-brand-secondary">
+                <div className="flex justify-between border-b border-brand-border pb-1.5">
+                  <span className="text-brand-muted">DISCIPLINE:</span>
+                  <span className="text-brand-text font-semibold">{service.categoryName}</span>
+                </div>
+                <div className="flex justify-between border-b border-brand-border pb-1.5">
+                  <span className="text-brand-muted">ENGAGEMENT:</span>
+                  <span className="text-brand-text font-semibold">Fixed Milestone / Sprint</span>
+                </div>
+                <div className="flex justify-between border-b border-brand-border pb-1.5">
+                  <span className="text-brand-muted">IP TRANSFER:</span>
+                  <span className="text-brand-accent font-semibold">100% Client Title</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-brand-muted">REVIEWS:</span>
+                  <span className="text-brand-text font-semibold">Bi-Weekly Staging Demos</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Main Content Grid */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          {/* Main Column */}
-          <div className="lg:col-span-8 space-y-16">
-            {/* The Challenge / Client Problem */}
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#b7c7bd] flex items-center gap-1.5">
-                  <AlertCircle className="w-4 h-4" />
-                  The Operational Challenge
+      {/* Main Content Sections (PRD § 6.2 parts 3-11) */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          {/* 3. What the service is and who it helps & 4. Business challenges addressed */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            {/* Left 6 Columns: Who It Helps & Problem Overview */}
+            <div className="lg:col-span-6 bg-brand-card rounded-2xl border border-brand-border p-8 shadow-sm space-y-6">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-wider text-brand-accent font-semibold">
+                  AUDIENCE & OPERATIONAL FIT
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                <h2 className="text-2xl font-bold text-brand-text mt-1">
+                  What This Service Is & Who It Helps
+                </h2>
+                <p className="text-sm text-brand-secondary leading-relaxed mt-3">
+                  {service.shortDescription}
+                </p>
+              </div>
+
+              <div className="space-y-3 pt-3 border-t border-brand-border">
+                <span className="text-xs font-semibold uppercase tracking-wider text-brand-text block">
+                  Best Suited For:
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {service.suitableFor.map((item, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1 rounded-lg text-xs font-mono bg-brand-surface  text-brand-secondary border border-brand-border"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right 6 Columns: 4. Business Challenges Addressed */}
+            <div className="lg:col-span-6 bg-brand-card rounded-2xl border border-brand-border p-8 shadow-sm space-y-6">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-wider text-brand-accent font-semibold">
+                  CHALLENGES TO ADDRESS
+                </span>
+                <h2 className="text-2xl font-bold text-brand-text mt-1">
                   {service.clientProblem.title}
                 </h2>
-                <p className="text-sm sm:text-base text-[#94a49a] leading-relaxed">
+                <p className="text-sm text-brand-secondary leading-relaxed mt-3">
                   {service.clientProblem.description}
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                {service.clientProblem.painPoints.map((pain, idx) => (
-                  <div
-                    key={idx}
-                    className="p-4 rounded-xl bg-[#091615] border border-[#1a342e] text-xs sm:text-sm text-[#94a49a] flex items-start gap-2.5"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#dae7de] mt-2 flex-shrink-0" />
-                    <span className="leading-relaxed">{pain}</span>
-                  </div>
-                ))}
+              <div className="space-y-2.5 pt-3 border-t border-brand-border">
+                <span className="text-xs font-semibold uppercase tracking-wider text-brand-text block">
+                  Identified Operational Pain Points:
+                </span>
+                <ul className="space-y-2 text-xs sm:text-sm text-brand-secondary">
+                  {service.clientProblem.painPoints.map((pain, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5">
+                      <AlertCircle className="w-4 h-4 text-brand-accent mt-0.5 flex-shrink-0" />
+                      <span>{pain}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
+          </div>
 
-            {/* Our Solution & Technical Pillars */}
-            <div className="space-y-6 pt-6 border-t border-[#1a342e]">
-              <div className="space-y-2">
-                <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de] flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4" />
-                  Our Architectural Solution
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                  {service.ourSolution.title}
-                </h2>
-                <p className="text-sm sm:text-base text-[#94a49a] leading-relaxed">
-                  {service.ourSolution.description}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {service.ourSolution.pillars.map((pillar, idx) => (
-                  <div
-                    key={idx}
-                    className="p-5 rounded-xl bg-[#0d1f1c] border border-[#1a342e] space-y-2"
-                  >
-                    <h3 className="text-sm font-bold text-white tracking-tight">
-                      {pillar.title}
-                    </h3>
-                    <p className="text-xs text-[#94a49a] leading-relaxed">
-                      {pillar.detail}
-                    </p>
-                  </div>
-                ))}
-              </div>
+          {/* 5. Proposed approach and technical considerations */}
+          <div className="bg-brand-card rounded-2xl border border-brand-border p-8 sm:p-10 shadow-sm space-y-8">
+            <div className="max-w-3xl space-y-2">
+              <span className="text-xs font-mono uppercase tracking-wider text-brand-accent font-semibold">
+                ARCHITECTURAL METHODOLOGY
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-brand-text">
+                {service.ourSolution.title}
+              </h2>
+              <p className="text-sm text-brand-secondary leading-relaxed">
+                {service.ourSolution.description}
+              </p>
             </div>
 
-            {/* Key Deliverables */}
-            <div className="space-y-6 pt-6 border-t border-[#1a342e]">
-              <div className="space-y-1">
-                <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de]">
-                  Tangible Outcomes
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {service.ourSolution.pillars.map((pillar, idx) => (
+                <div
+                  key={idx}
+                  className="p-6 rounded-xl bg-brand-surface border border-brand-border space-y-3"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-brand-card border border-brand-border flex items-center justify-center font-mono font-bold text-xs text-brand-accent">
+                    0{idx + 1}
+                  </div>
+                  <h3 className="text-base font-bold text-brand-text">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-xs text-brand-secondary leading-relaxed">
+                    {pillar.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 6. Deliverables and scope examples & 7. Relevant integrations and technologies */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            {/* Deliverables */}
+            <div className="lg:col-span-7 bg-brand-card rounded-2xl border border-brand-border p-8 shadow-sm space-y-6">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-wider text-brand-accent font-semibold">
+                  TANGIBLE OUTPUTS
                 </span>
-                <h2 className="text-2xl font-bold text-white tracking-tight">
-                  What We Deliver
-                </h2>
-                <p className="text-xs sm:text-sm text-[#94a49a]">
-                  Concrete deliverables included with this service engagement:
+                <h3 className="text-2xl font-bold text-brand-text mt-1">
+                  Deliverables & Scope Examples
+                </h3>
+                <p className="text-xs text-brand-muted mt-1">
+                  Possible deliverables, confirmed in the agreed project scope:
                 </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {service.deliverables.map((item, idx) => (
+                {service.deliverables.map((deliv, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-xl bg-[#091615] border border-[#1a342e] flex items-start gap-2.5 text-xs sm:text-sm text-[#dae7de]"
+                    className="p-3.5 rounded-xl bg-brand-surface border border-brand-border flex items-start gap-2.5"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-[#dae7de] mt-0.5 flex-shrink-0" />
-                    <span>{item}</span>
+                    <CheckCircle2 className="w-4 h-4 text-brand-accent mt-0.5 flex-shrink-0" />
+                    <span className="text-xs font-medium text-brand-text">{deliv}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Step-by-Step Delivery Process */}
-            <div className="space-y-6 pt-6 border-t border-[#1a342e]">
-              <div className="space-y-1">
-                <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de]">
-                  Structured Lifecycle
+            {/* Practical Business Benefits */}
+            <div className="lg:col-span-5 bg-brand-card rounded-2xl border border-brand-border p-8 shadow-sm space-y-6">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-wider text-brand-accent font-semibold">
+                  POTENTIAL BUSINESS BENEFITS
                 </span>
-                <h2 className="text-2xl font-bold text-white tracking-tight">
-                  Our Engineering Process for {service.title}
-                </h2>
-              </div>
-
-              <div className="space-y-3">
-                {service.process.map((step) => (
-                  <div
-                    key={step.step}
-                    className="p-4 rounded-xl bg-[#0d1f1c] border border-[#1a342e] flex items-start gap-4"
-                  >
-                    <span className="w-8 h-8 rounded-lg bg-[#091615] border border-[#1a342e] font-mono text-[#dae7de] font-bold text-xs flex items-center justify-center flex-shrink-0">
-                      0{step.step}
-                    </span>
-                    <div className="space-y-0.5">
-                      <h3 className="text-sm font-bold text-white tracking-tight">
-                        {step.title}
-                      </h3>
-                      <p className="text-xs text-[#94a49a] leading-relaxed">
-                        {step.summary}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Service-Specific FAQs */}
-            <div className="space-y-6 pt-6 border-t border-[#1a342e]">
-              <div className="space-y-1">
-                <span className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de] flex items-center gap-1.5">
-                  <HelpCircle className="w-4 h-4" />
-                  Service FAQs
-                </span>
-                <h2 className="text-2xl font-bold text-white tracking-tight">
-                  Frequently Asked Questions
-                </h2>
-              </div>
-
-              <div className="space-y-3">
-                {service.faqs.map((faq, idx) => (
-                  <div
-                    key={idx}
-                    className="p-5 rounded-xl bg-[#0d1f1c] border border-[#1a342e] space-y-2"
-                  >
-                    <h3 className="text-sm font-semibold text-white tracking-tight">
-                      {faq.question}
-                    </h3>
-                    <p className="text-xs text-[#94a49a] leading-relaxed">
-                      {faq.answer}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right Sidebar */}
-          <div className="lg:col-span-4 space-y-6">
-            {/* Suitable For Card */}
-            <div className="p-6 rounded-[24px] bg-[#0d1f1c] border border-[#1a342e] space-y-4">
-              <h3 className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de]">
-                Suitable Use Cases & Teams
-              </h3>
-              <ul className="space-y-2.5 text-xs text-[#94a49a]">
-                {service.suitableFor.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#dae7de] mt-0.5 flex-shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Business Benefits Card */}
-            <div className="p-6 rounded-[24px] bg-[#0d1f1c] border border-[#1a342e] space-y-4">
-              <h3 className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de]">
-                Measurable Business ROI
-              </h3>
-              <div className="space-y-3">
-                {service.businessBenefits.map((b, idx) => (
-                  <div key={idx} className="space-y-0.5">
-                    <h4 className="text-xs font-bold text-[#dae7de]">
-                      {b.title}
-                    </h4>
-                    <p className="text-xs text-[#94a49a] leading-relaxed">
-                      {b.detail}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Quick Consultation Trigger */}
-            <div className="p-6 rounded-[24px] bg-gradient-to-br from-[#1a342e] via-[#0d1f1c] to-[#091615] border border-[#2d584d] space-y-4">
-              <div className="space-y-1">
-                <span className="text-[11px] font-mono text-[#dae7de] uppercase tracking-wider">
-                  Direct Inquiries
-                </span>
-                <h3 className="text-base font-bold text-white tracking-tight">
-                  Discuss this service with an engineer
+                <h3 className="text-2xl font-bold text-brand-text mt-1">
+                  Practical Operational Gains
                 </h3>
-                <p className="text-xs text-[#94a49a]">
-                  Receive an architectural review and estimate within 24 hours.
+                <p className="text-xs text-brand-muted mt-1">
+                  Possible gains depend on the workflow, implementation, and agreed measures:
                 </p>
               </div>
 
-              <Link
-                href="/contact"
-                className="w-full py-2.5 rounded-lg text-xs font-semibold text-[#091615] bg-[#dae7de] hover:bg-white transition-colors block text-center"
-              >
-                Schedule Technical Scoping
-              </Link>
+              <div className="space-y-3">
+                {service.businessBenefits.map((benefit, idx) => (
+                  <div
+                    key={idx}
+                    className="p-4 rounded-xl bg-brand-surface border border-brand-border space-y-1"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-3.5 h-3.5 text-brand-accent" />
+                      <h4 className="text-xs font-bold text-brand-text">
+                        {benefit.title}
+                      </h4>
+                    </div>
+                    <p className="text-xs text-brand-secondary leading-relaxed pl-5">
+                      {benefit.detail}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* 8. Delivery Process */}
+          <div className="bg-brand-card rounded-2xl border border-brand-border p-8 sm:p-10 shadow-sm space-y-8">
+            <div className="max-w-2xl space-y-2">
+              <span className="text-xs font-mono uppercase tracking-wider text-brand-accent font-semibold">
+                EXECUTION LIFECYCLE
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-bold text-brand-text">
+                How We Deliver {service.title}
+              </h3>
+              <p className="text-sm text-brand-secondary leading-relaxed">
+                The review cadence and checkpoints are agreed during scoping:
+              </p>
             </div>
 
-            {/* Related Services */}
-            {service.relatedServiceSlugs.length > 0 && (
-              <div className="p-6 rounded-[24px] bg-[#0d1f1c] border border-[#1a342e] space-y-3">
-                <h3 className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de]">
-                  Related Services
-                </h3>
-                <div className="space-y-2">
-                  {service.relatedServiceSlugs.map((relSlug) => {
-                    const rel = getServiceBySlug(relSlug);
-                    if (!rel) return null;
-                    return (
-                      <Link
-                        key={rel.slug}
-                        href={`/services/${rel.slug}`}
-                        className="p-2.5 rounded-lg bg-[#091615] border border-[#1a342e] hover:border-[#2d584d] flex items-center justify-between text-xs text-[#94a49a] hover:text-[#dae7de] transition-colors group"
-                      >
-                        <span className="truncate pr-2">{rel.title}</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-[#94a49a] group-hover:text-[#dae7de] flex-shrink-0" />
-                      </Link>
-                    );
-                  })}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {service.process.map((step) => (
+                <div
+                  key={step.step}
+                  className="p-5 rounded-xl bg-brand-surface border border-brand-border space-y-2"
+                >
+                  <span className="text-xl font-mono font-bold text-brand-accent">
+                    0{step.step}
+                  </span>
+                  <h4 className="text-sm font-bold text-brand-text">
+                    {step.title}
+                  </h4>
+                  <p className="text-xs text-brand-secondary leading-relaxed">
+                    {step.summary}
+                  </p>
                 </div>
-              </div>
-            )}
+              ))}
+            </div>
           </div>
+
+          {/* 9. Relevant case study or clearly labelled demonstration (PRD § 6.2 part 9) */}
+          <div className="bg-brand-surface text-brand-text rounded-2xl border border-brand-border p-8 sm:p-10 space-y-4 shadow-md">
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <span className="px-3 py-1 rounded text-xs font-mono uppercase tracking-wider bg-brand-card border border-brand-border  text-brand-accent">
+                REFERENCE ARCHITECTURE DEMONSTRATION
+              </span>
+              <span className="text-xs text-brand-muted font-mono">
+                EXAMPLES CLEARLY LABELED
+              </span>
+            </div>
+            <h3 className="text-2xl font-bold text-brand-text">
+              Reference Architectures & Demonstrations
+            </h3>
+            <p className="text-sm text-brand-secondary leading-relaxed max-w-3xl">
+              Explore the labeled reference architectures and demonstration projects in our work directory. These examples do not represent client deliveries or measured service outcomes.
+            </p>
+            <div className="pt-2 flex items-center gap-3">
+              <Link
+                href="/work"
+                className="text-xs font-bold uppercase tracking-wider text-brand-accent hover:underline inline-flex items-center gap-1.5"
+              >
+                <span>Browse Reference Case Studies Directory</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+
+          {/* 10. Service FAQs */}
+          <div className="bg-brand-card rounded-2xl border border-brand-border p-8 sm:p-10 shadow-sm space-y-6">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-wider text-brand-accent font-semibold">
+                SERVICE QUESTIONS & ANSWERS
+              </span>
+              <h3 className="text-2xl font-bold text-brand-text mt-1">
+                Frequently Asked Questions about {service.title}
+              </h3>
+            </div>
+
+            <div className="space-y-4">
+              {service.faqs.map((faq, idx) => (
+                <div
+                  key={idx}
+                  className="p-5 rounded-xl border border-brand-border  bg-brand-card space-y-2"
+                >
+                  <div className="flex items-center gap-2">
+                    <HelpCircle className="w-4 h-4 text-brand-accent flex-shrink-0" />
+                    <h4 className="text-sm font-bold text-brand-text">
+                      {faq.question}
+                    </h4>
+                  </div>
+                  <p className="text-xs sm:text-sm text-brand-secondary leading-relaxed pl-6">
+                    {faq.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 11. Related Services */}
+          {relatedServices.length > 0 && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <span className="text-xs font-mono uppercase tracking-wider text-brand-accent font-semibold">
+                    CROSS-DISCIPLINE CAPABILITIES
+                  </span>
+                  <h3 className="text-2xl font-bold text-brand-text mt-1">
+                    Related Engineering Services
+                  </h3>
+                </div>
+                <Link
+                  href="/services"
+                  className="text-xs font-semibold text-brand-accent hover:underline"
+                >
+                  View All Services →
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {relatedServices.map((rel) => (
+                  <Link
+                    key={rel.slug}
+                    href={`/services/${rel.slug}`}
+                    className="p-6 rounded-2xl bg-brand-card border border-brand-border hover:border-brand-accent/50 hover:shadow-sm transition-all space-y-3 block group"
+                  >
+                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-brand-surface  text-brand-muted border border-brand-border">
+                      {rel.categoryName}
+                    </span>
+                    <h4 className="text-base font-bold text-brand-text group-hover:text-brand-accent transition-colors">
+                      {rel.title}
+                    </h4>
+                    <p className="text-xs text-brand-secondary leading-relaxed line-clamp-2">
+                      {rel.shortDescription}
+                    </p>
+                    <div className="pt-2 text-xs font-semibold text-brand-accent inline-flex items-center gap-1">
+                      <span>Inspect Details</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
+      {/* 12. Contact CTA */}
       <ConversionCTA />
     </div>
   );

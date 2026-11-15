@@ -67,7 +67,7 @@ export const serviceCategories: ServiceCategory[] = [
       { title: "School & College Management Systems", slug: "school-college-management-systems", description: "Student admissions, fee billing, grading, attendance, and parent portals." },
       { title: "HRM & Payroll Systems", slug: "hrm-payroll-systems", description: "Employee records, attendance, leave approvals, and tax-compliant payroll processing." },
       { title: "Inventory & Stock Management", slug: "inventory-stock-management", description: "Multi-warehouse tracking, low-stock alerts, barcoding, and supplier purchase orders." },
-      { title: "POS & Billing Systems", slug: "pos-billing-systems", description: "Fast retail/restaurant checkout, barcode scanning, thermal printing, and fiscal integration." },
+      { title: "POS & Billing Systems", slug: "pos-billing-systems", description: "Retail and restaurant checkout workflows, barcode scanning, thermal printing, and fiscal integration." },
       { title: "Gym & Membership Management", slug: "gym-membership-management", description: "Member check-ins, subscription recurring billing, trainer scheduling, and access control." },
       { title: "Agriculture / Business Management Systems", slug: "agriculture-business-management-systems", description: "Crop yield tracking, inventory, distributor distribution, and farm procurement." },
       { title: "Booking, Appointment & Workflow Systems", slug: "booking-workflow-systems", description: "Multi-staff calendar scheduling, automated SMS/email reminders, and customer bookings." },
@@ -79,15 +79,15 @@ export const serviceCategories: ServiceCategory[] = [
     slug: "ai-business-automation",
     title: "AI & Business Automation",
     shortSummary: "Practical AI workflows, conversational website assistants, and back-office process automation scoped to real business ROI.",
-    description: "Move past hype to practical automation. We integrate secure AI assistants, document processors, and multi-app automations that eliminate repetitive data entry and accelerate customer inquiries.",
+    description: "We scope AI assistants, document processors, and multi-app automations around approved data handling, existing systems, and defined workflows.",
     badge: "High Growth",
     serviceCount: 7,
     featuredSlug: "ai-workflow-automation",
     services: [
       { title: "AI Workflow Automation", slug: "ai-workflow-automation", description: "Multi-step automated workflows connecting internal systems with modern AI agents." },
-      { title: "AI Chatbots & Website Assistants", slug: "ai-chatbots-website-assistants", description: "Trained on your knowledge base to qualify inbound leads and answer customer inquiries 24/7." },
+      { title: "AI Chatbots & Website Assistants", slug: "ai-chatbots-website-assistants", description: "Configured around an approved knowledge base to help qualify inquiries and answer common questions." },
       { title: "Customer Support Automation", slug: "customer-support-automation", description: "Automated ticket categorization, intelligent draft replies, and escalation routing." },
-      { title: "Lead Capture & Follow-up Automation", slug: "lead-capture-followup-automation", description: "Instant CRM contact creation, WhatsApp/email nurture sequencing, and score qualification." },
+      { title: "Lead Capture & Follow-up Automation", slug: "lead-capture-followup-automation", description: "CRM contact creation, follow-up sequencing, and lead qualification based on agreed rules." },
       { title: "Document & Data Processing Automation", slug: "document-data-processing-automation", description: "Automated invoice parsing, contract data extraction, and structured database syncing." },
       { title: "CRM & Third-Party App Integrations", slug: "crm-third-party-integrations", description: "Robust webhooks and API pipelines connecting Zoho, HubSpot, Google Workspace, and ERPs." },
       { title: "AI-Assisted Business Workflows", slug: "ai-assisted-business-workflows", description: "Scoped decision-support workflows tailored to internal compliance and operating teams." },
@@ -97,8 +97,8 @@ export const serviceCategories: ServiceCategory[] = [
     id: "web-ecommerce",
     slug: "website-ecommerce-development",
     title: "Web & E-Commerce Development",
-    shortSummary: "Fast, conversion-focused corporate websites, custom web apps, and high-performance e-commerce platforms.",
-    description: "Your digital storefront must load in milliseconds, articulate your value proposition clearly, and guide visitors toward high-intent conversion actions with zero friction.",
+    shortSummary: "Corporate websites, custom web apps, and e-commerce platforms designed around business and user needs.",
+    description: "Your digital storefront should present your value clearly and help visitors complete useful tasks across supported devices.",
     badge: "Core Engineering",
     serviceCount: 8,
     featuredSlug: "business-websites-ecommerce",
@@ -203,7 +203,7 @@ export const detailedServices: ServiceItem[] = [
     categoryName: "Software & Management Systems",
     shortDescription: "Bespoke software platforms engineered around your company's proprietary operating logic, data structures, and compliance rules.",
     heroHeadline: "Engineered Software Tailored to Your Real Business Operations",
-    heroSubheadline: "Eliminate spreadsheet chaos and rigid SaaS limitations with software purpose-built for how your organization works.",
+    heroSubheadline: "Plan software around your organization's workflows, data, and integration requirements.",
     clientProblem: {
       title: "The Limits of Generic Off-the-Shelf Tools",
       description: "Growing companies frequently find themselves trapped between clunky legacy systems and rigid modern subscription software that forces team workflows into unnatural boxes.",
@@ -216,11 +216,11 @@ export const detailedServices: ServiceItem[] = [
     },
     ourSolution: {
       title: "Modular, Secure, and Maintainable Software Engineering",
-      description: "We design and build full-stack web and backend software tailored specifically to your data models and operational workflows, ensuring long-term maintainability and complete code ownership.",
+      description: "We design and build full-stack web and backend software around agreed data models and workflows, with maintainability and ownership terms defined for the project.",
       pillars: [
         {
           title: "Architecture Built for Durability",
-          detail: "Clean service layers, typed domain models, and relational database integrity that won't require a total rewrite in two years.",
+          detail: "Use clear service boundaries, typed domain models, and data constraints appropriate to the agreed requirements.",
         },
         {
           title: "Complete Intellectual Property Ownership",
@@ -228,11 +228,11 @@ export const detailedServices: ServiceItem[] = [
         },
         {
           title: "Role-Based Security & Audit Logs",
-          detail: "Granular permission tiers, multi-factor authentication, and immutable activity logs for enterprise compliance.",
+          detail: "Define permission tiers, authentication, and activity logging according to the project's security and compliance requirements.",
         },
         {
           title: "API-First Interoperability",
-          detail: "Seamless connection to existing payment gateways, accounting software, legacy databases, or third-party webhooks.",
+          detail: "Assess API and webhook options for payment gateways, accounting software, legacy databases, and other selected systems.",
         },
       ],
     },
@@ -251,23 +251,23 @@ export const detailedServices: ServiceItem[] = [
       "Founders building proprietary B2B SaaS platforms",
     ],
     businessBenefits: [
-      { title: "Operational Velocity", detail: "Automate repetitive daily tasks and eliminate double-entry between disparate departments." },
-      { title: "Data Certainty", detail: "A single source of operational truth with real-time reporting instead of stale monthly reconciliations." },
-      { title: "No Per-Seat Penalty", detail: "Expand your workforce without paying software vendors higher monthly licensing fees for every hire." },
-      { title: "Enterprise Scalability", detail: "Systems designed to handle hundreds of thousands of transactions without performance degradation." },
+      { title: "Workflow Support", detail: "Identify repetitive tasks and assess whether automation or integration fits the agreed workflow." },
+      { title: "Shared Reporting", detail: "Bring selected data sources into a reporting view with refresh behavior based on the integrations." },
+      { title: "Licensing Considerations", detail: "Compare custom development and ongoing maintenance costs with relevant third-party licensing options." },
+      { title: "Capacity Planning", detail: "Document expected usage and evaluate architecture against agreed functional and performance requirements." },
     ],
     process: [
       { step: 1, title: "Discovery & Workflow Mapping", summary: "We interview your key stakeholders, map input/output requirements, and document every operational edge case." },
       { step: 2, title: "Architecture & Data Modeling", summary: "We design the relational database schema, security boundaries, and API contracts before touching code." },
       { step: 3, title: "UX/UI Prototyping", summary: "We create interactive screen mockups for every user role, validating workflows with your team." },
-      { step: 4, title: "Iterative Sprint Development", summary: "Bi-weekly demo builds where you test real functionality on a secure staging server." },
-      { step: 5, title: "Quality Assurance & Migration", summary: "Rigorous load testing, security audits, and safe historical data migration from legacy files." },
-      { step: 6, title: "Deployment & Team Handover", summary: "Production launch, staff onboarding, comprehensive documentation, and scheduled SLA support." },
+      { step: 4, title: "Iterative Sprint Development", summary: "Development and review cadence, including any staging access, are agreed during scoping." },
+      { step: 5, title: "Quality Assurance & Migration", summary: "Testing, security checks, and historical data migration follow the agreed acceptance criteria and plan." },
+      { step: 6, title: "Deployment & Team Handover", summary: "Deployment, staff onboarding, documentation, and any ongoing support are defined in the project agreement." },
     ],
     faqs: [
       {
         question: "How long does a typical custom software project take?",
-        answer: "Development timelines depend entirely on system complexity. Focused operational modules or MVPs typically take 6 to 10 weeks, while full enterprise ERP or multi-department platforms range from 3 to 6 months in phased milestones.",
+        answer: "Delivery schedules depend on requirements, integrations, data migration, and review cycles. A realistic schedule is agreed after discovery and scope definition.",
       },
       {
         question: "Do we own the intellectual property and code?",
@@ -275,7 +275,7 @@ export const detailedServices: ServiceItem[] = [
       },
       {
         question: "Can this system integrate with our existing accounting or POS software?",
-        answer: "Yes. We build modern RESTful and webhook APIs that securely exchange data with popular accounting platforms, payment gateways, and existing databases.",
+        answer: "We can assess the available APIs, data formats, access requirements, and project scope before confirming integrations with accounting platforms, payment gateways, or existing databases.",
       },
       {
         question: "What happens if we need changes after launch?",
@@ -290,30 +290,30 @@ export const detailedServices: ServiceItem[] = [
     title: "AI & Business Automation",
     category: "ai-automation",
     categoryName: "AI & Business Automation",
-    shortDescription: "Practical AI workflows, intelligent document extraction, and cross-application pipelines that eliminate operational friction.",
-    heroHeadline: "Practical AI Workflows That Deliver Measurable Hours Saved",
-    heroSubheadline: "Move beyond speculative generative AI experiments to dependable automated pipelines that handle repetitive back-office work.",
+    shortDescription: "AI workflows, document extraction, and cross-application pipelines scoped to defined operational needs.",
+    heroHeadline: "AI Workflows Scoped to Measurable Goals",
+    heroSubheadline: "Assess automation opportunities against a defined baseline, workflow requirements, and appropriate human review.",
     clientProblem: {
       title: "Valuable Time Lost to Repetitive Manual Operations",
-      description: "Knowledge workers spend hours each day copying information across systems, triaging incoming inquiries, parsing PDFs, and sending routine follow-ups.",
+      description: "Some teams rely on manual steps to copy information across systems, triage inquiries, parse documents, and send routine follow-ups.",
       painPoints: [
-        "Inbound leads languishing for hours before an initial human response",
-        "Employees spending 10+ hours weekly manually extracting data from invoices and forms",
+        "Inbound leads requiring manual review and routing",
+        "Staff extracting data from invoices and forms",
         "Customer support teams answering identical routine questions repeatedly",
         "Disjointed systems that require manual copying and pasting between apps",
       ],
     },
     ourSolution: {
       title: "Engineered Automation Scoped to Real Business ROI",
-      description: "We audit your operational bottlenecks and implement secure, deterministic automation workflows that blend intelligent LLM processing with rock-solid logic rules and API triggers.",
+      description: "We assess workflow requirements and data handling, then scope automation that may combine language-model processing, business rules, and API triggers.",
       pillars: [
         {
           title: "Discovery-First Scoping",
-          detail: "We never promise magic. We identify high-frequency, rule-governed workflows where automation delivers proven time savings.",
+          detail: "Assess recurring, rule-governed workflows and establish a baseline before evaluating potential time savings.",
         },
         {
           title: "Private & Secure Architecture",
-          detail: "Your proprietary customer data and internal documents are never used for public model training; enterprise API standards apply.",
+          detail: "Review provider retention and model-training policies, data sensitivity, and approved configurations before selecting an AI service.",
         },
         {
           title: "Human-in-the-Loop Controls",
@@ -327,7 +327,7 @@ export const detailedServices: ServiceItem[] = [
     },
     deliverables: [
       "Operational workflow audit and ROI feasibility evaluation",
-      "Custom AI assistants trained strictly on your verified knowledge base",
+      "AI assistants grounded in approved source material, with behavior and review requirements defined in scope",
       "Automated document processing pipelines (invoices, receipts, customer intake)",
       "Cross-platform webhook integrations (CRM, WhatsApp, Gmail, Slack, Sheets)",
       "Human-in-the-loop review dashboards for exception handling",
@@ -340,18 +340,18 @@ export const detailedServices: ServiceItem[] = [
       "Agencies wanting automated client reporting and onboarding pipelines",
     ],
     businessBenefits: [
-      { title: "Immediate Response Times", detail: "Qualify inbound prospects within seconds on WhatsApp or website chat instead of next-day follow-ups." },
+      { title: "Inquiry Routing", detail: "Route inquiries from supported channels according to configured qualification rules and review steps." },
       { title: "Reduced Administrative Overhead", detail: "Reallocate skilled team members toward high-value client work rather than data entry." },
-      { title: "Standardized Execution", detail: "Eliminate human transcription errors across customer files, billing data, and order tickets." },
-      { title: "Predictable Scaling", detail: "Handle double the transaction or inquiry volume without immediately having to double back-office headcount." },
+      { title: "Validation & Review", detail: "Use field validation and human review to catch issues in extracted customer, billing, or order data." },
+      { title: "Capacity Planning", detail: "Evaluate expected transaction or inquiry volume and operational review needs during scoping." },
     ],
     process: [
       { step: 1, title: "Workflow Audit & Feasibility", summary: "We analyze your recurring manual tasks, calculate potential time savings, and verify API feasibility." },
       { step: 2, title: "Data Preparation & Prompt Engineering", summary: "We structure your source documentation, define prompt guardrails, and establish security boundaries." },
       { step: 3, title: "Pipeline Integration & Test Harness", summary: "We connect systems via secure webhooks and test against historical sample datasets." },
       { step: 4, title: "Human Review Interface", summary: "We establish review thresholds so edge cases automatically notify your designated team lead." },
-      { step: 5, title: "Staged Rollout & Telemetry", summary: "Gradual deployment with real-time error monitoring, logging, and token usage tracking." },
-      { step: 6, title: "Ongoing Tuning & Refinement", summary: "Continuous optimization based on actual edge cases and expanding operational needs." },
+      { step: 5, title: "Staged Rollout & Telemetry", summary: "Rollout, monitoring, logging, and usage tracking are defined according to the integrations and project scope." },
+      { step: 6, title: "Ongoing Tuning & Refinement", summary: "Post-launch evaluation and further changes can be scoped based on observed behavior and operational needs." },
     ],
     faqs: [
       {
@@ -360,7 +360,7 @@ export const detailedServices: ServiceItem[] = [
       },
       {
         question: "Will our proprietary business data be shared with public AI models?",
-        answer: "No. We utilize commercial enterprise API tiers with strict contractual zero-data-retention guarantees, ensuring your confidential internal files and customer records are never used for model training.",
+        answer: "Provider retention and model-training policies vary by service and plan. Data handling requirements should be reviewed before selecting a provider, and sensitive information should not be sent without an approved configuration.",
       },
       {
         question: "What happens when the AI chatbot doesn't know an answer?",
@@ -368,7 +368,7 @@ export const detailedServices: ServiceItem[] = [
       },
       {
         question: "How are automation tools connected to our existing CRM?",
-        answer: "We build secure webhooks and API connectors directly to your CRM (HubSpot, Zoho, Salesforce, or custom DB), ensuring data syncs in real time without manual intervention.",
+        answer: "Integration options depend on the CRM's APIs, access model, and data requirements. Synchronization behavior and any manual review steps are defined during scoping.",
       },
     ],
     relatedServiceSlugs: ["custom-software-development", "crm-systems", "business-websites-ecommerce", "lead-capture-followup-automation"],
@@ -379,14 +379,14 @@ export const detailedServices: ServiceItem[] = [
     title: "Business Websites & E-Commerce",
     category: "web-ecommerce",
     categoryName: "Web & E-Commerce Development",
-    shortDescription: "High-performance, conversion-engineered corporate websites and modern e-commerce platforms built for speed and search authority.",
+    shortDescription: "Corporate websites and e-commerce platforms planned around content, accessibility, search, and integration needs.",
     heroHeadline: "Websites Engineered to Convert Visitors Into Qualified Inquiries",
-    heroSubheadline: "Transform your online presence from a passive digital brochure into a fast, authoritative customer acquisition engine.",
+    heroSubheadline: "Shape your online presence around clear information, useful journeys, and the needs of your customers.",
     clientProblem: {
       title: "Websites That Look Decent but Fail to Generate Business",
       description: "Most company websites suffer from slow load times, bloated page builders, confusing user journeys, and generic messaging that leaves visitors indifferent.",
       painPoints: [
-        "Bounce rates over 60% caused by sluggish performance on mobile networks",
+        "Poor mobile performance creating friction for visitors on slower networks",
         "Visitors leaving without taking action due to hidden or unclear value propositions",
         "Rigid CMS templates that break whenever marketing wants to publish new landing pages",
         "Poor technical SEO foundations that render the site invisible to search engines and AI assistants",
@@ -394,10 +394,10 @@ export const detailedServices: ServiceItem[] = [
     },
     ourSolution: {
       title: "Clean Code, Lightning Performance, and Conversion Architecture",
-      description: "We build fast, secure Next.js and headless websites designed around the psychology of business buyers—combining strong editorial typography, clear proof points, and friction-free inquiry flows.",
+      description: "We build responsive Next.js and headless websites with clear editorial structure, evidence-backed content, and straightforward inquiry paths.",
       pillars: [
         {
-          title: "Sub-Second Core Web Vitals",
+          title: "Core Web Vitals & Performance",
           detail: "Built on clean Next.js architecture with optimized image delivery, static generation, and near-zero layout shift.",
         },
         {
@@ -429,23 +429,23 @@ export const detailedServices: ServiceItem[] = [
       "Retailers expanding into omnichannel direct-to-consumer e-commerce",
     ],
     businessBenefits: [
-      { title: "Immediate Credibility", detail: "Project an established, high-capability image that commands executive trust and premium project pricing." },
-      { title: "Higher Conversion Rates", detail: "Frictionless navigation and clear CTAs turn a higher percentage of ad and search traffic into inquiries." },
-      { title: "Global Speed", detail: "Edge CDN distribution ensures visitors in New York, London, Dubai, or Lahore experience instantaneous page loads." },
+      { title: "Clear Positioning", detail: "Present the organization's verified capabilities, useful evidence, and project approach in a clear format." },
+      { title: "Clear Inquiry Paths", detail: "Use navigation and calls to action that make relevant next steps easy to find and evaluate." },
+      { title: "Delivery Options", detail: "Choose hosting and content delivery approaches that fit the audience, application, and operational requirements." },
       { title: "Total Design Control", detail: "Freedom from restrictive theme templates with a bespoke design system aligned to your brand identity." },
     ],
     process: [
       { step: 1, title: "Positioning & Information Architecture", summary: "We audit your audience, clarify your value proposition, and map the sitemap and user conversion paths." },
       { step: 2, title: "Wireframes & Editorial Copy", summary: "We structure page hierarchy and collaborate on business copy that speaks directly to client pain points." },
       { step: 3, title: "High-Fidelity Visual Design", summary: "We create interactive Figma designs adhering to your brand guidelines, typography, and color palette." },
-      { step: 4, title: "Frontend Engineering", summary: "We develop responsive, accessible code with semantic markup, fast CSS, and interactive components." },
-      { step: 5, title: "Content Loading & Testing", summary: "Complete cross-browser, mobile responsiveness, and Core Web Vitals speed verification." },
-      { step: 6, title: "Deployment & DNS Launch", summary: "Smooth zero-downtime deployment, SSL configuration, search console indexing, and analytics handover." },
+      { step: 4, title: "Frontend Engineering", summary: "We develop responsive interfaces with semantic markup, accessible interactions, and maintainable styling." },
+      { step: 5, title: "Content Loading & Testing", summary: "Browser, accessibility, mobile, and Core Web Vitals checks are performed against agreed test conditions." },
+      { step: 6, title: "Deployment & DNS Launch", summary: "Plan deployment, DNS configuration, SSL, search-console setup, and analytics handover for the agreed hosting environment." },
     ],
     faqs: [
       {
         question: "How long does it take to design and launch a new business website?",
-        answer: "A standard 5 to 10-page custom corporate website typically takes 3 to 5 weeks from discovery to production launch. Larger e-commerce portals or extensive multi-service directories take 6 to 8 weeks.",
+        answer: "Delivery schedules depend on content readiness, design needs, integrations, and acceptance criteria. The timeline is estimated after scope and dependencies are reviewed.",
       },
       {
         question: "Can our internal marketing team update text and blog posts easily?",
@@ -453,11 +453,11 @@ export const detailedServices: ServiceItem[] = [
       },
       {
         question: "Will the website be optimized for mobile and local networks?",
-        answer: "Every site we build is mobile-first. We rigorously test assets, lazy loading, and script budgets to ensure fast browsing even on average 3G/4G cellular connections.",
+        answer: "Mobile layouts and performance should be tested against agreed devices, networks, and user needs. Results depend on content, implementation, hosting, and network conditions.",
       },
       {
         question: "Do you guarantee #1 ranking on Google?",
-        answer: "No legitimate agency can guarantee a #1 search ranking. We build according to Google's strictest technical quality guidelines, structured schema standards, and fast Core Web Vitals to give your site the strongest possible organic foundation.",
+        answer: "No agency can guarantee a #1 search ranking. Technical work can improve crawlability, structured data, and measured page experience, but rankings depend on many factors outside a site's implementation.",
       },
     ],
     relatedServiceSlugs: ["seo-growth-strategy", "custom-software-development", "mobile-app-development", "content-creative-services"],
@@ -468,7 +468,7 @@ export const detailedServices: ServiceItem[] = [
     title: "Mobile Application Development",
     category: "mobile-development",
     categoryName: "Mobile Application Development",
-    shortDescription: "Native iOS & Android and high-performance cross-platform Flutter/React Native mobile applications built for retention and speed.",
+    shortDescription: "Native iOS and Android, and cross-platform Flutter or React Native applications scoped to product and device requirements.",
     heroHeadline: "Engaging Mobile Apps Engineered for Performance and Real Usability",
     heroSubheadline: "From field workforce utilities to customer-facing mobile platforms, we build intuitive apps that users love opening.",
     clientProblem: {
@@ -487,7 +487,7 @@ export const detailedServices: ServiceItem[] = [
       pillars: [
         {
           title: "Native Performance & Touch Feel",
-          detail: "60 FPS rendering, platform-native gestures, and smooth micro-interactions that feel natural on both iOS and Android.",
+          detail: "Platform-appropriate rendering, native gestures, and interaction patterns for iOS and Android.",
         },
         {
           title: "Offline-First Synchronization",
@@ -499,7 +499,7 @@ export const detailedServices: ServiceItem[] = [
         },
         {
           title: "Observability & Crash Analytics",
-          detail: "Integrated Sentry crash reporting and user journey telemetry to identify and resolve edge-case bugs immediately.",
+          detail: "Crash reporting and user-journey telemetry can help teams investigate issues and prioritize fixes.",
         },
       ],
     },
@@ -518,7 +518,7 @@ export const detailedServices: ServiceItem[] = [
       "Healthcare, fitness, or booking services wanting on-the-go customer access",
     ],
     businessBenefits: [
-      { title: "Direct Customer Channel", detail: "Harness push notifications for real-time order updates, reminders, and engagement." },
+      { title: "Direct Customer Channel", detail: "Use push notifications for order updates, reminders, and other agreed customer messages." },
       { title: "Field Workforce Efficiency", detail: "Empower staff to capture signatures, photos, and inspection data directly on site." },
       { title: "Unified Codebase Economics", detail: "Cross-platform technology cuts initial engineering and ongoing maintenance costs in half." },
       { title: "Long-Term Compatibility", detail: "Structured architecture keeps pace with yearly iOS and Android major version updates." },
@@ -534,7 +534,7 @@ export const detailedServices: ServiceItem[] = [
     faqs: [
       {
         question: "Should we build cross-platform (Flutter / React Native) or native (Swift / Kotlin)?",
-        answer: "For over 85% of commercial business apps, modern cross-platform frameworks like Flutter or React Native provide native 60fps performance while saving up to 40% in development and ongoing maintenance costs. We only recommend pure native when an app requires heavy low-level Bluetooth/AR hardware integration.",
+        answer: "Cross-platform frameworks such as Flutter or React Native can reduce duplicated implementation work for some products. The right choice depends on device capabilities, performance needs, platform conventions, and the product team's constraints; native development may be appropriate for specialized hardware integrations.",
       },
       {
         question: "Do you handle the App Store and Google Play submission process?",
@@ -623,7 +623,7 @@ export const detailedServices: ServiceItem[] = [
     faqs: [
       {
         question: "How long before we see tangible organic search results?",
-        answer: "SEO is a medium-to-long-term strategic investment. Technical fixes and indexation improvements often show initial ranking movements within 6 to 8 weeks, with substantial qualified traffic and lead generation typically compounding between months 3 and 6.",
+        answer: "SEO outcomes and timing depend on the site's current condition, competition, content, and search-engine changes. We can assess technical issues and define measurable work, but cannot guarantee rankings or traffic.",
       },
       {
         question: "What is Answer Engine Optimization (AEO)?",
@@ -654,7 +654,7 @@ export const detailedServices: ServiceItem[] = [
       description: "Spotty Wi-Fi, unmanaged routers, absent data backup routines, and unorganized network wiring disrupt employee productivity and expose businesses to security risks.",
       painPoints: [
         "Frequent network drops interrupting high-stakes client video calls and database connections",
-        "Consumer-grade Wi-Fi routers failing under the load of 30+ office devices",
+        "Consumer-grade Wi-Fi routers failing to meet office capacity and coverage needs",
         "Zero firewall protection or guest isolation, creating critical security vulnerabilities",
         "No documented disaster recovery or automated backup procedures in the event of hardware failure",
       ],
@@ -673,7 +673,7 @@ export const detailedServices: ServiceItem[] = [
         },
         {
           title: "Automated Redundancy & Failover",
-          detail: "Dual-WAN multi-ISP setup ensures instant automatic failover so your office never loses internet during provider outages.",
+          detail: "Dual-WAN configurations can route traffic across providers according to agreed failover rules and network requirements.",
         },
         {
           title: "Complete Documentation",
@@ -696,10 +696,10 @@ export const detailedServices: ServiceItem[] = [
       "Schools, colleges, and shared working spaces managing high concurrent users",
     ],
     businessBenefits: [
-      { title: "Continuous Productivity", detail: "Eliminate costly midday work stoppages caused by consumer router crashes and bandwidth bottlenecks." },
+      { title: "Network Resilience", detail: "Assess coverage, equipment, and connectivity needs to plan for common network interruptions." },
       { title: "Secure Company Data", detail: "Isolate sensitive internal servers and financial workstations from guest traffic and unauthorized devices." },
       { title: "Remote Team Connectivity", detail: "Provide secure encrypted VPN tunnels for management and remote staff without exposing open ports." },
-      { title: "Disaster Preparedness", detail: "Rest easy knowing operational data is automatically backed up offsite and restorable within hours." },
+      { title: "Disaster Preparedness", detail: "Define backup frequency, storage, and restoration objectives based on business continuity requirements." },
     ],
     process: [
       { step: 1, title: "Site Assessment & Bandwidth Audit", summary: "We evaluate your physical layout, device density, ISP lines, and coverage dead zones." },
@@ -711,8 +711,8 @@ export const detailedServices: ServiceItem[] = [
     ],
     faqs: [
       {
-        question: "Can you configure dual-internet failover so our office never goes offline?",
-        answer: "Yes. We configure multi-WAN routers (e.g., MikroTik or UniFi Gateway) connected to two separate internet providers. If primary line drops, traffic automatically routes through the backup line within seconds without interrupting ongoing calls.",
+        question: "Can you configure dual-internet failover for our office?",
+        answer: "Multi-WAN failover can be scoped around available providers and network equipment. Failover timing and the effect on active sessions depend on the circuits, configuration, and applications, and should be tested against agreed requirements.",
       },
       {
         question: "Do you supply the physical hardware (routers, switches, access points)?",
@@ -724,7 +724,7 @@ export const detailedServices: ServiceItem[] = [
       },
       {
         question: "Do you offer emergency on-site and remote IT support?",
-        answer: "Yes. We offer both project-based implementation and monthly IT support retainers with guaranteed SLA response times for critical network emergencies.",
+        answer: "Project-based implementation and ongoing support can be scoped separately. Any response targets, coverage windows, and escalation terms should be documented in the agreed service level.",
       },
     ],
     relatedServiceSlugs: ["custom-software-development", "ai-workflow-automation"],
@@ -792,7 +792,7 @@ export const detailedServices: ServiceItem[] = [
     ],
     process: [
       { step: 1, title: "Audience & Competitor Copy Audit", summary: "We review your current messaging and analyze competitor positioning to identify white space." },
-      { step: 2, title: "Stakeholder Interviews", summary: "We conduct 30-minute interviews with your leadership and technical staff to capture authentic insights." },
+      { step: 2, title: "Stakeholder Interviews", summary: "Structured conversations with leadership and technical staff capture operational needs and constraints." },
       { step: 3, title: "Messaging Framework & Outline", summary: "We define core value propositions, tone guardrails, and structural page outlines for approval." },
       { step: 4, title: "Drafting & Collaborative Revisions", summary: "We draft complete copy with headline variations and collaborate via shared comment docs." },
       { step: 5, title: "SEO Optimization & Proofreading", summary: "Rigorous verification of reading flow, fact-checking, meta tags, and internal link anchors." },
@@ -809,7 +809,7 @@ export const detailedServices: ServiceItem[] = [
       },
       {
         question: "Can you write case studies if client names must remain confidential under NDA?",
-        answer: "Yes. We frequently craft anonymous, high-impact case studies using industry labels (e.g. 'Leading Regional Logistics Provider' or 'FinTech Scale-up') while detailing the real architectural challenge and verified technical outcomes.",
+        answer: "If a client engagement and its publication are approved, a case study can omit identifying details. Any challenges or outcomes included should be supported by evidence and reviewed for permission.",
       },
       {
         question: "How many revision rounds are included?",
@@ -836,84 +836,84 @@ export function getServiceBySlug(slug: string): ServiceItem | undefined {
         category: cat.id,
         categoryName: cat.title,
         shortDescription: sub.description,
-        heroHeadline: `${sub.title} Engineered for High Performance & Scale`,
+        heroHeadline: `${sub.title} for Your Business Workflows`,
         heroSubheadline: `Professional ${sub.title.toLowerCase()} tailored to your operational workflows, compliance requirements, and business goals.`,
         clientProblem: {
-          title: `Overcoming Common Challenges in ${sub.title}`,
-          description: `Companies engaging in ${sub.title.toLowerCase()} frequently encounter technical debt, inconsistent delivery timelines, poor integration between systems, and escalating maintenance overhead.`,
+          title: `Requirements to Clarify for ${sub.title}`,
+          description: `The needs for ${sub.title.toLowerCase()} vary by organization. Discovery should identify the current process, system constraints, required integrations, and acceptance criteria.`,
           painPoints: [
-            "Lack of clean architectural standards and documented code patterns",
-            "Disjointed integrations with existing databases and legacy software",
-            "Slow turnaround times and unpredictable agency communication",
-            "Absence of ongoing monitoring, security patching, and telemetry",
+            "Existing workflows and system limitations",
+            "Data exchange requirements with current tools",
+            "Access control, privacy, and operational requirements",
+            "Maintenance and support expectations after launch",
           ],
         },
         ourSolution: {
           title: `Disciplined Engineering for ${sub.title}`,
-          description: `We deliver modular, well-tested implementations designed around your real operational requirements, backed by full source code ownership and direct developer communication.`,
+          description: `The implementation approach for ${sub.title.toLowerCase()} is defined after reviewing requirements, existing systems, and delivery constraints.`,
           pillars: [
             {
-              title: "Modern, Maintainable Architecture",
-              detail: "Built on battle-tested frameworks with clean code practices, typed models, and comprehensive documentation.",
+              title: "Architecture Based on Scope",
+              detail: "Select application structure, data models, and hosting according to the agreed requirements.",
             },
             {
-              title: "Seamless API & Workflow Integration",
-              detail: "Connecting cleanly with your existing systems, webhooks, and third-party tools with zero friction.",
+              title: "Integration Planning",
+              detail: "Confirm supported APIs, data ownership, and failure handling with each relevant provider.",
             },
             {
               title: "100% Intellectual Property Handoff",
-              detail: "You retain total ownership of all repositories, configurations, and deployment assets upon delivery.",
+              detail: "Code and project asset ownership and handover follow the terms agreed in the project contract.",
             },
             {
-              title: "Dedicated Quality Assurance & Support",
-              detail: "Rigorous testing across browsers and environments with guaranteed post-launch warranty support.",
+              title: "Quality & Support Planning",
+              detail: "Testing coverage, release checks, warranty, and ongoing support are agreed for the project.",
             },
           ],
         },
         deliverables: [
-          `Technical specifications and architecture documentation for ${sub.title}`,
-          "Interactive Figma mockups and validated user workflows",
-          "Production-ready codebase with automated tests and CI/CD setup",
-          "Comprehensive API integration and third-party connectors",
-          "Complete source code repository transfer and administrative handover",
-          "Post-launch technical warranty coverage and SLA support options",
+          `Requirements and architecture documentation for ${sub.title}, as scoped`,
+          "User flows or interface prototypes when required",
+          "Application code and automated tests defined in the project scope",
+          "API integrations selected during discovery",
+          "Repository access and handover as agreed in the contract",
+          "Warranty and post-launch support terms documented in the agreement",
         ],
         suitableFor: [
-          "Startups and founders seeking reliable, fast execution",
+          "Startups and founders seeking a scoped product engineering engagement",
           "Small and mid-sized enterprises modernizing digital systems",
           "Organizations needing custom integrations and reliable tech support",
           "International companies looking for an accountable remote engineering partner",
         ],
         businessBenefits: [
           {
-            title: "Operational Efficiency",
-            detail: "Eliminate manual friction and speed up your day-to-day business operations.",
+            title: "Workflow Fit",
+            detail: "Assess whether the proposed workflow addresses the operational needs identified during discovery.",
           },
           {
-            title: "Clear Cost Predictability",
-            detail: "Transparent milestone billing with no surprise hidden fees or proprietary vendor lock-in.",
+            title: "Defined Scope",
+            detail: "Document deliverables, assumptions, dependencies, and commercial terms in the project agreement.",
           },
           {
-            title: "Robust Security & Compliance",
-            detail: "Engineered according to modern cybersecurity best practices and data privacy standards.",
+            title: "Security Requirements",
+            detail: "Identify the relevant access, data protection, and compliance requirements before implementation.",
           },
           {
-            title: "Long-Term Scalability",
-            detail: "Built to handle expanding transaction volumes without requiring a total rebuild.",
+            title: "Maintenance Planning",
+            detail: "Consider expected usage and future changes when choosing the initial architecture.",
           },
         ],
         process: [
           { step: 1, title: "Discovery & Requirements", summary: "We audit your requirements, interview stakeholders, and document the scope." },
           { step: 2, title: "Architecture & Blueprint", summary: "We define data models, security boundaries, and technical specifications." },
           { step: 3, title: "Design & Prototyping", summary: "We create interactive prototypes to validate workflows before coding." },
-          { step: 4, title: "Sprint Development", summary: "Bi-weekly sprints with live demo builds on private staging servers." },
-          { step: 5, title: "QA & Deployment", summary: "End-to-end testing, security validation, and smooth zero-downtime launch." },
-          { step: 6, title: "Support & Handoff", summary: "Complete repository handover, staff training, and scheduled SLA maintenance." },
+          { step: 4, title: "Sprint Development", summary: "Review cadence, staging access, and demonstration frequency are agreed during scoping." },
+          { step: 5, title: "QA & Deployment", summary: "Testing and release checks follow the acceptance criteria and deployment plan." },
+          { step: 6, title: "Support & Handoff", summary: "Repository access, training, warranty, and ongoing support follow the project agreement." },
         ],
         faqs: [
           {
             question: `How do you scope and price ${sub.title}?`,
-            answer: `We provide clear fixed-milestone pricing for well-defined deliverables and flexible sprint retainers for evolving scopes. Every quote includes an itemized breakdown with zero hidden fees.`,
+            answer: `Pricing and delivery terms are set out in a proposal after the requirements and project scope are reviewed.`,
           },
           {
             question: `Do we own all the code and assets for ${sub.title}?`,
@@ -921,7 +921,7 @@ export function getServiceBySlug(slug: string): ServiceItem | undefined {
           },
           {
             question: "How do you manage communication with remote international clients?",
-            answer: "We provide dedicated Slack / Teams / WhatsApp channels, weekly video calls, and access to private staging URLs where you can verify progress in real time across overlapping time zones.",
+            answer: "Communication channels, meeting cadence, staging access, and working-hour overlap are agreed during scoping and documented in the delivery plan.",
           },
         ],
         relatedServiceSlugs: cat.services.filter((s) => s.slug !== sub.slug).slice(0, 3).map((s) => s.slug),
@@ -939,4 +939,10 @@ export function getAllServiceSlugs(): string[] {
     cat.services.forEach((s) => allSlugs.add(s.slug));
   });
   return Array.from(allSlugs);
+}
+
+export function getRelatedServices(slugs: string[]): ServiceItem[] {
+  return slugs
+    .map((slug) => getServiceBySlug(slug))
+    .filter((service): service is ServiceItem => service !== undefined);
 }

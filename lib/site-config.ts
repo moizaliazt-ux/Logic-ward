@@ -17,7 +17,6 @@ export interface SiteConfig {
       label: string;
     };
     workingHours: string;
-    responseTime: string;
   };
   social: {
     linkedin: string;
@@ -50,7 +49,6 @@ export const siteConfig: SiteConfig = {
       label: "Pakistan Operations & Global Remote Delivery",
     },
     workingHours: "Mon - Fri: 9:00 AM - 6:00 PM (PKT / UTC+5)",
-    responseTime: "Guaranteed initial response within 1 business day",
   },
   social: {
     linkedin: "https://linkedin.com/company/logicward",
@@ -61,10 +59,11 @@ export const siteConfig: SiteConfig = {
   nav: {
     main: [
       { title: "Home", href: "/" },
-      { title: "About", href: "/about" },
       { title: "Services", href: "/services" },
       { title: "Solutions", href: "/solutions" },
-      { title: "Portfolio", href: "/portfolio" },
+      { title: "Industries", href: "/industries" },
+      { title: "Our Work", href: "/work" },
+      { title: "Company", href: "/company" },
       { title: "Insights", href: "/insights" },
       { title: "Contact", href: "/contact" },
     ],

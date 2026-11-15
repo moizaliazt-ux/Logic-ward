@@ -12,8 +12,8 @@ import {
   TrendingUp,
   Server,
   PenTool,
-  CheckCircle2,
   Filter,
+  X,
 } from "lucide-react";
 import { serviceCategories } from "@/lib/data/services";
 
@@ -23,7 +23,7 @@ export function ServiceDirectory() {
 
   const categories = useMemo(() => {
     return [
-      { id: "all", title: "All Categories" },
+      { id: "all", title: "All Disciplines" },
       ...serviceCategories.map((c) => ({ id: c.id, title: c.title })),
     ];
   }, []);
@@ -63,69 +63,73 @@ export function ServiceDirectory() {
   const getCategoryIcon = (id: string) => {
     switch (id) {
       case "software-systems":
-        return <Code2 className="w-5 h-5 text-[#dae7de]" />;
+        return <Code2 className="w-5 h-5 text-brand-accent" />;
       case "ai-automation":
-        return <Bot className="w-5 h-5 text-[#94a49a]" />;
+        return <Bot className="w-5 h-5 text-brand-accent" />;
       case "web-ecommerce":
-        return <Globe className="w-5 h-5 text-[#dae7de]" />;
+        return <Globe className="w-5 h-5 text-brand-accent" />;
       case "mobile-development":
-        return <Smartphone className="w-5 h-5 text-[#94a49a]" />;
+        return <Smartphone className="w-5 h-5 text-brand-accent" />;
       case "digital-marketing":
-        return <TrendingUp className="w-5 h-5 text-[#dae7de]" />;
+        return <TrendingUp className="w-5 h-5 text-brand-accent" />;
       case "it-infrastructure":
-        return <Server className="w-5 h-5 text-[#94a49a]" />;
+        return <Server className="w-5 h-5 text-brand-accent" />;
       case "content-creative":
-        return <PenTool className="w-5 h-5 text-[#dae7de]" />;
+        return <PenTool className="w-5 h-5 text-brand-accent" />;
       default:
-        return <Code2 className="w-5 h-5 text-[#dae7de]" />;
+        return <Code2 className="w-5 h-5 text-brand-accent" />;
     }
   };
 
   return (
     <div className="space-y-10">
       {/* Search and Category Filter Bar */}
-      <div className="p-6 rounded-[24px] bg-[#0d1f1c] border border-[#1a342e] space-y-4 shadow-xl shadow-black/40">
+      <div className="p-6 rounded-2xl bg-brand-card border border-brand-border space-y-5 shadow-sm">
         <div className="flex flex-col md:flex-row items-center gap-4">
-          {/* Live Search Input */}
+          {/* Accessible Live Search Input */}
           <div className="relative w-full md:flex-1">
-            <Search className="w-4 h-4 text-[#94a49a] absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-brand-muted absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
-              placeholder="Search across all 40+ services (e.g., ERP, Flutter, SEO, Next.js, Firewall)..."
+              aria-label="Search across services directory"
+              placeholder="Search across all 40+ services (e.g., ERP, Next.js, Flutter, SEO, Firewall)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#091615] border border-[#1a342e] text-sm text-[#dae7de] placeholder-[#94a49a]/60 focus:outline-none focus:border-[#2d584d] transition-colors"
+              className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-brand-surface border border-brand-border text-sm text-brand-text placeholder-brand-muted focus:outline-none focus:border-brand-accent transition-colors"
             />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#94a49a] hover:text-[#dae7de] transition-colors"
+                aria-label="Clear search input"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-brand-muted hover:text-brand-text"
               >
-                Clear
+                <X className="w-4 h-4" />
               </button>
             )}
           </div>
 
-          <div className="flex items-center gap-2 self-start md:self-auto text-xs font-mono text-[#94a49a]">
-            <Filter className="w-3.5 h-3.5 text-[#dae7de]" />
-            <span>
-              Showing <strong className="text-white">{totalMatchingServices}</strong> services
-            </span>
+          <div className="text-xs text-brand-muted font-mono whitespace-nowrap self-start md:self-center">
+            Showing <strong className="text-brand-text">{totalMatchingServices}</strong> services across{" "}
+            <strong className="text-brand-text">{filteredCategories.length}</strong> disciplines
           </div>
         </div>
 
-        {/* Category Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1 no-scrollbar">
+        {/* Category Filter Pills */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none pt-2 border-t border-brand-border">
+          <span className="text-xs text-brand-muted font-semibold uppercase tracking-wider flex items-center gap-1.5 mr-2">
+            <Filter className="w-3.5 h-3.5 text-brand-accent" />
+            Discipline:
+          </span>
           {categories.map((cat) => {
             const isActive = selectedCategory === cat.id;
             return (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all border ${
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all border ${
                   isActive
-                    ? "bg-[#dae7de] text-[#091615] border-[#dae7de] font-semibold"
-                    : "bg-[#091615] text-[#94a49a] border-[#1a342e] hover:text-[#dae7de] hover:border-[#2d584d]"
+                    ? "bg-brand-background border-brand-border  text-brand-text font-semibold"
+                    : "bg-brand-surface border-brand-border  text-brand-secondary hover:text-brand-text hover:border-brand-border"
                 }`}
               >
                 {cat.title}
@@ -135,77 +139,82 @@ export function ServiceDirectory() {
         </div>
       </div>
 
-      {/* Services Grid Grouped by Category */}
+      {/* Services Listing by Category */}
       {filteredCategories.length === 0 ? (
-        <div className="py-16 text-center rounded-[24px] bg-[#0d1f1c] border border-dashed border-[#1a342e] space-y-3">
-          <p className="text-sm text-[#94a49a]">
-            No services matched your query &quot;{searchTerm}&quot;.
+        <div className="p-12 rounded-2xl bg-brand-card border border-brand-border text-center space-y-4 shadow-sm">
+          <p className="text-base text-brand-text font-semibold">
+            No services matching &quot;{searchTerm}&quot; in the selected discipline.
+          </p>
+          <p className="text-xs text-brand-muted max-w-md mx-auto">
+            Try adjusting your search keywords, or reset your filters to explore our full technology portfolio.
           </p>
           <button
             onClick={() => {
               setSearchTerm("");
               setSelectedCategory("all");
             }}
-            className="text-xs font-mono text-[#dae7de] underline hover:text-white"
+            className="px-4 py-2 rounded-lg text-xs font-semibold text-brand-background bg-brand-accent hover:bg-brand-accent-hover transition-colors"
           >
-            Reset Filters
+            Reset All Filters
           </button>
         </div>
       ) : (
-        <div className="space-y-16">
-          {filteredCategories.map((category) => (
-            <div key={category.id} className="space-y-6">
-              {/* Category Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#1a342e] pb-4">
+        <div className="space-y-12">
+          {filteredCategories.map((cat) => (
+            <div key={cat.id} className="space-y-6">
+              {/* Category Group Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-brand-border gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-[#091615] border border-[#1a342e] flex items-center justify-center">
-                    {getCategoryIcon(category.id)}
+                  <div className="w-10 h-10 rounded-xl bg-brand-card border border-brand-border flex items-center justify-center shadow-2xs">
+                    {getCategoryIcon(cat.id)}
                   </div>
                   <div>
-                    <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                      {category.title}
+                    <h2 className="text-xl font-bold text-brand-text">
+                      {cat.title}
                     </h2>
-                    <p className="text-xs sm:text-sm text-[#94a49a]">
-                      {category.shortSummary}
+                    <p className="text-xs text-brand-muted line-clamp-1">
+                      {cat.shortSummary}
                     </p>
                   </div>
                 </div>
 
-                <span className="text-xs font-mono text-[#94a49a] self-start sm:self-auto bg-[#0d1f1c] px-2.5 py-1 rounded-md border border-[#1a342e]">
-                  {category.filteredServices.length} {category.filteredServices.length === 1 ? "Capability" : "Capabilities"}
-                </span>
+                <Link
+                  href={`/services/${cat.featuredSlug}`}
+                  className="text-xs font-semibold text-brand-accent hover:text-brand-accent inline-flex items-center gap-1 group flex-shrink-0"
+                >
+                  <span>Discipline Blueprint</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </div>
 
-              {/* Service Cards Grid (PRD: 12px radius, #0d1f1c background, #1a342e border) */}
+              {/* Sub-Service Cards Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {category.filteredServices.map((service) => (
+                {cat.filteredServices.map((service) => (
                   <Link
                     key={service.slug}
                     href={`/services/${service.slug}`}
-                    className="group flex flex-col justify-between p-6 rounded-xl bg-[#0d1f1c] border border-[#1a342e] hover:border-[#2d584d] hover:bg-[#132b27]/30 transition-all shadow-sm"
+                    className="p-6 rounded-2xl bg-brand-card border border-brand-border hover:border-brand-accent/50 hover:shadow-sm transition-all flex flex-col justify-between space-y-4 group"
                   >
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-[11px] font-mono text-[#94a49a] uppercase tracking-wider">
-                          Module #{service.slug.slice(0, 4)}
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-surface  text-brand-accent border border-brand-border font-semibold">
+                          SERVICE OVERVIEW
                         </span>
-                        <ArrowRight className="w-4 h-4 text-[#94a49a] group-hover:text-[#dae7de] group-hover:translate-x-1 transition-all" />
+                        <span className="text-[11px] font-mono text-brand-muted">
+                          Details
+                        </span>
                       </div>
-
-                      <h3 className="text-base font-bold text-white group-hover:text-[#dae7de] transition-colors tracking-tight">
+                      <h3 className="text-base font-bold text-brand-text group-hover:text-brand-accent transition-colors leading-snug">
                         {service.title}
                       </h3>
-
-                      <p className="text-xs text-[#94a49a] leading-relaxed line-clamp-3">
+                      <p className="text-xs text-brand-secondary leading-relaxed line-clamp-3">
                         {service.description}
                       </p>
                     </div>
 
-                    <div className="pt-5 mt-4 border-t border-[#1a342e]/70">
-                      <span className="text-xs font-mono font-medium text-[#dae7de] flex items-center gap-1.5 group-hover:underline">
-                        <span>View Specification</span>
-                        <span>→</span>
-                      </span>
+                    <div className="pt-3 border-t border-brand-border flex items-center justify-between text-xs font-semibold text-brand-accent">
+                      <span>Inspect Service Blueprint</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </Link>
                 ))}

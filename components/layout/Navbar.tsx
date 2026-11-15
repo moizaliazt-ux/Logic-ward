@@ -19,19 +19,34 @@ import {
 } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { serviceCategories } from "@/lib/data/services";
+import { industriesData } from "@/lib/data/industries";
+import { solutionsData } from "@/lib/data/solutions";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [solutionsDropdownOpen, setSolutionsDropdownOpen] = useState(false);
+  const [industriesDropdownOpen, setIndustriesDropdownOpen] = useState(false);
+  const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);
+
+  // Mobile accordion state
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
+  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
+
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const [prevPathname, setPrevPathname] = useState(pathname);
 
-  if (prevPathname !== pathname) {
-    setPrevPathname(pathname);
-    setMobileMenuOpen(false);
-    setServicesOpen(false);
-  }
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setMobileMenuOpen(false);
+      setServicesDropdownOpen(false);
+      setSolutionsDropdownOpen(false);
+      setIndustriesDropdownOpen(false);
+      setCompanyDropdownOpen(false);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,115 +59,96 @@ export function Navbar() {
   const getCategoryIcon = (id: string) => {
     switch (id) {
       case "software-systems":
-        return <Code2 className="w-4 h-4 text-[#dae7de]" />;
+        return <Code2 className="w-4 h-4 text-brand-accent" />;
       case "ai-automation":
-        return <Bot className="w-4 h-4 text-[#94a49a]" />;
+        return <Bot className="w-4 h-4 text-brand-accent" />;
       case "web-ecommerce":
-        return <Globe className="w-4 h-4 text-[#dae7de]" />;
+        return <Globe className="w-4 h-4 text-brand-accent" />;
       case "mobile-development":
-        return <Smartphone className="w-4 h-4 text-[#94a49a]" />;
+        return <Smartphone className="w-4 h-4 text-brand-accent" />;
       case "digital-marketing":
-        return <TrendingUp className="w-4 h-4 text-[#dae7de]" />;
+        return <TrendingUp className="w-4 h-4 text-brand-accent" />;
       case "it-infrastructure":
-        return <Server className="w-4 h-4 text-[#94a49a]" />;
+        return <Server className="w-4 h-4 text-brand-accent" />;
       case "content-creative":
-        return <PenTool className="w-4 h-4 text-[#dae7de]" />;
+        return <PenTool className="w-4 h-4 text-brand-accent" />;
       default:
-        return <Code2 className="w-4 h-4 text-[#dae7de]" />;
+        return <Code2 className="w-4 h-4 text-brand-accent" />;
     }
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full pt-2 px-3 sm:px-6">
-      {/* Translucent Floating Global Navigation Bar (Per PRD specification: 12px radius, 57px blur, 10px gaps, 6px controls) */}
+    <header className="sticky top-0 z-50 w-full pt-3 px-3 sm:px-6">
       <nav
         className={`max-w-7xl mx-auto rounded-xl transition-all duration-300 border ${
           scrolled
-            ? "bg-[#091615]/90 backdrop-blur-[57px] border-[#1a342e] shadow-2xl shadow-black/80 py-2.5 px-4"
-            : "bg-[#0d1f1c]/80 backdrop-blur-[57px] border-[#1a342e]/70 shadow-lg py-3 px-5"
+            ? "bg-brand-surface border-brand-border shadow-md py-2.5 px-4 sm:px-6"
+            : "bg-brand-surface border-brand-border shadow-sm py-3 px-5 sm:px-6"
         }`}
+        aria-label="Main Navigation"
       >
         <div className="flex items-center justify-between">
-          {/* Wordmark Logo */}
+          {/* Brand Logo & Wordmark */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 group focus:outline-none"
+            className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent rounded-md"
             aria-label={`${siteConfig.name} Home`}
           >
-            <div className="w-8 h-8 rounded-md bg-[#1a342e] border border-[#2d584d] flex items-center justify-center font-bold text-[#dae7de] font-mono text-xs">
+            <div className="w-8 h-8 rounded-lg bg-brand-accent flex items-center justify-center font-bold text-brand-background font-mono text-xs">
               LW
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="text-base font-medium tracking-tight text-[#dae7de] group-hover:text-white transition-colors uppercase font-mono">
+              <span className="text-base font-semibold tracking-tight text-brand-text group-hover:text-brand-accent transition-colors">
                 {siteConfig.name}
               </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#dae7de]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
             </div>
           </Link>
 
-          {/* Desktop Nav Items (PRD: 14px / 14px, weight 400, -0.14px tracking, 10px gap) */}
-          <div className="hidden lg:flex items-center gap-2.5 text-[14px] leading-[14px] tracking-[-0.14px]">
-            <Link
-              href="/"
-              className={`px-3 py-1.5 rounded-md transition-colors ${
-                pathname === "/"
-                  ? "text-[#dae7de] bg-[#1a342e]/60 font-medium"
-                  : "text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]/40"
-              }`}
-            >
-              INTRO
-            </Link>
-
-            <Link
-              href="/about"
-              className={`px-3 py-1.5 rounded-md transition-colors ${
-                pathname === "/about"
-                  ? "text-[#dae7de] bg-[#1a342e]/60 font-medium"
-                  : "text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]/40"
-              }`}
-            >
-              ABOUT
-            </Link>
-
-            {/* Services Dropdown */}
+          {/* Desktop Navigation Links */}
+          <div className="hidden lg:flex items-center gap-1.5 text-sm font-medium text-brand-secondary">
+            {/* Services Mega-Menu Trigger */}
             <div
               className="relative"
-              onMouseEnter={() => setServicesOpen(true)}
-              onMouseLeave={() => setServicesOpen(false)}
+              onMouseEnter={() => setServicesDropdownOpen(true)}
+              onMouseLeave={() => setServicesDropdownOpen(false)}
             >
               <Link
                 href="/services"
-                className={`px-3 py-1.5 rounded-md inline-flex items-center gap-1 transition-colors ${
+                className={`px-3 py-2 rounded-md inline-flex items-center gap-1 transition-colors ${
                   pathname.startsWith("/services")
-                    ? "text-[#dae7de] bg-[#1a342e]/60 font-medium"
-                    : "text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]/40"
+                    ? "text-brand-text bg-brand-elevated/80 font-semibold"
+                    : "text-brand-secondary hover:text-brand-text hover:bg-brand-elevated/50"
                 }`}
-                aria-expanded={servicesOpen}
+                aria-expanded={servicesDropdownOpen}
               >
-                <span>SERVICES</span>
+                <span>Services</span>
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    servicesOpen ? "rotate-180 text-[#dae7de]" : "text-[#94a49a]"
+                    servicesDropdownOpen ? "rotate-180 text-brand-text" : "text-brand-muted"
                   }`}
                 />
               </Link>
 
-              {/* Mega Menu Dropdown */}
-              {servicesOpen && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2.5 w-[860px] z-50">
-                  <div className="bg-[#091615] border border-[#1a342e] rounded-xl shadow-2xl shadow-black/90 p-6 backdrop-blur-[57px]">
-                    <div className="flex items-center justify-between pb-3.5 border-b border-[#1a342e] mb-4">
-                      <div className="flex items-center gap-2">
-                        <span className="text-[12px] font-mono font-bold uppercase tracking-[0.72px] text-[#dae7de]">
-                          TECHNOLOGY PORTFOLIO SPECTRUM
+              {/* Services Mega Menu */}
+              {servicesDropdownOpen && (
+                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2.5 w-[840px] z-50">
+                  <div className="bg-brand-card border border-brand-border rounded-2xl shadow-md p-6">
+                    <div className="flex items-center justify-between pb-3.5 border-b border-brand-border mb-4">
+                      <div>
+                        <span className="text-xs font-mono font-bold uppercase tracking-wider text-brand-accent">
+                          CAPABILITY DISCIPLINES
                         </span>
+                        <p className="text-xs text-brand-muted mt-0.5">
+                          Explore our full-stack engineering and digital solutions
+                        </p>
                       </div>
                       <Link
                         href="/services"
-                        className="text-[12px] font-mono text-[#dae7de] hover:underline inline-flex items-center gap-1 group"
+                        className="text-xs font-semibold text-brand-text hover:text-brand-accent inline-flex items-center gap-1 group"
                       >
-                        EXPLORE ALL 40+ SERVICES
-                        <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                        <span>View All 40+ Services</span>
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                       </Link>
                     </div>
 
@@ -161,22 +157,22 @@ export function Navbar() {
                         <div key={cat.id} className="space-y-1.5">
                           <Link
                             href={`/services/${cat.featuredSlug}`}
-                            className="flex items-center gap-2 text-[13px] font-medium text-[#dae7de] hover:text-white transition-colors group"
+                            className="flex items-center gap-2 text-xs font-bold text-brand-text hover:text-brand-accent transition-colors group"
                           >
-                            <span className="p-1 rounded bg-[#0d1f1c] border border-[#1a342e]">
+                            <span className="p-1 rounded bg-brand-surface border border-brand-border">
                               {getCategoryIcon(cat.id)}
                             </span>
                             <span className="leading-snug">{cat.title}</span>
                           </Link>
-                          <p className="text-[11px] text-[#94a49a] line-clamp-2 leading-relaxed">
+                          <p className="text-[11px] text-brand-muted line-clamp-2 leading-relaxed">
                             {cat.shortSummary}
                           </p>
                           <ul className="space-y-0.5 pt-0.5">
-                            {cat.services.slice(0, 3).map((sub) => (
+                            {cat.services.slice(0, 2).map((sub) => (
                               <li key={sub.slug}>
                                 <Link
                                   href={`/services/${sub.slug}`}
-                                  className="text-[11px] text-[#94a49a] hover:text-[#dae7de] transition-colors block py-0.5"
+                                  className="text-[11px] text-brand-muted hover:text-brand-text transition-colors block py-0.5"
                                 >
                                   • {sub.title}
                                 </Link>
@@ -187,16 +183,16 @@ export function Navbar() {
                       ))}
                     </div>
 
-                    <div className="mt-5 pt-3.5 border-t border-[#1a342e] bg-[#050d0c] -mx-6 -mb-6 p-4 rounded-b-xl flex items-center justify-between">
-                      <span className="text-[12px] text-[#94a49a]">
-                        Need custom enterprise scoping or multi-department architecture?
+                    <div className="mt-5 pt-3.5 border-t border-brand-border  bg-brand-background -mx-6 -mb-6 p-4 rounded-b-2xl flex items-center justify-between">
+                      <span className="text-xs text-brand-muted">
+                        Need custom enterprise architecture or technical scoping?
                       </span>
                       <Link
                         href="/contact"
-                        className="text-[12px] font-mono font-bold text-[#091615] bg-[#dae7de] hover:bg-white px-3 py-1.5 rounded-md transition-colors inline-flex items-center gap-1.5"
+                        className="text-xs font-semibold text-brand-background bg-brand-accent hover:bg-brand-accent-hover px-3.5 py-1.5 rounded-lg transition-colors inline-flex items-center gap-1.5"
                       >
-                        REQUEST SCOPING
-                        <ArrowRight className="w-3 h-3" />
+                        Request Scoping Call
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
                   </div>
@@ -204,84 +200,237 @@ export function Navbar() {
               )}
             </div>
 
+            {/* Solutions Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setSolutionsDropdownOpen(true)}
+              onMouseLeave={() => setSolutionsDropdownOpen(false)}
+            >
+              <Link
+                href="/solutions"
+                className={`px-3 py-2 rounded-md inline-flex items-center gap-1 transition-colors ${
+                  pathname === "/solutions"
+                    ? "text-brand-text bg-brand-elevated/80 font-semibold"
+                    : "text-brand-secondary hover:text-brand-text hover:bg-brand-elevated/50"
+                }`}
+                aria-expanded={solutionsDropdownOpen}
+              >
+                <span>Solutions</span>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    solutionsDropdownOpen ? "rotate-180 text-brand-text" : "text-brand-muted"
+                  }`}
+                />
+              </Link>
+
+              {solutionsDropdownOpen && (
+                <div className="absolute left-0 top-full pt-2.5 w-72 z-50">
+                  <div className="bg-brand-card border border-brand-border rounded-xl shadow-md p-3 space-y-1">
+                    <span className="px-3 pt-2 pb-1 text-[11px] font-mono uppercase tracking-wider text-brand-accent block">
+                      Enterprise Platforms
+                    </span>
+                    {solutionsData.slice(0, 6).map((sol) => (
+                      <Link
+                        key={sol.id}
+                        href={`/solutions#${sol.id}`}
+                        className="px-3 py-1.5 rounded-lg text-xs text-brand-secondary hover:text-brand-text hover:bg-brand-elevated transition-colors block"
+                      >
+                        {sol.title}
+                      </Link>
+                    ))}
+                    <div className="pt-2 border-t border-brand-border mt-2">
+                      <Link
+                        href="/solutions"
+                        className="px-3 py-1 text-xs font-semibold text-brand-accent hover:underline flex items-center justify-between"
+                      >
+                        <span>View All 10 Solutions</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Industries Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIndustriesDropdownOpen(true)}
+              onMouseLeave={() => setIndustriesDropdownOpen(false)}
+            >
+              <Link
+                href="/industries"
+                className={`px-3 py-2 rounded-md inline-flex items-center gap-1 transition-colors ${
+                  pathname.startsWith("/industries")
+                    ? "text-brand-text bg-brand-elevated/80 font-semibold"
+                    : "text-brand-secondary hover:text-brand-text hover:bg-brand-elevated/50"
+                }`}
+                aria-expanded={industriesDropdownOpen}
+              >
+                <span>Industries</span>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    industriesDropdownOpen ? "rotate-180 text-brand-text" : "text-brand-muted"
+                  }`}
+                />
+              </Link>
+
+              {industriesDropdownOpen && (
+                <div className="absolute left-0 top-full pt-2.5 w-72 z-50">
+                  <div className="bg-brand-card border border-brand-border rounded-xl shadow-md p-3 space-y-1">
+                    <span className="px-3 pt-2 pb-1 text-[11px] font-mono uppercase tracking-wider text-brand-accent block">
+                      Target Domains
+                    </span>
+                    {industriesData.slice(0, 6).map((ind) => (
+                      <Link
+                        key={ind.id}
+                        href={`/industries/${ind.slug}`}
+                        className="px-3 py-1.5 rounded-lg text-xs text-brand-secondary hover:text-brand-text hover:bg-brand-elevated transition-colors block"
+                      >
+                        {ind.name}
+                      </Link>
+                    ))}
+                    <div className="pt-2 border-t border-brand-border mt-2">
+                      <Link
+                        href="/industries"
+                        className="px-3 py-1 text-xs font-semibold text-brand-accent hover:underline flex items-center justify-between"
+                      >
+                        <span>View All 9 Sectors</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Our Work */}
             <Link
-              href="/solutions"
-              className={`px-3 py-1.5 rounded-md transition-colors ${
-                pathname === "/solutions"
-                  ? "text-[#dae7de] bg-[#1a342e]/60 font-medium"
-                  : "text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]/40"
+              href="/work"
+              className={`px-3 py-2 rounded-md transition-colors ${
+                pathname.startsWith("/work") || pathname.startsWith("/portfolio")
+                  ? "text-brand-text bg-brand-elevated/80 font-semibold"
+                  : "text-brand-secondary hover:text-brand-text hover:bg-brand-elevated/50"
               }`}
             >
-              SOLUTIONS
+              Our Work
             </Link>
 
-            <Link
-              href="/portfolio"
-              className={`px-3 py-1.5 rounded-md transition-colors ${
-                pathname.startsWith("/portfolio")
-                  ? "text-[#dae7de] bg-[#1a342e]/60 font-medium"
-                  : "text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]/40"
-              }`}
+            {/* Company Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setCompanyDropdownOpen(true)}
+              onMouseLeave={() => setCompanyDropdownOpen(false)}
             >
-              PORTFOLIO
-            </Link>
+              <Link
+                href="/company"
+                className={`px-3 py-2 rounded-md inline-flex items-center gap-1 transition-colors ${
+                  pathname.startsWith("/company") || pathname === "/about"
+                    ? "text-brand-text bg-brand-elevated/80 font-semibold"
+                    : "text-brand-secondary hover:text-brand-text hover:bg-brand-elevated/50"
+                }`}
+                aria-expanded={companyDropdownOpen}
+              >
+                <span>Company</span>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    companyDropdownOpen ? "rotate-180 text-brand-text" : "text-brand-muted"
+                  }`}
+                />
+              </Link>
 
+              {companyDropdownOpen && (
+                <div className="absolute left-0 top-full pt-2.5 w-60 z-50">
+                  <div className="bg-brand-card border border-brand-border rounded-xl shadow-md p-3 space-y-1">
+                    <Link
+                      href="/company"
+                      className="px-3 py-1.5 rounded-lg text-xs text-brand-secondary hover:text-brand-text hover:bg-brand-elevated transition-colors block"
+                    >
+                      About Logicward
+                    </Link>
+                    <Link
+                      href="/company#process"
+                      className="px-3 py-1.5 rounded-lg text-xs text-brand-secondary hover:text-brand-text hover:bg-brand-elevated transition-colors block"
+                    >
+                      6-Step Delivery Model
+                    </Link>
+                    <Link
+                      href="/company#team"
+                      className="px-3 py-1.5 rounded-lg text-xs text-brand-secondary hover:text-brand-text hover:bg-brand-elevated transition-colors block"
+                    >
+                      Engineering Leadership
+                    </Link>
+                    <Link
+                      href="/contact"
+                      className="px-3 py-1.5 rounded-lg text-xs text-brand-secondary hover:text-brand-text hover:bg-brand-elevated transition-colors block"
+                    >
+                      Careers & Inquiries
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Insights */}
             <Link
               href="/insights"
-              className={`px-3 py-1.5 rounded-md transition-colors ${
+              className={`px-3 py-2 rounded-md transition-colors ${
                 pathname.startsWith("/insights")
-                  ? "text-[#dae7de] bg-[#1a342e]/60 font-medium"
-                  : "text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]/40"
+                  ? "text-brand-text bg-brand-elevated/80 font-semibold"
+                  : "text-brand-secondary hover:text-brand-text hover:bg-brand-elevated/50"
               }`}
             >
-              INSIGHTS
+              Insights
             </Link>
 
+            {/* Contact */}
             <Link
               href="/contact"
-              className={`px-3 py-1.5 rounded-md transition-colors ${
+              className={`px-3 py-2 rounded-md transition-colors ${
                 pathname === "/contact"
-                  ? "text-[#dae7de] bg-[#1a342e]/60 font-medium"
-                  : "text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]/40"
+                  ? "text-brand-text bg-brand-elevated/80 font-semibold"
+                  : "text-brand-secondary hover:text-brand-text hover:bg-brand-elevated/50"
               }`}
             >
-              CONTACT
+              Contact
             </Link>
           </div>
 
-          {/* Action Buttons (PRD: 6px radius, compact Warm White button and Black outline button) */}
-          <div className="hidden lg:flex items-center gap-2">
+          {/* Action Buttons: WhatsApp & Start a Project CTA */}
+          <div className="hidden lg:flex items-center gap-3">
             <a
               href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[12px] font-mono font-medium text-[#dae7de] px-3.5 py-2 rounded-md border border-[#1a342e] bg-[#0d1f1c] hover:bg-[#132b27] transition-colors flex items-center gap-1.5"
+              className="text-xs font-mono font-medium text-brand-secondary hover:text-brand-text px-3 py-2 rounded-lg border border-brand-border  bg-brand-card hover:bg-brand-elevated transition-colors flex items-center gap-1.5"
+              title="Direct WhatsApp Inquiry"
             >
-              <PhoneCall className="w-3.5 h-3.5 text-[#dae7de]" />
-              <span>WHATSAPP</span>
+              <PhoneCall className="w-3.5 h-3.5 text-brand-accent" />
+              <span>WhatsApp</span>
             </a>
 
             <Link
               href="/contact"
-              className="text-[12px] font-mono font-bold text-[#091615] bg-[#dae7de] hover:bg-white px-4 py-2 rounded-[6px] transition-all flex items-center gap-1.5 shadow-sm"
+              className="text-xs font-semibold text-brand-background bg-brand-accent hover:bg-brand-accent-hover px-4 py-2 rounded-lg transition-all flex items-center gap-1.5 shadow-sm hover:shadow"
             >
-              <span>BOOK CONSULTATION</span>
+              <span>Start a Project</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          {/* Mobile Toggle */}
+          {/* Mobile Hamburger & Quick CTA */}
           <div className="flex items-center gap-2 lg:hidden">
             <Link
               href="/contact"
-              className="text-[11px] font-mono font-bold text-[#091615] bg-[#dae7de] px-3 py-1.5 rounded-[6px]"
+              className="text-xs font-semibold text-brand-background bg-brand-accent px-3 py-1.5 rounded-lg"
             >
-              LET&apos;S TALK
+              Inquire
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 rounded-md text-[#94a49a] hover:text-[#dae7de] hover:bg-[#132b27]"
+              className="p-2 rounded-lg text-brand-muted hover:text-brand-text hover:bg-brand-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -289,83 +438,175 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer with Accessible Accordions */}
       {mobileMenuOpen && (
-        <div className="lg:hidden mt-2 max-w-7xl mx-auto rounded-xl bg-[#091615] border border-[#1a342e] p-5 space-y-4 shadow-2xl">
-          <div className="space-y-1 text-sm font-mono uppercase">
+        <div className="lg:hidden mt-2 max-w-7xl mx-auto rounded-2xl bg-brand-card border border-brand-border p-5 space-y-4 shadow-md">
+          <div className="space-y-1 text-sm">
             <Link
               href="/"
-              className={`block px-3 py-2 rounded-md ${
-                pathname === "/" ? "bg-[#1a342e] text-[#dae7de]" : "text-[#94a49a]"
+              className={`block px-3 py-2 rounded-lg ${
+                pathname === "/" ? "bg-brand-elevated text-brand-text font-semibold" : "text-brand-secondary"
               }`}
             >
-              HOME
+              Home
             </Link>
+
+            {/* Mobile Services Accordion */}
+            <div>
+              <button
+                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-brand-secondary hover:text-brand-text"
+              >
+                <span>Services (All Disciplines)</span>
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform ${
+                    mobileServicesOpen ? "rotate-180 text-brand-text" : ""
+                  }`}
+                />
+              </button>
+              {mobileServicesOpen && (
+                <div className="pl-4 py-1 space-y-1 border-l border-brand-border ml-3 text-xs text-brand-muted">
+                  {serviceCategories.map((cat) => (
+                    <Link
+                      key={cat.id}
+                      href={`/services/${cat.featuredSlug}`}
+                      className="block py-1.5 hover:text-brand-text"
+                    >
+                      {cat.title}
+                    </Link>
+                  ))}
+                  <Link
+                    href="/services"
+                    className="block py-1.5 font-semibold text-brand-accent"
+                  >
+                    View All 40+ Services →
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Mobile Solutions Accordion */}
+            <div>
+              <button
+                onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
+                className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-brand-secondary hover:text-brand-text"
+              >
+                <span>Solutions & Platforms</span>
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform ${
+                    mobileSolutionsOpen ? "rotate-180 text-brand-text" : ""
+                  }`}
+                />
+              </button>
+              {mobileSolutionsOpen && (
+                <div className="pl-4 py-1 space-y-1 border-l border-brand-border ml-3 text-xs text-brand-muted">
+                  {solutionsData.slice(0, 5).map((sol) => (
+                    <Link
+                      key={sol.id}
+                      href={`/solutions#${sol.id}`}
+                      className="block py-1.5 hover:text-brand-text"
+                    >
+                      {sol.title}
+                    </Link>
+                  ))}
+                  <Link
+                    href="/solutions"
+                    className="block py-1.5 font-semibold text-brand-accent"
+                  >
+                    View All 10 Solutions →
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Mobile Industries Accordion */}
+            <div>
+              <button
+                onClick={() => setMobileIndustriesOpen(!mobileIndustriesOpen)}
+                className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-brand-secondary hover:text-brand-text"
+              >
+                <span>Target Industries</span>
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform ${
+                    mobileIndustriesOpen ? "rotate-180 text-brand-text" : ""
+                  }`}
+                />
+              </button>
+              {mobileIndustriesOpen && (
+                <div className="pl-4 py-1 space-y-1 border-l border-brand-border ml-3 text-xs text-brand-muted">
+                  {industriesData.map((ind) => (
+                    <Link
+                      key={ind.id}
+                      href={`/industries/${ind.slug}`}
+                      className="block py-1.5 hover:text-brand-text"
+                    >
+                      {ind.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <Link
-              href="/about"
-              className={`block px-3 py-2 rounded-md ${
-                pathname === "/about" ? "bg-[#1a342e] text-[#dae7de]" : "text-[#94a49a]"
+              href="/work"
+              className={`block px-3 py-2 rounded-lg ${
+                pathname.startsWith("/work") || pathname.startsWith("/portfolio")
+                  ? "bg-brand-elevated text-brand-text font-semibold"
+                  : "text-brand-secondary"
               }`}
             >
-              ABOUT
+              Our Work & Case Studies
             </Link>
+
             <Link
-              href="/services"
-              className={`block px-3 py-2 rounded-md ${
-                pathname.startsWith("/services") ? "bg-[#1a342e] text-[#dae7de]" : "text-[#94a49a]"
+              href="/company"
+              className={`block px-3 py-2 rounded-lg ${
+                pathname.startsWith("/company") || pathname === "/about"
+                  ? "bg-brand-elevated text-brand-text font-semibold"
+                  : "text-brand-secondary"
               }`}
             >
-              SERVICES (ALL 7 CATEGORIES)
+              Company & Delivery Model
             </Link>
-            <Link
-              href="/solutions"
-              className={`block px-3 py-2 rounded-md ${
-                pathname === "/solutions" ? "bg-[#1a342e] text-[#dae7de]" : "text-[#94a49a]"
-              }`}
-            >
-              SOLUTIONS & ERP
-            </Link>
-            <Link
-              href="/portfolio"
-              className={`block px-3 py-2 rounded-md ${
-                pathname.startsWith("/portfolio") ? "bg-[#1a342e] text-[#dae7de]" : "text-[#94a49a]"
-              }`}
-            >
-              PORTFOLIO
-            </Link>
+
             <Link
               href="/insights"
-              className={`block px-3 py-2 rounded-md ${
-                pathname.startsWith("/insights") ? "bg-[#1a342e] text-[#dae7de]" : "text-[#94a49a]"
+              className={`block px-3 py-2 rounded-lg ${
+                pathname.startsWith("/insights")
+                  ? "bg-brand-elevated text-brand-text font-semibold"
+                  : "text-brand-secondary"
               }`}
             >
-              INSIGHTS
+              Insights & Engineering Articles
             </Link>
+
             <Link
               href="/contact"
-              className={`block px-3 py-2 rounded-md ${
-                pathname === "/contact" ? "bg-[#1a342e] text-[#dae7de]" : "text-[#94a49a]"
+              className={`block px-3 py-2 rounded-lg ${
+                pathname === "/contact"
+                  ? "bg-brand-elevated text-brand-text font-semibold"
+                  : "text-brand-secondary"
               }`}
             >
-              CONTACT
+              Contact & Project Inquiry
             </Link>
           </div>
 
-          <div className="pt-3 border-t border-[#1a342e] space-y-2">
+          <div className="pt-3 border-t border-brand-border space-y-2">
             <Link
               href="/contact"
-              className="w-full py-2.5 text-center text-xs font-mono font-bold rounded-md bg-[#dae7de] text-[#091615] block"
+              className="w-full py-2.5 text-center text-xs font-semibold rounded-lg bg-brand-accent hover:bg-brand-accent-hover text-brand-background block"
             >
-              BOOK A FREE CONSULTATION
+              Start a Project
             </Link>
             <a
               href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-2 text-center text-xs font-mono rounded-md bg-[#0d1f1c] border border-[#1a342e] text-[#dae7de] flex items-center justify-center gap-1.5"
+              className="w-full py-2 text-center text-xs font-mono rounded-lg bg-brand-surface border border-brand-border  text-brand-secondary flex items-center justify-center gap-1.5"
             >
-              <PhoneCall className="w-3.5 h-3.5" />
-              <span>WHATSAPP DIRECT</span>
+              <PhoneCall className="w-3.5 h-3.5 text-brand-accent" />
+              <span>WhatsApp Direct</span>
             </a>
           </div>
         </div>

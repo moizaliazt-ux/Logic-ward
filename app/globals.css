@@ -1,19 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  /* Colors from User Inspiration & PRD Specification */
-  --color-warm-white: #dae7de;
-  --color-off-black: #091615;
-  --color-true-black: #050d0c;
-  --color-pine-dark: #0d1f1c;
-  --color-pine-surface: #132b27;
-  --color-spruce: #1a342e;
-  --color-emerald-accent: #2d584d;
-  --color-sage-muted: #94a49a;
-  --color-sage-light: #dae7de;
-  --color-pale-steel: #b7c7bd;
+  --color-brand-background: #111318;
+  --color-brand-surface: #171f2b;
+  --color-brand-card: #1c2430;
+  --color-brand-elevated: #242b35;
+  --color-brand-text: #f5f7fa;
+  --color-brand-secondary: #b8c0cc;
+  --color-brand-muted: #8792a2;
+  --color-brand-border: #303947;
+  --color-brand-accent: #19c5d8;
+  --color-brand-accent-hover: #12afc1;
 
-  /* Typography Scale from PRD */
+  /* =========================================================================
+     PRD Section 14.3 Typography Scale
+     ========================================================================= */
   --text-hero-eyebrow: 12px;
   --leading-hero-eyebrow: 1;
   --tracking-hero-eyebrow: 0.96px;
@@ -23,51 +24,59 @@
   --text-nav: 14px;
   --leading-nav: 1.25;
   --tracking-nav: -0.14px;
-  --text-interface-text: 19px;
-  --leading-interface-text: 1.2;
+  --text-interface-text: 18px;
+  --leading-interface-text: 1.35;
   --tracking-interface-text: -0.19px;
-  --text-feature-heading: 19px;
-  --leading-feature-heading: 1.2;
-  --tracking-feature-heading: -0.19px;
-  --text-card-heading: 28px;
-  --leading-card-heading: 1;
-  --tracking-card-heading: -0.56px;
+  --text-feature-heading: 20px;
+  --leading-feature-heading: 1.25;
+  --tracking-feature-heading: -0.2px;
+  --text-card-heading: 24px;
+  --leading-card-heading: 1.2;
+  --tracking-card-heading: -0.5px;
   --text-section-heading: 36px;
-  --leading-section-heading: 1;
-  --tracking-section-heading: -1.08px;
+  --leading-section-heading: 1.15;
+  --tracking-section-heading: -1.0px;
   --text-hero-heading: 62px;
-  --leading-hero-heading: 0.93;
+  --leading-hero-heading: 1.05;
   --tracking-hero-heading: -1.86px;
 
-  /* Spacing Scale from PRD */
+  /* =========================================================================
+     PRD Section 14.4 Spacing Scale
+     ========================================================================= */
   --spacing-5: 5px;
   --spacing-6: 6px;
   --spacing-8: 8px;
   --spacing-10: 10px;
-  --spacing-11: 11px;
   --spacing-12: 12px;
-  --spacing-13: 13px;
-  --spacing-15: 15px;
-  --spacing-18: 18px;
-  --spacing-30: 30px;
-  --spacing-50: 50px;
-  --spacing-55: 55px;
-  --spacing-88: 88px;
-  --spacing-100: 100px;
-  --spacing-143: 143px;
-  --spacing-150: 150px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+  --spacing-96: 96px;
+  --spacing-112: 112px;
+  --spacing-128: 128px;
 
-  /* Border Radii from PRD */
-  --radius-sm: 2px;
-  --radius-md: 6px;
-  --radius-xl: 12px;
+  /* =========================================================================
+     PRD Section 14.4 Border Radii (Consistent 12px - 20px)
+     ========================================================================= */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
   --radius-3xl: 24px;
+  --radius-full: 9999px;
+
 }
 
 @layer base {
   :root {
-    --background: #091615;
-    --foreground: #dae7de;
+    color-scheme: dark;
+    --background: #111318;
+    --foreground: #f5f7fa;
   }
 
   body {
@@ -75,33 +84,38 @@
     color: var(--foreground);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01", "ss07";
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 }
 
-/* Custom subtle pine scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #091615;
+  background: #111318;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1a342e;
+  background: #303947;
   border-radius: 9999px;
+  border: 2px solid #111318;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2d584d;
+  background: #8792a2;
 }
 
-/* High-contrast focus state */
 *:focus-visible {
-  outline: 2px solid #dae7de;
+  outline: 2px solid #19c5d8;
   outline-offset: 2px;
 }
 
-/* Respect reduced motion preferences */
+::selection {
+  color: #f5f7fa;
+  background: rgb(25 197 216 / 25%);
+}
+
+/* Respect reduced motion preferences (PRD Section 14.5 & 19) */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;

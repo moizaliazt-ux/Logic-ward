@@ -9,43 +9,43 @@ import {
 export function CapabilityTrust() {
   const capabilities = [
     {
-      icon: <Layers className="w-5 h-5 text-[#dae7de]" />,
-      title: "100% IP & Code Ownership",
+      icon: <Layers className="w-5 h-5 text-brand-accent" />,
+      title: "Contractual Code & IP Ownership",
       description:
-        "Upon milestone completion, all source code, database architectures, CI/CD scripts, and credentials transfer directly to your company. Zero vendor lock-in.",
+        "Subject to agreed contract terms, custom source code, schemas, and configurations transfer to your company upon milestone completion. Zero proprietary vendor lock-in.",
     },
     {
-      icon: <Cpu className="w-5 h-5 text-[#94a49a]" />,
-      title: "Sub-Second Global Performance",
+      icon: <Cpu className="w-5 h-5 text-brand-accent" />,
+      title: "Performance-Engineered Architecture",
       description:
-        "Engineered with clean Next.js App Router and edge caching. Optimized for instantaneous rendering across local Pakistani and international networks.",
+        "Built with Next.js App Router and caching strategies selected for the page content, hosting, and operational requirements.",
     },
     {
-      icon: <Sparkles className="w-5 h-5 text-[#dae7de]" />,
-      title: "Pragmatic, Scoped AI Automation",
+      icon: <Sparkles className="w-5 h-5 text-brand-accent" />,
+      title: "Pragmatic, Scoped Automation",
       description:
-        "We reject vague generative AI hype. We build deterministic pipelines with human review thresholds that eliminate verified manual operational hours.",
+        "We prioritize practical workflow automation with schema validation, structured APIs, and human review thresholds where operational accuracy is essential.",
     },
     {
-      icon: <GitBranch className="w-5 h-5 text-[#94a49a]" />,
-      title: "Transparent Milestone Governance",
+      icon: <GitBranch className="w-5 h-5 text-brand-accent" />,
+      title: "Milestone-Driven Governance",
       description:
-        "No hidden surprise fees. Project roadmaps are broken into discrete functional sprints verified on private staging servers before sign-off.",
+        "Project roadmaps are broken into discrete functional sprints demonstrated on private staging servers before milestone sign-off and payment release.",
     },
   ];
 
   return (
-    <section className="py-12 border-y border-[#1a342e] bg-[#091615]">
+    <section className="py-14 border-b border-brand-border  bg-brand-card text-brand-text">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-[12px] font-mono uppercase tracking-[0.72px] text-[#94a49a]">
-            Engineering Standards & Integrity
+          <span className="text-xs font-mono uppercase tracking-wider text-brand-accent font-semibold">
+            ENGINEERING STANDARDS & INTEGRITY
           </span>
-          <h2 className="text-xl sm:text-2xl font-normal text-[#dae7de] tracking-[-1.08px] mt-1">
-            How We Partner With Ambitious Businesses
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-brand-text mt-1.5">
+            How We Partner With Ambitious Organizations
           </h2>
-          <p className="text-xs sm:text-sm text-[#94a49a] mt-2">
-            We operate with engineering rigor, clear communication, and transparent accountability—not hollow agency superlatives.
+          <p className="text-xs sm:text-sm text-brand-secondary mt-2">
+            We operate with engineering rigor, clear communication, and transparent accountability—grounded in verifiable delivery practices.
           </p>
         </div>
 
@@ -53,15 +53,15 @@ export function CapabilityTrust() {
           {capabilities.map((item, index) => (
             <div
               key={index}
-              className="p-5 rounded-xl bg-[#0d1f1c] border border-[#1a342e] hover:border-[#43634f] transition-colors space-y-3 group shadow-md shadow-black/20"
+              className="p-6 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-accent/40 hover:bg-brand-elevated hover:shadow-sm transition-all space-y-3 group"
             >
-              <div className="w-10 h-10 rounded-lg bg-[#132b27] border border-[#1a342e] flex items-center justify-center group-hover:border-[#dae7de]/40 transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-brand-card border border-brand-border flex items-center justify-center group-hover:border-brand-accent transition-colors shadow-2xs">
                 {item.icon}
               </div>
-              <h3 className="text-sm font-medium text-[#dae7de]">
+              <h3 className="text-base font-bold text-brand-text group-hover:text-brand-accent transition-colors">
                 {item.title}
               </h3>
-              <p className="text-xs text-[#94a49a] leading-relaxed">
+              <p className="text-xs sm:text-sm text-brand-secondary leading-relaxed">
                 {item.description}
               </p>
             </div>

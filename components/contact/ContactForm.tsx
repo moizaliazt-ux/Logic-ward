@@ -18,7 +18,7 @@ export function ContactForm() {
     phone: "",
     company: "",
     service: "Custom Software & ERP Solutions",
-    budget: "$2,500 - $7,500 (or PKR equivalent)",
+    budget: "Not sure yet",
     projectDetails: "",
     consent: true,
   });
@@ -28,12 +28,9 @@ export function ContactForm() {
   const [submittedData, setSubmittedData] = useState<typeof formData | null>(null);
 
   const budgetOptions = [
-    "Under $2,500 / PKR 700k (MVP or Focused Module)",
-    "$2,500 - $7,500 / PKR 700k - 2M (Standard Web/App/System)",
-    "$7,500 - $15,000 / PKR 2M - 4.5M (Enterprise Multi-Module)",
-    "$15,000+ / PKR 4.5M+ (Full Enterprise Infrastructure)",
-    "Monthly Dedicated Engineering Retainer",
-    "Undecided / Requires Technical Scoping",
+    "Project budget to be discussed",
+    "Monthly retainer",
+    "Not sure yet",
   ];
 
   const validate = () => {
@@ -94,31 +91,31 @@ export function ContactForm() {
 
   if (submittedData) {
     return (
-      <div className="p-8 sm:p-10 rounded-[24px] bg-[#0d1f1c] border border-[#2d584d] shadow-xl shadow-black/50 space-y-6">
-        <div className="w-12 h-12 rounded-xl bg-[#091615] border border-[#1a342e] text-[#dae7de] flex items-center justify-center">
+      <div className="p-8 sm:p-10 rounded-[24px] bg-brand-card border border-brand-border shadow-md shadow-brand-background/20 space-y-6">
+        <div className="w-12 h-12 rounded-xl bg-brand-background border border-brand-border  text-brand-text flex items-center justify-center">
           <CheckCircle2 className="w-6 h-6" />
         </div>
 
         <div className="space-y-2">
-          <span className="text-xs font-mono font-semibold text-[#dae7de] uppercase tracking-wider">
+          <span className="text-xs font-mono font-semibold text-brand-text uppercase tracking-wider">
             Inquiry Validated Successfully
           </span>
-          <h3 className="text-2xl font-bold text-white tracking-tight">
+          <h3 className="text-2xl font-bold text-brand-text tracking-tight">
             Thank you, {submittedData.name}.
           </h3>
-          <p className="text-sm text-[#94a49a] leading-relaxed">
+          <p className="text-sm text-brand-muted leading-relaxed">
             Your project details have been captured and validated according to our technical inquiry schema.
           </p>
         </div>
 
         {/* Integration Status Notice per Brief */}
-        <div className="p-4 rounded-xl bg-[#091615] border border-[#1a342e] text-xs space-y-2">
-          <div className="flex items-center gap-2 text-[#dae7de] font-semibold">
-            <Lock className="w-4 h-4 text-[#dae7de]" />
+        <div className="p-4 rounded-xl bg-brand-background border border-brand-border text-xs space-y-2">
+          <div className="flex items-center gap-2 text-brand-text font-semibold">
+            <Lock className="w-4 h-4 text-brand-text" />
             <span>Pending Backend SMTP Configuration Notice:</span>
           </div>
-          <p className="text-[#94a49a] leading-relaxed">
-            Per development brief guidelines, backend email transport is awaiting production SMTP credentials. To ensure your inquiry reaches our engineering team immediately, use the one-click WhatsApp button below to transmit your pre-filled inquiry directly to our desk.
+          <p className="text-brand-muted leading-relaxed">
+            Email delivery is not configured for this form. To send your inquiry, open WhatsApp and review the pre-filled message before you choose to send it.
           </p>
         </div>
 
@@ -128,9 +125,9 @@ export function ContactForm() {
             href={`https://wa.me/${siteConfig.contact.whatsappNumber}?text=${generateWhatsAppMessage()}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3.5 rounded-lg font-semibold text-[#091615] bg-[#dae7de] hover:bg-white transition-all text-sm text-center shadow-lg shadow-black/40 inline-flex items-center justify-center gap-2"
+            className="px-6 py-3.5 rounded-lg font-semibold text-brand-background  bg-brand-accent hover:bg-brand-accent-hover transition-all text-sm text-center shadow-sm shadow-brand-background/20 inline-flex items-center justify-center gap-2"
           >
-            <PhoneCall className="w-4 h-4 text-[#091615]" />
+            <PhoneCall className="w-4 h-4 text-brand-background" />
             <span>Send Pre-Filled Brief on WhatsApp</span>
           </a>
 
@@ -143,12 +140,12 @@ export function ContactForm() {
                 phone: "",
                 company: "",
                 service: "Custom Software & ERP Solutions",
-                budget: "$2,500 - $7,500 (or PKR equivalent)",
+                budget: "Not sure yet",
                 projectDetails: "",
                 consent: true,
               });
             }}
-            className="px-5 py-3.5 rounded-lg font-medium text-[#dae7de] bg-[#091615] border border-[#1a342e] hover:bg-[#132b27] transition-colors text-sm text-center"
+            className="px-5 py-3.5 rounded-lg font-medium text-brand-text  bg-brand-background border border-brand-border hover:bg-brand-elevated transition-colors text-sm text-center"
           >
             Submit Another Inquiry
           </button>
@@ -160,105 +157,105 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-6 sm:p-10 rounded-[24px] bg-[#0d1f1c] border border-[#1a342e] space-y-6 shadow-xl shadow-black/40"
+      className="p-6 sm:p-10 rounded-[24px] bg-brand-card border border-brand-border space-y-6 shadow-md shadow-brand-background/20"
       noValidate
     >
       <div className="space-y-1">
-        <h2 className="text-xl font-bold text-white tracking-tight">
+        <h2 className="text-xl font-bold text-brand-text tracking-tight">
           Project Consultation Request
         </h2>
-        <p className="text-xs text-[#94a49a]">
-          Complete the form below. Initial architectural feedback is provided within 1 business day.
+        <p className="text-xs text-brand-muted">
+          Complete the form below with the details you are comfortable sharing. We will review the information and follow up through the contact channel you provide.
         </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {/* Name */}
         <div className="space-y-1.5">
-          <label className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de] block">
-            Full Name <span className="text-[#dae7de]">*</span>
+          <label className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
+            Full Name <span className="text-brand-text">*</span>
           </label>
           <input
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="e.g. Sarah Jenkins or Tariq Mahmood"
-            className={`w-full px-4 py-2.5 rounded-xl bg-[#091615] border text-sm text-[#dae7de] placeholder-[#94a49a]/50 focus:outline-none transition-colors ${
+            className={`w-full px-4 py-2.5 rounded-xl bg-brand-background border text-sm text-brand-text placeholder-brand-muted/50 focus:outline-none transition-colors ${
               errors.name
-                ? "border-rose-500 focus:border-rose-500"
-                : "border-[#1a342e] focus:border-[#2d584d]"
+                ? "border-brand-accent focus:border-brand-accent"
+                : "border-brand-border focus:border-brand-accent"
             }`}
           />
           {errors.name && (
-            <p className="text-[11px] text-rose-400 font-mono">{errors.name}</p>
+            <p className="text-[11px] text-brand-accent font-mono">{errors.name}</p>
           )}
         </div>
 
         {/* Business Email */}
         <div className="space-y-1.5">
-          <label className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de] block">
-            Business Email <span className="text-[#dae7de]">*</span>
+          <label className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
+            Business Email <span className="text-brand-text">*</span>
           </label>
           <input
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="name@company.com"
-            className={`w-full px-4 py-2.5 rounded-xl bg-[#091615] border text-sm text-[#dae7de] placeholder-[#94a49a]/50 focus:outline-none transition-colors ${
+            className={`w-full px-4 py-2.5 rounded-xl bg-brand-background border text-sm text-brand-text placeholder-brand-muted/50 focus:outline-none transition-colors ${
               errors.email
-                ? "border-rose-500 focus:border-rose-500"
-                : "border-[#1a342e] focus:border-[#2d584d]"
+                ? "border-brand-accent focus:border-brand-accent"
+                : "border-brand-border focus:border-brand-accent"
             }`}
           />
           {errors.email && (
-            <p className="text-[11px] text-rose-400 font-mono">{errors.email}</p>
+            <p className="text-[11px] text-brand-accent font-mono">{errors.email}</p>
           )}
         </div>
 
         {/* Phone / WhatsApp */}
         <div className="space-y-1.5">
-          <label className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de] block">
-            Phone / WhatsApp <span className="text-[#dae7de]">*</span>
+          <label className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
+            Phone / WhatsApp <span className="text-brand-text">*</span>
           </label>
           <input
             type="tel"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder="+92 300 0000000 or +1 555 0000"
-            className={`w-full px-4 py-2.5 rounded-xl bg-[#091615] border text-sm text-[#dae7de] placeholder-[#94a49a]/50 focus:outline-none transition-colors ${
+            className={`w-full px-4 py-2.5 rounded-xl bg-brand-background border text-sm text-brand-text placeholder-brand-muted/50 focus:outline-none transition-colors ${
               errors.phone
-                ? "border-rose-500 focus:border-rose-500"
-                : "border-[#1a342e] focus:border-[#2d584d]"
+                ? "border-brand-accent focus:border-brand-accent"
+                : "border-brand-border focus:border-brand-accent"
             }`}
           />
           {errors.phone && (
-            <p className="text-[11px] text-rose-400 font-mono">{errors.phone}</p>
+            <p className="text-[11px] text-brand-accent font-mono">{errors.phone}</p>
           )}
         </div>
 
         {/* Company Name */}
         <div className="space-y-1.5">
-          <label className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de] block">
-            Company / Organization <span className="text-[#94a49a] font-normal normal-case">(Optional)</span>
+          <label className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
+            Company / Organization <span className="text-brand-muted font-normal normal-case">(Optional)</span>
           </label>
           <input
             type="text"
             value={formData.company}
             onChange={(e) => setFormData({ ...formData, company: e.target.value })}
             placeholder="Company or Brand Name"
-            className="w-full px-4 py-2.5 rounded-xl bg-[#091615] border border-[#1a342e] text-sm text-[#dae7de] placeholder-[#94a49a]/50 focus:outline-none focus:border-[#2d584d] transition-colors"
+            className="w-full px-4 py-2.5 rounded-xl bg-brand-background border border-brand-border text-sm text-brand-text placeholder-brand-muted/50 focus:outline-none focus:border-brand-accent transition-colors"
           />
         </div>
 
         {/* Service Required */}
         <div className="space-y-1.5">
-          <label className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de] block">
-            Primary Service Required <span className="text-[#dae7de]">*</span>
+          <label className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
+            Primary Service Required <span className="text-brand-text">*</span>
           </label>
           <select
             value={formData.service}
             onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-            className="w-full px-4 py-2.5 rounded-xl bg-[#091615] border border-[#1a342e] text-sm text-[#dae7de] focus:outline-none focus:border-[#2d584d] transition-colors"
+            className="w-full px-4 py-2.5 rounded-xl bg-brand-background border border-brand-border text-sm text-brand-text focus:outline-none focus:border-brand-accent transition-colors"
           >
             {serviceCategories.map((c) => (
               <option key={c.id} value={c.title}>
@@ -285,13 +282,13 @@ export function ContactForm() {
 
         {/* Budget Range */}
         <div className="space-y-1.5">
-          <label className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de] block">
-            Target Budget Range <span className="text-[#94a49a] font-normal normal-case">(Optional)</span>
+          <label className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
+            Target Budget Range <span className="text-brand-muted font-normal normal-case">(Optional)</span>
           </label>
           <select
             value={formData.budget}
             onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-            className="w-full px-4 py-2.5 rounded-xl bg-[#091615] border border-[#1a342e] text-sm text-[#dae7de] focus:outline-none focus:border-[#2d584d] transition-colors"
+            className="w-full px-4 py-2.5 rounded-xl bg-brand-background border border-brand-border text-sm text-brand-text focus:outline-none focus:border-brand-accent transition-colors"
           >
             {budgetOptions.map((opt, i) => (
               <option key={i} value={opt}>
@@ -304,8 +301,8 @@ export function ContactForm() {
 
       {/* Project Details */}
       <div className="space-y-1.5">
-        <label className="text-xs font-mono uppercase tracking-[0.72px] text-[#dae7de] block">
-          Project Summary & Technical Objectives <span className="text-[#dae7de]">*</span>
+        <label className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
+          Project Summary & Technical Objectives <span className="text-brand-text">*</span>
         </label>
         <textarea
           rows={4}
@@ -314,38 +311,38 @@ export function ContactForm() {
             setFormData({ ...formData, projectDetails: e.target.value })
           }
           placeholder="Briefly describe your business, key challenges, target users, any legacy systems you are replacing, and desired launch timeline..."
-          className={`w-full px-4 py-2.5 rounded-xl bg-[#091615] border text-sm text-[#dae7de] placeholder-[#94a49a]/50 focus:outline-none transition-colors ${
+          className={`w-full px-4 py-2.5 rounded-xl bg-brand-background border text-sm text-brand-text placeholder-brand-muted/50 focus:outline-none transition-colors ${
             errors.projectDetails
-              ? "border-rose-500 focus:border-rose-500"
-              : "border-[#1a342e] focus:border-[#2d584d]"
+              ? "border-brand-accent focus:border-brand-accent"
+              : "border-brand-border focus:border-brand-accent"
           }`}
         />
         {errors.projectDetails && (
-          <p className="text-[11px] text-rose-400 font-mono">{errors.projectDetails}</p>
+          <p className="text-[11px] text-brand-accent font-mono">{errors.projectDetails}</p>
         )}
       </div>
 
       {/* Consent & Privacy Checkbox */}
       <div className="space-y-1 pt-1">
-        <label className="flex items-start gap-2 text-xs text-[#94a49a] cursor-pointer">
+        <label className="flex items-start gap-2 text-xs text-brand-muted cursor-pointer">
           <input
             type="checkbox"
             checked={formData.consent}
             onChange={(e) =>
               setFormData({ ...formData, consent: e.target.checked })
             }
-            className="rounded bg-[#091615] border-[#1a342e] text-[#dae7de] focus:ring-0 mt-0.5"
+            className="rounded bg-brand-background  border-brand-border  text-brand-text focus:ring-0 mt-0.5"
           />
           <span>
             I agree to the confidential handling of my project details in accordance with Logicward&apos;s{" "}
-            <a href="/privacy" className="text-[#dae7de] underline hover:text-white">
+            <a href="/privacy" className="text-brand-text underline hover:text-brand-text">
               Privacy Policy
             </a>
             . We never sell or share client contact information.
           </span>
         </label>
         {errors.consent && (
-          <p className="text-[11px] text-rose-400 font-mono">{errors.consent}</p>
+          <p className="text-[11px] text-brand-accent font-mono">{errors.consent}</p>
         )}
       </div>
 
@@ -354,7 +351,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-3.5 rounded-lg font-semibold text-[#091615] bg-[#dae7de] hover:bg-white transition-all text-sm shadow-lg shadow-black/40 inline-flex items-center justify-center gap-2 disabled:opacity-50"
+          className="w-full py-3.5 rounded-lg font-semibold text-brand-background  bg-brand-accent hover:bg-brand-accent-hover transition-all text-sm shadow-sm shadow-brand-background/20 inline-flex items-center justify-center gap-2 disabled:opacity-50"
         >
           {isSubmitting ? (
             <>
@@ -370,8 +367,8 @@ export function ContactForm() {
         </button>
       </div>
 
-      <div className="flex items-center justify-center gap-2 text-[11px] font-mono text-[#94a49a] pt-1">
-        <Lock className="w-3 h-3 text-[#dae7de]" />
+      <div className="flex items-center justify-center gap-2 text-[11px] font-mono text-brand-muted pt-1">
+        <Lock className="w-3 h-3 text-brand-text" />
         <span>Bilateral Non-Disclosure Agreement (NDA) available upon request.</span>
       </div>
     </form>
