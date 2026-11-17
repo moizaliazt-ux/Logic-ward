@@ -15,9 +15,11 @@ import {
   getSolutionBySlug,
   getAllSolutionSlugs,
 } from "@/lib/data/solutions";
-import { siteConfig } from "@/lib/site-config";
+import { getWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import { ConversionCTA } from "@/components/home/ConversionCTA";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+
+export const instant = false;
 
 export async function generateStaticParams() {
   const slugs = getAllSolutionSlugs();
@@ -66,6 +68,9 @@ export default async function SolutionDetailPage({
     notFound();
   }
 
+  const whatsAppUrl = getWhatsAppUrl(
+    `Hello Logicward, I would like to discuss a tailored ${solution.title}.`,
+  );
   const breadcrumbs = [
     { name: "Home", url: siteConfig.url },
     { name: "Solutions", url: `${siteConfig.url}/solutions` },
@@ -76,7 +81,7 @@ export default async function SolutionDetailPage({
     <div className="flex flex-col w-full bg-brand-surface  text-brand-text">
       <BreadcrumbJsonLd items={breadcrumbs} />
       {/* Hero Header */}
-      <section className="relative py-16 md:py-24 bg-brand-surface  text-brand-text border-b border-brand-border">
+      <section className="page-hero relative py-16 md:py-24 bg-brand-surface text-brand-text border-b border-brand-border">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
           <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-brand-muted flex-wrap">
@@ -110,14 +115,16 @@ export default async function SolutionDetailPage({
               <span>Request Scoping for this System</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <a
-              href={`https://wa.me/${siteConfig.contact.whatsappNumber}?text=Hello%20Logicward,%20I%20would%20like%20to%20discuss%20a%20tailored%20${encodeURIComponent(solution.title)}.`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-3 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-text bg-brand-card border border-brand-border hover:bg-brand-elevated transition-colors inline-flex items-center gap-2"
-            >
-              <span>Direct WhatsApp Inquiry</span>
-            </a>
+            {whatsAppUrl && (
+              <a
+                href={whatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-3 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-text bg-brand-card border border-brand-border hover:bg-brand-elevated transition-colors inline-flex items-center gap-2"
+              >
+                <span>Direct WhatsApp Inquiry</span>
+              </a>
+            )}
           </div>
         </div>
       </section>
@@ -125,7 +132,7 @@ export default async function SolutionDetailPage({
       {/* Scope Disclaimer Notice (PRD § 7) */}
       <div className="bg-brand-card border-b border-brand-border py-3.5 px-4 text-center">
         <p className="text-xs text-brand-muted max-w-4xl mx-auto">
-          <strong className="text-brand-text">Implementation Note:</strong> Our management solutions are custom-configured around your exact organizational hierarchies, approval matrices, and reporting logic. We deliver tailored software without rigid vendor lock-in.
+          <strong className="text-brand-text">Scope note:</strong> Modules, integrations, controls, and workflows below are planning examples. Feasibility, security, delivery, ownership, and support terms are confirmed in the written project scope.
         </p>
       </div>
 
@@ -144,7 +151,7 @@ export default async function SolutionDetailPage({
                   Core Modules & Feature Breakdown
                 </h2>
                 <p className="text-sm text-brand-secondary mt-1">
-                  Modular building blocks configured around your company&apos;s daily operations:
+                  Example building blocks to consider during requirements discovery:
                 </p>
               </div>
 
@@ -171,7 +178,7 @@ export default async function SolutionDetailPage({
                   User Roles & Permissions
                 </h2>
                 <p className="text-sm text-brand-secondary mt-1">
-                  Role-based access tiers preventing unauthorized data exposure:
+                  Example roles and access boundaries that may be considered:
                 </p>
               </div>
 
@@ -203,7 +210,7 @@ export default async function SolutionDetailPage({
                 Main Operational Workflows
               </h2>
               <p className="text-sm text-brand-secondary leading-relaxed">
-                Step-by-step life cycles orchestrated by the platform:
+                Example process flows for requirements planning:
               </p>
             </div>
 
@@ -243,7 +250,7 @@ export default async function SolutionDetailPage({
                   EXECUTIVE VISIBILITY
                 </span>
                 <h3 className="text-2xl font-bold text-brand-text mt-1">
-                  Reporting & Real-Time Dashboards
+                  Reporting & Dashboards
                 </h3>
               </div>
 
@@ -271,7 +278,7 @@ export default async function SolutionDetailPage({
               <div className="space-y-4">
                 <div className="space-y-2">
                   <span className="text-xs font-semibold uppercase tracking-wider text-brand-text block">
-                    Supported Integrations:
+                    Potential Integrations (subject to access and feasibility):
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {solution.integrationsDataMigration.integrations.map((integ, idx) => (
@@ -304,7 +311,7 @@ export default async function SolutionDetailPage({
               <div className="flex items-center gap-2">
                 <Lock className="w-5 h-5 text-brand-accent" />
                 <h3 className="text-xl font-bold text-brand-text">
-                  Security, Backups & Audit Trails
+                  Security, Operations & Audit Planning
                 </h3>
               </div>
 
@@ -326,7 +333,7 @@ export default async function SolutionDetailPage({
               <div className="flex items-center gap-2">
                 <FileCheck2 className="w-5 h-5 text-brand-accent" />
                 <h3 className="text-xl font-bold text-brand-text">
-                  Implementation & Training Roadmap
+                  Implementation & Training Considerations
                 </h3>
               </div>
 

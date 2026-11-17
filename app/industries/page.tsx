@@ -52,7 +52,7 @@ export default function IndustriesPage() {
   return (
     <div className="w-full flex flex-col bg-brand-surface">
       {/* Header Section */}
-      <section className="bg-brand-surface text-brand-text pt-24 pb-20 border-b border-brand-border relative overflow-hidden">
+      <section className="page-hero bg-brand-surface text-brand-text pt-24 pb-20 border-b border-brand-border relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md text-xs font-mono uppercase tracking-wider bg-brand-card border border-brand-border  text-brand-accent">
@@ -71,7 +71,7 @@ export default function IndustriesPage() {
       {/* Transparency Notice */}
       <div className="bg-brand-card border-b border-brand-border py-3.5 px-4 text-center">
         <p className="text-xs text-brand-muted max-w-4xl mx-auto">
-          <span className="font-semibold text-brand-text">Compliance Notice:</span> The industries below represent target domain capabilities and reference workflows. Demonstration projects are clearly marked as Concept Projects or Reference Implementations to protect client confidentiality under bilateral NDAs.
+          <span className="font-semibold text-brand-text">Reference Notice:</span> The industries below represent target domain capabilities and illustrative workflows. Demonstration projects are marked as Concept Projects or Reference Implementations, not verified client engagements or outcomes.
         </p>
       </div>
 

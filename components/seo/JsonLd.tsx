@@ -9,19 +9,36 @@ export function OrganizationJsonLd() {
     legalName: siteConfig.legalName,
     url: siteConfig.url,
     description: siteConfig.description,
-    email: siteConfig.contact.email,
-    telephone: siteConfig.contact.phone,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: siteConfig.contact.address.city,
-      addressCountry: siteConfig.contact.address.country,
-    },
-    sameAs: [
+    ...(siteConfig.contact.email ? { email: siteConfig.contact.email } : {}),
+    ...(siteConfig.contact.phone ? { telephone: siteConfig.contact.phone } : {}),
+    ...(siteConfig.contact.address.city || siteConfig.contact.address.country
+      ? {
+          address: {
+            "@type": "PostalAddress",
+            ...(siteConfig.contact.address.city
+              ? { addressLocality: siteConfig.contact.address.city }
+              : {}),
+            ...(siteConfig.contact.address.country
+              ? { addressCountry: siteConfig.contact.address.country }
+              : {}),
+          },
+        }
+      : {}),
+    ...([
       siteConfig.social.linkedin,
       siteConfig.social.twitter,
       siteConfig.social.github,
       siteConfig.social.facebook,
-    ],
+    ].some(Boolean)
+      ? {
+          sameAs: [
+            siteConfig.social.linkedin,
+            siteConfig.social.twitter,
+            siteConfig.social.github,
+            siteConfig.social.facebook,
+          ].filter(Boolean),
+        }
+      : {}),
     areaServed: siteConfig.marketsServed,
     knowsAbout: [
       "Custom Software Development",

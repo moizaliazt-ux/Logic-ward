@@ -1,9 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, PhoneCall, CheckCircle2 } from "lucide-react";
-import { siteConfig } from "@/lib/site-config";
+import { getWhatsAppUrl, siteConfig } from "@/lib/site-config";
 
 export function ConversionCTA() {
+  const whatsAppUrl = getWhatsAppUrl();
+
   return (
     <section className="py-20 md:py-28 relative overflow-hidden bg-brand-surface  text-brand-text border-t border-brand-border">
       {/* Ambient Electric Cyan Glow */}
@@ -16,10 +18,10 @@ export function ConversionCTA() {
 
         <div className="space-y-4 max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-brand-text leading-tight">
-            Let&apos;s Build the Technology Platform Your Business Deserves.
+            Have a technology project to scope?
           </h2>
           <p className="text-sm sm:text-base text-brand-secondary leading-relaxed max-w-2xl mx-auto">
-            Whether you are modernizing a legacy software system, launching a new digital product, or automating operational bottlenecks—we are ready to engineer your solution.
+            Share the problem, current systems, and constraints. Feasibility, timing, deliverables, and any next steps are confirmed after review.
           </p>
         </div>
 
@@ -27,15 +29,11 @@ export function ConversionCTA() {
         <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs font-mono text-brand-secondary">
           <div className="flex items-center gap-1.5">
             <CheckCircle2 className="w-4 h-4 text-brand-accent" />
-            <span>Discovery conversation</span>
+            <span>Outline the requirements</span>
           </div>
           <div className="flex items-center gap-1.5">
             <CheckCircle2 className="w-4 h-4 text-brand-accent" />
-            <span>Milestones defined during scoping</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-brand-accent" />
-            <span>Mutual NDA available when needed</span>
+            <span>Confirm scope before work begins</span>
           </div>
         </div>
 
@@ -49,15 +47,17 @@ export function ConversionCTA() {
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
 
-          <a
-            href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto px-6 py-3.5 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-text bg-brand-card border border-brand-border hover:border-brand-accent/50 transition-colors text-center inline-flex items-center justify-center gap-2"
-          >
-            <PhoneCall className="w-4 h-4 text-brand-accent" />
-            <span>WhatsApp Direct ({siteConfig.contact.whatsappDisplay})</span>
-          </a>
+          {whatsAppUrl && (
+            <a
+              href={whatsAppUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-text bg-brand-card border border-brand-border hover:border-brand-accent/50 transition-colors text-center inline-flex items-center justify-center gap-2"
+            >
+              <PhoneCall className="w-4 h-4 text-brand-accent" />
+              <span>WhatsApp Direct ({siteConfig.contact.whatsappDisplay})</span>
+            </a>
+          )}
         </div>
       </div>
     </section>

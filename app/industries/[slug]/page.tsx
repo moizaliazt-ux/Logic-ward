@@ -9,8 +9,10 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { industriesData } from "@/lib/data/industries";
-import { siteConfig } from "@/lib/site-config";
+import { getWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+
+export const instant = false;
 
 export async function generateStaticParams() {
   return industriesData.map((ind) => ({
@@ -60,6 +62,9 @@ export default async function IndustryDetailPage({
     notFound();
   }
 
+  const whatsAppUrl = getWhatsAppUrl(
+    `Hello Logicward, I would like to discuss a software project for the ${industry.name} sector.`,
+  );
   const breadcrumbs = [
     { name: "Home", url: siteConfig.url },
     { name: "Industries", url: `${siteConfig.url}/industries` },
@@ -70,7 +75,7 @@ export default async function IndustryDetailPage({
     <div className="w-full flex flex-col bg-brand-surface">
       <BreadcrumbJsonLd items={breadcrumbs} />
       {/* Hero Header */}
-      <section className="bg-brand-surface text-brand-text pt-24 pb-20 border-b border-brand-border relative overflow-hidden">
+      <section className="page-hero bg-brand-surface text-brand-text pt-24 pb-20 border-b border-brand-border relative overflow-hidden">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
           <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-brand-muted flex-wrap">
@@ -101,14 +106,16 @@ export default async function IndustryDetailPage({
               <span>Request Scoping for {industry.name}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <a
-              href={`https://wa.me/${siteConfig.contact.whatsappNumber}?text=Hello%20Logicward,%20I%20would%20like%20to%20discuss%20a%20software%20project%20for%20the%20${encodeURIComponent(industry.name)}%20sector.`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-3 rounded-lg text-sm font-semibold text-brand-text  bg-brand-card border border-brand-border hover:bg-brand-elevated transition-colors inline-flex items-center gap-2"
-            >
-              <span>Direct WhatsApp Inquiry</span>
-            </a>
+            {whatsAppUrl && (
+              <a
+                href={whatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-3 rounded-lg text-sm font-semibold text-brand-text bg-brand-card border border-brand-border hover:bg-brand-elevated transition-colors inline-flex items-center gap-2"
+              >
+                <span>Direct WhatsApp Inquiry</span>
+              </a>
+            )}
           </div>
         </div>
       </section>
@@ -225,7 +232,7 @@ export default async function IndustryDetailPage({
                     href="/services"
                     className="text-xs font-bold text-brand-accent hover:underline inline-flex items-center gap-1"
                   >
-                    <span>Browse 40+ Services Directory</span>
+                    <span>Browse the services directory</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>

@@ -32,29 +32,29 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   name: "Logicward",
   legalName: "Logicward Digital Technologies",
-  tagline: "Technology That Moves Your Business Forward.",
+  tagline: "Build smarter. Move your business forward.",
   description:
-    "Full-service IT, software, and digital growth agency delivering custom software, AI automation, high-performance web and mobile apps, and IT infrastructure for ambitious businesses worldwide.",
+    "Logicward plans and builds practical software, digital products, business systems, and workflow automation for organizations in Pakistan and international markets.",
   url: "https://logicward.com",
   primaryMarket: "Pakistan & Worldwide",
   marketsServed: ["Pakistan", "United States", "United Kingdom", "Canada", "UAE", "Europe"],
   contact: {
-    email: "contact@logicward.com", // [REPLACE BEFORE LAUNCH: Real agency email]
-    phone: "+92 (300) 000-0000", // [REPLACE BEFORE LAUNCH: Real contact number]
-    whatsappNumber: "923000000000", // [REPLACE BEFORE LAUNCH: Real WhatsApp digits without plus]
-    whatsappDisplay: "+92 300 0000000",
+    email: "moizali.azt@gmail.com",
+    phone: "",
+    whatsappNumber: "",
+    whatsappDisplay: "",
     address: {
-      city: "Lahore / Karachi", // [REPLACE BEFORE LAUNCH: Primary office location]
-      country: "Pakistan",
-      label: "Pakistan Operations & Global Remote Delivery",
+      city: "",
+      country: "",
+      label: "",
     },
-    workingHours: "Mon - Fri: 9:00 AM - 6:00 PM (PKT / UTC+5)",
+    workingHours: "",
   },
   social: {
-    linkedin: "https://linkedin.com/company/logicward",
-    twitter: "https://x.com/logicward",
-    github: "https://github.com/logicward",
-    facebook: "https://facebook.com/logicward",
+    linkedin: "",
+    twitter: "",
+    github: "",
+    facebook: "",
   },
   nav: {
     main: [
@@ -69,4 +69,12 @@ export const siteConfig: SiteConfig = {
     ],
   },
 };
+
+export function getWhatsAppUrl(message?: string): string | null {
+  const number = siteConfig.contact.whatsappNumber.replace(/\D/g, "");
+  if (!number) return null;
+
+  const query = message ? `?text=${encodeURIComponent(message)}` : "";
+  return `https://wa.me/${number}${query}`;
+}
 

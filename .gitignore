@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/api/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -49,3 +50,5 @@ Rules.md
 Websiteflow.md
 Memory.md
 
+
+node_modules/

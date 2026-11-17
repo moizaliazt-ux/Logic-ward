@@ -654,7 +654,7 @@ export const solutionsData: SolutionItem[] = [
     keyCapabilities: [
       {
         title: "Appointment Reminders",
-        detail: "Reduce appointment no-shows with automated two-way WhatsApp confirmation and 24-hour reminder messages.",
+        detail: "An optional appointment-confirmation and reminder workflow can be assessed for the selected messaging provider; no change in attendance is implied.",
       },
       {
         title: "Multi-Staff Calendar Sync",

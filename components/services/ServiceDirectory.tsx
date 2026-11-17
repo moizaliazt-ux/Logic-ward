@@ -38,8 +38,12 @@ export function ServiceDirectory() {
       })
       .map((cat) => {
         const filteredServices = cat.services.filter((s) => {
-          if (!searchTerm.trim()) return true;
-          const query = searchTerm.toLowerCase();
+          const query = searchTerm.trim().toLowerCase();
+          if (!query) return true;
+          const categoryMatches =
+            cat.title.toLowerCase().includes(query) ||
+            cat.description.toLowerCase().includes(query);
+          if (categoryMatches) return true;
           return (
             s.title.toLowerCase().includes(query) ||
             s.description.toLowerCase().includes(query)
@@ -92,24 +96,28 @@ export function ServiceDirectory() {
             <input
               type="text"
               aria-label="Search across services directory"
-              placeholder="Search across all 40+ services (e.g., ERP, Next.js, Flutter, SEO, Firewall)..."
+              placeholder="Search by service, discipline, technology, or workflow..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-brand-surface border border-brand-border text-sm text-brand-text placeholder-brand-muted focus:outline-none focus:border-brand-accent transition-colors"
+              className="min-h-11 w-full rounded-xl border border-brand-border bg-brand-surface py-2.5 pl-10 pr-12 text-sm text-brand-text placeholder-brand-muted transition-colors focus:border-brand-accent focus:outline-none"
             />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm("")}
                 aria-label="Clear search input"
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-brand-muted hover:text-brand-text"
+                className="absolute right-1.5 top-1/2 flex min-h-11 min-w-11 -translate-y-1/2 items-center justify-center text-brand-muted hover:text-brand-text"
               >
                 <X className="w-4 h-4" />
               </button>
             )}
           </div>
 
-          <div className="text-xs text-brand-muted font-mono whitespace-nowrap self-start md:self-center">
-            Showing <strong className="text-brand-text">{totalMatchingServices}</strong> services across{" "}
+          <div
+            aria-live="polite"
+            className="text-xs text-brand-muted font-mono whitespace-nowrap self-start md:self-center"
+          >
+            <strong className="text-brand-text">{totalMatchingServices}</strong> service topics
+            {" · "}
             <strong className="text-brand-text">{filteredCategories.length}</strong> disciplines
           </div>
         </div>
@@ -126,7 +134,8 @@ export function ServiceDirectory() {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all border ${
+                aria-pressed={isActive}
+                className={`min-h-11 px-3.5 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all border ${
                   isActive
                     ? "bg-brand-background border-brand-border  text-brand-text font-semibold"
                     : "bg-brand-surface border-brand-border  text-brand-secondary hover:text-brand-text hover:border-brand-border"
@@ -153,7 +162,7 @@ export function ServiceDirectory() {
               setSearchTerm("");
               setSelectedCategory("all");
             }}
-            className="px-4 py-2 rounded-lg text-xs font-semibold text-brand-background bg-brand-accent hover:bg-brand-accent-hover transition-colors"
+            className="min-h-11 px-4 py-2 rounded-lg text-xs font-semibold text-brand-background bg-brand-accent hover:bg-brand-accent-hover transition-colors"
           >
             Reset All Filters
           </button>
@@ -161,7 +170,7 @@ export function ServiceDirectory() {
       ) : (
         <div className="space-y-12">
           {filteredCategories.map((cat) => (
-            <div key={cat.id} className="space-y-6">
+            <div key={cat.id} id={cat.id} className="space-y-6 scroll-mt-24">
               {/* Category Group Header */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-brand-border gap-3">
                 <div className="flex items-center gap-3">
@@ -172,9 +181,9 @@ export function ServiceDirectory() {
                     <h2 className="text-xl font-bold text-brand-text">
                       {cat.title}
                     </h2>
-                    <p className="text-xs text-brand-muted line-clamp-1">
-                      {cat.shortSummary}
-                    </p>
+                      <p className="text-xs text-brand-muted line-clamp-2">
+                        {cat.shortSummary}
+                      </p>
                   </div>
                 </div>
 
@@ -182,40 +191,33 @@ export function ServiceDirectory() {
                   href={`/services/${cat.featuredSlug}`}
                   className="text-xs font-semibold text-brand-accent hover:text-brand-accent inline-flex items-center gap-1 group flex-shrink-0"
                 >
-                  <span>Discipline Blueprint</span>
+                  <span>Featured service</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
 
-              {/* Sub-Service Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {cat.filteredServices.map((service) => (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12">
+                {cat.filteredServices.map((service, index) => (
                   <Link
                     key={service.slug}
                     href={`/services/${service.slug}`}
-                    className="p-6 rounded-2xl bg-brand-card border border-brand-border hover:border-brand-accent/50 hover:shadow-sm transition-all flex flex-col justify-between space-y-4 group"
+                    className="group grid min-h-28 grid-cols-[2.5rem_1fr_auto] items-start gap-4 border-t border-brand-border py-5 transition-colors hover:bg-brand-card/60 sm:gap-5 sm:px-3"
                   >
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-surface  text-brand-accent border border-brand-border font-semibold">
-                          SERVICE OVERVIEW
-                        </span>
-                        <span className="text-[11px] font-mono text-brand-muted">
-                          Details
-                        </span>
-                      </div>
-                      <h3 className="text-base font-bold text-brand-text group-hover:text-brand-accent transition-colors leading-snug">
+                    <span className="pt-1 font-mono text-xs text-brand-muted">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="space-y-2">
+                      <span className="block text-base font-semibold leading-snug text-brand-text transition-colors group-hover:text-brand-accent">
                         {service.title}
-                      </h3>
-                      <p className="text-xs text-brand-secondary leading-relaxed line-clamp-3">
+                      </span>
+                      <span className="block text-sm leading-relaxed text-brand-secondary">
                         {service.description}
-                      </p>
-                    </div>
-
-                    <div className="pt-3 border-t border-brand-border flex items-center justify-between text-xs font-semibold text-brand-accent">
-                      <span>Inspect Service Blueprint</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </div>
+                      </span>
+                    </span>
+                    <ArrowRight
+                      aria-hidden="true"
+                      className="mt-1 h-4 w-4 text-brand-muted transition-transform group-hover:translate-x-1 group-hover:text-brand-accent"
+                    />
                   </Link>
                 ))}
               </div>

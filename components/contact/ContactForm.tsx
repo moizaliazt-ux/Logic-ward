@@ -4,11 +4,9 @@ import React, { useState } from "react";
 import {
   Send,
   CheckCircle2,
-  PhoneCall,
-  Loader2,
   Lock,
 } from "lucide-react";
-import { siteConfig } from "@/lib/site-config";
+import Link from "next/link";
 import { serviceCategories } from "@/lib/data/services";
 
 export function ContactForm() {
@@ -20,12 +18,13 @@ export function ContactForm() {
     service: "Custom Software & ERP Solutions",
     budget: "Not sure yet",
     projectDetails: "",
-    consent: true,
+    consent: false,
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedData, setSubmittedData] = useState<typeof formData | null>(null);
+  const [submissionError, setSubmissionError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const budgetOptions = [
     "Project budget to be discussed",
@@ -46,10 +45,6 @@ export function ContactForm() {
       newErrors.email = "Please enter a valid email address.";
     }
 
-    if (!formData.phone.trim() || formData.phone.trim().length < 7) {
-      newErrors.phone = "Contact phone or WhatsApp number is required.";
-    }
-
     if (!formData.projectDetails.trim() || formData.projectDetails.trim().length < 15) {
       newErrors.projectDetails =
         "Please provide at least 15 characters describing your project requirements.";
@@ -63,77 +58,73 @@ export function ContactForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-
+    setSubmissionError("");
     setIsSubmitting(true);
 
-    // Simulate safe processing time
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmittedData({ ...formData });
-    }, 800);
-  };
+    try {
+      const endpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL;
+      if (!endpoint) {
+        throw new Error("Contact email is not configured. Please use the published email address.");
+      }
 
-  const generateWhatsAppMessage = () => {
-    if (!submittedData) return "";
-    const text = `Hello Logicward, I am submitting a project inquiry:
-- Name: ${submittedData.name}
-- Email: ${submittedData.email}
-- Phone/WhatsApp: ${submittedData.phone}
-- Company: ${submittedData.company || "Not specified"}
-- Service Required: ${submittedData.service}
-- Budget Range: ${submittedData.budget}
-- Project Details: ${submittedData.projectDetails}`;
-    return encodeURIComponent(text);
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || result.errors?.join(" ") || "We couldn't send your inquiry. Please try again.");
+      }
+
+      setSubmittedData({ ...formData });
+    } catch (error) {
+      setSubmissionError(
+        error instanceof Error ? error.message : "We couldn't send your inquiry. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submittedData) {
     return (
-      <div className="p-8 sm:p-10 rounded-[24px] bg-brand-card border border-brand-border shadow-md shadow-brand-background/20 space-y-6">
+      <div role="status" aria-live="polite" className="p-8 sm:p-10 rounded-[24px] bg-brand-card border border-brand-border shadow-md shadow-brand-background/20 space-y-6">
         <div className="w-12 h-12 rounded-xl bg-brand-background border border-brand-border  text-brand-text flex items-center justify-center">
           <CheckCircle2 className="w-6 h-6" />
         </div>
 
         <div className="space-y-2">
           <span className="text-xs font-mono font-semibold text-brand-text uppercase tracking-wider">
-            Inquiry Validated Successfully
+            Inquiry sent
           </span>
           <h3 className="text-2xl font-bold text-brand-text tracking-tight">
-            Thank you, {submittedData.name}.
+            Thanks, {submittedData.name}.
           </h3>
           <p className="text-sm text-brand-muted leading-relaxed">
-            Your project details have been captured and validated according to our technical inquiry schema.
+            The email service accepted your inquiry for delivery to Logicward&apos;s contact mailbox. A receipt confirmation was also sent to {submittedData.email}.
           </p>
         </div>
 
-        {/* Integration Status Notice per Brief */}
         <div className="p-4 rounded-xl bg-brand-background border border-brand-border text-xs space-y-2">
           <div className="flex items-center gap-2 text-brand-text font-semibold">
             <Lock className="w-4 h-4 text-brand-text" />
-            <span>Pending Backend SMTP Configuration Notice:</span>
+            <span>Your details were sent by email and are not stored in a website database.</span>
           </div>
           <p className="text-brand-muted leading-relaxed">
-            Email delivery is not configured for this form. To send your inquiry, open WhatsApp and review the pre-filled message before you choose to send it.
+            The configured mail provider and recipient mailbox handle the submitted information under their own practices.
           </p>
         </div>
 
-        {/* 1-Click WhatsApp Direct Submission */}
         <div className="pt-2 flex flex-col sm:flex-row gap-3">
-          <a
-            href={`https://wa.me/${siteConfig.contact.whatsappNumber}?text=${generateWhatsAppMessage()}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3.5 rounded-lg font-semibold text-brand-background  bg-brand-accent hover:bg-brand-accent-hover transition-all text-sm text-center shadow-sm shadow-brand-background/20 inline-flex items-center justify-center gap-2"
-          >
-            <PhoneCall className="w-4 h-4 text-brand-background" />
-            <span>Send Pre-Filled Brief on WhatsApp</span>
-          </a>
-
           <button
             onClick={() => {
               setSubmittedData(null);
+              setSubmissionError("");
               setFormData({
                 name: "",
                 email: "",
@@ -142,12 +133,12 @@ export function ContactForm() {
                 service: "Custom Software & ERP Solutions",
                 budget: "Not sure yet",
                 projectDetails: "",
-                consent: true,
+                consent: false,
               });
             }}
-            className="px-5 py-3.5 rounded-lg font-medium text-brand-text  bg-brand-background border border-brand-border hover:bg-brand-elevated transition-colors text-sm text-center"
+            className="px-5 py-3.5 rounded-lg font-medium text-brand-text bg-brand-background border border-brand-border hover:bg-brand-elevated transition-colors text-sm text-center"
           >
-            Submit Another Inquiry
+            Start over
           </button>
         </div>
       </div>
@@ -159,27 +150,39 @@ export function ContactForm() {
       onSubmit={handleSubmit}
       className="p-6 sm:p-10 rounded-[24px] bg-brand-card border border-brand-border space-y-6 shadow-md shadow-brand-background/20"
       noValidate
+      aria-labelledby="contact-form-heading"
     >
       <div className="space-y-1">
-        <h2 className="text-xl font-bold text-brand-text tracking-tight">
+        <h2 id="contact-form-heading" className="text-xl font-bold text-brand-text tracking-tight">
           Project Consultation Request
         </h2>
         <p className="text-xs text-brand-muted">
-          Complete the form below with the details you are comfortable sharing. We will review the information and follow up through the contact channel you provide.
+          Submitting this form emails your inquiry to Logicward and sends an automatic receipt confirmation to your address. Do not include passwords, sensitive personal information, or proprietary material.
         </p>
       </div>
+
+      {submissionError && (
+        <p role="alert" className="rounded-lg border border-brand-border bg-brand-background px-4 py-3 text-sm text-brand-accent">
+          {submissionError}
+        </p>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {/* Name */}
         <div className="space-y-1.5">
-          <label className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
+          <label htmlFor="contact-name" className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
             Full Name <span className="text-brand-text">*</span>
           </label>
           <input
+            id="contact-name"
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="e.g. Sarah Jenkins or Tariq Mahmood"
+            autoComplete="name"
+            required
+            aria-invalid={Boolean(errors.name)}
+            aria-describedby={errors.name ? "contact-name-error" : undefined}
             className={`w-full px-4 py-2.5 rounded-xl bg-brand-background border text-sm text-brand-text placeholder-brand-muted/50 focus:outline-none transition-colors ${
               errors.name
                 ? "border-brand-accent focus:border-brand-accent"
@@ -187,20 +190,25 @@ export function ContactForm() {
             }`}
           />
           {errors.name && (
-            <p className="text-[11px] text-brand-accent font-mono">{errors.name}</p>
+            <p id="contact-name-error" role="alert" className="text-[11px] text-brand-accent font-mono">{errors.name}</p>
           )}
         </div>
 
         {/* Business Email */}
         <div className="space-y-1.5">
-          <label className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
+          <label htmlFor="contact-email" className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
             Business Email <span className="text-brand-text">*</span>
           </label>
           <input
+            id="contact-email"
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="name@company.com"
+            autoComplete="email"
+            required
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? "contact-email-error" : undefined}
             className={`w-full px-4 py-2.5 rounded-xl bg-brand-background border text-sm text-brand-text placeholder-brand-muted/50 focus:outline-none transition-colors ${
               errors.email
                 ? "border-brand-accent focus:border-brand-accent"
@@ -208,37 +216,33 @@ export function ContactForm() {
             }`}
           />
           {errors.email && (
-            <p className="text-[11px] text-brand-accent font-mono">{errors.email}</p>
+            <p id="contact-email-error" role="alert" className="text-[11px] text-brand-accent font-mono">{errors.email}</p>
           )}
         </div>
 
         {/* Phone / WhatsApp */}
         <div className="space-y-1.5">
-          <label className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
-            Phone / WhatsApp <span className="text-brand-text">*</span>
+          <label htmlFor="contact-phone" className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
+            Phone / WhatsApp <span className="text-brand-muted font-normal normal-case">(Optional)</span>
           </label>
           <input
+            id="contact-phone"
             type="tel"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder="+92 300 0000000 or +1 555 0000"
-            className={`w-full px-4 py-2.5 rounded-xl bg-brand-background border text-sm text-brand-text placeholder-brand-muted/50 focus:outline-none transition-colors ${
-              errors.phone
-                ? "border-brand-accent focus:border-brand-accent"
-                : "border-brand-border focus:border-brand-accent"
-            }`}
+            autoComplete="tel"
+            className="w-full px-4 py-2.5 rounded-xl bg-brand-background border border-brand-border text-sm text-brand-text placeholder-brand-muted/50 focus:outline-none focus:border-brand-accent transition-colors"
           />
-          {errors.phone && (
-            <p className="text-[11px] text-brand-accent font-mono">{errors.phone}</p>
-          )}
         </div>
 
         {/* Company Name */}
         <div className="space-y-1.5">
-          <label className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
+          <label htmlFor="contact-company" className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
             Company / Organization <span className="text-brand-muted font-normal normal-case">(Optional)</span>
           </label>
           <input
+            id="contact-company"
             type="text"
             value={formData.company}
             onChange={(e) => setFormData({ ...formData, company: e.target.value })}
@@ -249,10 +253,11 @@ export function ContactForm() {
 
         {/* Service Required */}
         <div className="space-y-1.5">
-          <label className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
+          <label htmlFor="contact-service" className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
             Primary Service Required <span className="text-brand-text">*</span>
           </label>
           <select
+            id="contact-service"
             value={formData.service}
             onChange={(e) => setFormData({ ...formData, service: e.target.value })}
             className="w-full px-4 py-2.5 rounded-xl bg-brand-background border border-brand-border text-sm text-brand-text focus:outline-none focus:border-brand-accent transition-colors"
@@ -282,10 +287,11 @@ export function ContactForm() {
 
         {/* Budget Range */}
         <div className="space-y-1.5">
-          <label className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
+          <label htmlFor="contact-budget" className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
             Target Budget Range <span className="text-brand-muted font-normal normal-case">(Optional)</span>
           </label>
           <select
+            id="contact-budget"
             value={formData.budget}
             onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
             className="w-full px-4 py-2.5 rounded-xl bg-brand-background border border-brand-border text-sm text-brand-text focus:outline-none focus:border-brand-accent transition-colors"
@@ -301,16 +307,20 @@ export function ContactForm() {
 
       {/* Project Details */}
       <div className="space-y-1.5">
-        <label className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
+        <label htmlFor="contact-details" className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text block">
           Project Summary & Technical Objectives <span className="text-brand-text">*</span>
         </label>
         <textarea
+          id="contact-details"
           rows={4}
           value={formData.projectDetails}
           onChange={(e) =>
             setFormData({ ...formData, projectDetails: e.target.value })
           }
           placeholder="Briefly describe your business, key challenges, target users, any legacy systems you are replacing, and desired launch timeline..."
+          required
+          aria-invalid={Boolean(errors.projectDetails)}
+          aria-describedby={errors.projectDetails ? "contact-details-error" : undefined}
           className={`w-full px-4 py-2.5 rounded-xl bg-brand-background border text-sm text-brand-text placeholder-brand-muted/50 focus:outline-none transition-colors ${
             errors.projectDetails
               ? "border-brand-accent focus:border-brand-accent"
@@ -318,31 +328,37 @@ export function ContactForm() {
           }`}
         />
         {errors.projectDetails && (
-          <p className="text-[11px] text-brand-accent font-mono">{errors.projectDetails}</p>
+          <p id="contact-details-error" role="alert" className="text-[11px] text-brand-accent font-mono">{errors.projectDetails}</p>
         )}
       </div>
 
       {/* Consent & Privacy Checkbox */}
       <div className="space-y-1 pt-1">
-        <label className="flex items-start gap-2 text-xs text-brand-muted cursor-pointer">
+        <div className="flex items-start gap-2 text-xs text-brand-muted">
           <input
+            id="privacy-consent"
             type="checkbox"
             checked={formData.consent}
             onChange={(e) =>
               setFormData({ ...formData, consent: e.target.checked })
             }
             className="rounded bg-brand-background  border-brand-border  text-brand-text focus:ring-0 mt-0.5"
+            required
+            aria-invalid={Boolean(errors.consent)}
+            aria-describedby={errors.consent ? "privacy-consent-error" : undefined}
           />
-          <span>
-            I agree to the confidential handling of my project details in accordance with Logicward&apos;s{" "}
-            <a href="/privacy" className="text-brand-text underline hover:text-brand-text">
+          <div>
+            <label htmlFor="privacy-consent" className="cursor-pointer">
+              I have read Logicward&apos;s{" "}
+            </label>
+            <Link href="/privacy" className="text-brand-text underline hover:text-brand-text">
               Privacy Policy
-            </a>
-            . We never sell or share client contact information.
-          </span>
-        </label>
+            </Link>
+            <span> and consent to sending these inquiry details by email to Logicward and receiving an automatic email confirmation.</span>
+          </div>
+        </div>
         {errors.consent && (
-          <p className="text-[11px] text-brand-accent font-mono">{errors.consent}</p>
+          <p id="privacy-consent-error" role="alert" className="text-[11px] text-brand-accent font-mono">{errors.consent}</p>
         )}
       </div>
 
@@ -351,25 +367,16 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-3.5 rounded-lg font-semibold text-brand-background  bg-brand-accent hover:bg-brand-accent-hover transition-all text-sm shadow-sm shadow-brand-background/20 inline-flex items-center justify-center gap-2 disabled:opacity-50"
+          className="w-full py-3.5 rounded-lg font-semibold text-brand-background bg-brand-accent hover:bg-brand-accent-hover transition-all text-sm shadow-sm shadow-brand-background/20 inline-flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isSubmitting ? (
-            <>
-              <Loader2 className="w-4 h-4 animate-spin" />
-              <span>Validating Project Details...</span>
-            </>
-          ) : (
-            <>
-              <span>Submit Project Consultation Request</span>
-              <Send className="w-4 h-4" />
-            </>
-          )}
+          <span>{isSubmitting ? "Sending inquiry..." : "Send project inquiry"}</span>
+          <Send className="w-4 h-4" />
         </button>
       </div>
 
       <div className="flex items-center justify-center gap-2 text-[11px] font-mono text-brand-muted pt-1">
         <Lock className="w-3 h-3 text-brand-text" />
-        <span>Bilateral Non-Disclosure Agreement (NDA) available upon request.</span>
+        <span>Do not include passwords, sensitive personal information, or proprietary material.</span>
       </div>
     </form>
   );

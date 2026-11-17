@@ -18,7 +18,7 @@ export default function PortfolioPage() {
   return (
     <div className="flex flex-col w-full bg-brand-surface  text-brand-text">
       {/* Header Banner */}
-      <section className="relative py-16 md:py-24 bg-brand-surface  text-brand-text border-b border-brand-border">
+      <section className="page-hero relative py-16 md:py-24 bg-brand-surface text-brand-text border-b border-brand-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono uppercase tracking-wider bg-brand-card  text-brand-accent border border-brand-border">
@@ -29,7 +29,7 @@ export default function PortfolioPage() {
               Selected Work & Architecture Case Studies
             </h1>
             <p className="text-base sm:text-lg text-brand-secondary leading-relaxed">
-              Explore how we solve complex data models, low-latency mobile synchronizations, and high-concurrency business operations through structured software engineering.
+              Review labeled reference architectures and demonstration projects that explore business workflows, system boundaries, and technical trade-offs.
             </p>
           </div>
         </div>

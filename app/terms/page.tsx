@@ -6,7 +6,7 @@ import { ShieldCheck, ChevronRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: `Master terms of service and commercial delivery governance for ${siteConfig.legalName}.`,
+  description: `Website terms and project-scope information for ${siteConfig.name}.`,
 };
 
 export default function TermsPage() {
@@ -32,51 +32,64 @@ export default function TermsPage() {
           Terms of Service
         </h1>
         <p className="text-sm text-brand-muted">
-          These Terms of Service govern your access to the {siteConfig.name} website and outline the commercial and technical delivery standards applicable to all engineering engagements with {siteConfig.legalName}.
+          This page summarizes website use and general project information. The scope and terms of any engagement are established only in the written agreement accepted by the parties.
         </p>
       </div>
 
       <div className="pt-8 space-y-10 text-sm text-brand-muted leading-relaxed">
         <section className="space-y-3">
-          <h2 className="text-lg font-bold text-brand-text tracking-tight">1. Scoping & Master Services Agreements</h2>
+          <h2 className="text-lg font-bold text-brand-text tracking-tight">1. Website information and project scope</h2>
           <p>
-            Website content and service descriptions do not constitute a binding unilateral offer. All client engagements are executed through formal Statements of Work (SOW) or Master Services Agreements (MSA) detailing deliverables, milestones, technical specifications, and acceptance criteria.
+            Website content and service descriptions are informational and do not establish a project scope, delivery commitment, price, or service-level agreement. Requirements, deliverables, schedule, acceptance criteria, and commercial terms must be confirmed in a written project agreement.
           </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-brand-text tracking-tight">2. Intellectual Property (IP) Ownership</h2>
           <p>
-            Upon settlement of milestone invoices, 100% of custom application source code, database architectures, graphics, and technical documentation produced specifically for the client are assigned unconditionally to the client.
+            Ownership, licensing, repository access, and handover of project-specific work are governed by the written project agreement and its payment and acceptance terms. This page does not promise an unconditional transfer.
           </p>
           <p>
-            Logicward retains rights solely to pre-existing open-source libraries, reusable boilerplates, and general agency design methodologies.
+            Any treatment of pre-existing materials, third-party or open-source components, and reusable tools should also be specified in that agreement.
           </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-brand-text tracking-tight">3. Milestone Governance & Acceptance</h2>
           <p>
-            Engineering work proceeds in iterative, milestone-governed phases. Clients have a standard review window (typically 10 business days) to test delivered functionality against agreed acceptance criteria prior to milestone sign-off.
+            Milestones, review periods, approval responsibilities, and acceptance procedures are defined for each engagement. No standard review period is promised by this website.
           </p>
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-lg font-bold text-brand-text tracking-tight">4. Warranties & Code Quality</h2>
+          <h2 className="text-lg font-bold text-brand-text tracking-tight">4. Warranties and ongoing support</h2>
           <p>
-            We warrant that delivered software will perform substantially in accordance with agreed specifications. Standard engagements include a 30-to-90 day post-launch bug warranty covering any defect remediation at zero additional fee.
+            Warranty coverage, defect handling, maintenance, support availability, response targets, and fees—if offered—must be stated in the applicable written agreement. This page does not promise a standard warranty period or free remediation.
           </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-brand-text tracking-tight">5. Contact Information</h2>
           <p>
-            Inquiries regarding service terms should be directed to:
+            For inquiries regarding service terms, use the contact page to find currently available channels.
           </p>
           <div className="p-4 rounded-xl bg-brand-card border border-brand-border text-xs font-mono text-brand-text space-y-1">
-            <div>Email: {siteConfig.contact.email}</div>
-            <div>Phone: {siteConfig.contact.phone}</div>
-            <div>Address: {siteConfig.contact.address.city}, {siteConfig.contact.address.country} ({siteConfig.contact.address.label})</div>
+            {siteConfig.contact.email && <div>Email: {siteConfig.contact.email}</div>}
+            {siteConfig.contact.phone && <div>Phone: {siteConfig.contact.phone}</div>}
+            {siteConfig.contact.address.label && (
+              <div>
+                Address: {siteConfig.contact.address.city}
+                {siteConfig.contact.address.city && siteConfig.contact.address.country ? ", " : ""}
+                {siteConfig.contact.address.country} ({siteConfig.contact.address.label})
+              </div>
+            )}
+            {!siteConfig.contact.email &&
+              !siteConfig.contact.phone &&
+              !siteConfig.contact.address.label && (
+                <Link href="/contact" className="text-brand-accent underline">
+                  Contact page
+                </Link>
+              )}
           </div>
         </section>
       </div>

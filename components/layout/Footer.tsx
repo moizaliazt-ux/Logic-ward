@@ -7,16 +7,17 @@ import {
   MapPin,
   Clock,
   ShieldCheck,
-  Globe2,
 } from "lucide-react";
-import { siteConfig } from "@/lib/site-config";
+import { getWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import { serviceCategories } from "@/lib/data/services";
+import { solutionsData } from "@/lib/data/solutions";
 
 export function Footer() {
   const currentYear = 2026;
+  const whatsAppUrl = getWhatsAppUrl();
 
   return (
-    <footer className="w-full bg-brand-background  text-brand-muted border-t border-brand-border">
+    <footer className="w-full bg-brand-background text-brand-muted border-t border-brand-border">
       {/* Upper Brand / Consultation Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
         <div className="bg-brand-card border border-brand-border rounded-2xl p-8 sm:p-10 mb-16">
@@ -24,13 +25,13 @@ export function Footer() {
             <div className="max-w-2xl space-y-3">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono uppercase tracking-wider bg-brand-card  text-brand-accent border border-brand-border">
                 <ShieldCheck className="w-3.5 h-3.5 text-brand-accent" />
-                TRUSTED SOFTWARE ENGINEERING PARTNER
+                SOFTWARE, BUILT AROUND YOUR BUSINESS
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold text-brand-text tracking-tight">
-                Ready to engineer technology that moves your business forward?
+                Ready to plan your next technology project?
               </h2>
               <p className="text-sm text-brand-secondary leading-relaxed">
-                Start a discovery conversation to discuss your requirements, technical scope, and potential project milestones.
+                Use the project inquiry form to outline your requirements and technical scope. Available delivery channels appear only after they are verified.
               </p>
             </div>
 
@@ -39,17 +40,21 @@ export function Footer() {
                 href="/contact"
                 className="px-6 py-3.5 rounded-lg text-sm font-semibold text-brand-background bg-brand-accent hover:bg-brand-accent-hover transition-all text-center shadow-sm shadow-brand-background/20"
               >
-                Start a Project
+                {siteConfig.contact.email || siteConfig.contact.phone || whatsAppUrl
+                  ? "Start a Project"
+                  : "View Inquiry Form"}
               </Link>
-              <a
-                href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-3.5 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-text bg-brand-card hover:bg-brand-elevated border border-brand-border transition-colors text-center inline-flex items-center justify-center gap-2"
-              >
-                <span>WhatsApp Us</span>
-                <ArrowUpRight className="w-4 h-4 text-brand-accent" />
-              </a>
+              {whatsAppUrl && (
+                <a
+                  href={whatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3.5 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-text bg-brand-card hover:bg-brand-elevated border border-brand-border transition-colors text-center inline-flex items-center justify-center gap-2"
+                >
+                  <span>WhatsApp Us</span>
+                  <ArrowUpRight className="w-4 h-4 text-brand-accent" />
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -69,20 +74,16 @@ export function Footer() {
             <p className="text-xs text-brand-secondary leading-relaxed">
               {siteConfig.tagline}
             </p>
-            <p className="text-xs text-brand-muted leading-relaxed">
-              Full-service IT, custom software, ERP/CRM systems, mobile apps, deterministic AI automation, and cloud networking infrastructure for ambitious businesses worldwide.
+            <p className="text-sm text-brand-secondary leading-relaxed">
+              Software, digital products, and business systems planned around the way organizations work.
             </p>
 
-            <div className="pt-2 text-xs space-y-2">
-              <div className="flex items-center gap-2 text-brand-secondary">
-                <Globe2 className="w-3.5 h-3.5 text-brand-accent flex-shrink-0" />
-                <span>Pakistan & Worldwide Clients</span>
-              </div>
-              <div className="flex items-center gap-2 text-brand-muted">
+            {siteConfig.contact.workingHours && (
+              <div className="pt-2 flex items-center gap-2 text-xs text-brand-muted">
                 <Clock className="w-3.5 h-3.5 text-brand-accent flex-shrink-0" />
                 <span>{siteConfig.contact.workingHours}</span>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Column 2: Core Services */}
@@ -106,7 +107,7 @@ export function Footer() {
                   href="/services"
                   className="text-brand-accent hover:underline font-medium inline-flex items-center gap-1 pt-1"
                 >
-                  View All 40+ Services →
+                  View all services →
                 </Link>
               </li>
             </ul>
@@ -118,41 +119,13 @@ export function Footer() {
               Solutions & ERP
             </h3>
             <ul className="space-y-2 text-xs">
-              <li>
-                <Link href="/solutions#erp-solutions" className="hover:text-brand-text transition-colors">
-                  Enterprise ERP Solutions
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions#crm-systems" className="hover:text-brand-text transition-colors">
-                  Custom CRM Pipelines
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions#school-college" className="hover:text-brand-text transition-colors">
-                  School & College Systems
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions#hrm-payroll" className="hover:text-brand-text transition-colors">
-                  HRM & Payroll Platforms
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions#inventory-stock" className="hover:text-brand-text transition-colors">
-                  Inventory & Stock Control
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions#pos-billing" className="hover:text-brand-text transition-colors">
-                  POS & Billing Systems
-                </Link>
-              </li>
-              <li>
-                <Link href="/solutions#dashboards-bi" className="hover:text-brand-text transition-colors">
-                  Executive BI Dashboards
-                </Link>
-              </li>
+              {solutionsData.slice(0, 7).map((solution) => (
+                <li key={solution.id}>
+                  <Link href={`/solutions#${solution.slug}`} className="hover:text-brand-text transition-colors">
+                    {solution.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -206,6 +179,7 @@ export function Footer() {
               Direct Contact
             </h3>
             <div className="space-y-2.5 text-xs">
+              {siteConfig.contact.email && (
               <div>
                 <span className="text-[11px] text-brand-muted block">General Inquiries:</span>
                 <a
@@ -216,11 +190,26 @@ export function Footer() {
                   <span>{siteConfig.contact.email}</span>
                 </a>
               </div>
+              )}
 
+              {siteConfig.contact.phone && (
+                <div>
+                  <span className="text-[11px] text-brand-muted block">Telephone:</span>
+                  <a
+                    href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
+                    className="text-brand-secondary hover:text-brand-text transition-colors inline-flex items-center gap-1.5"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-brand-accent" />
+                    <span>{siteConfig.contact.phone}</span>
+                  </a>
+                </div>
+              )}
+
+              {whatsAppUrl && (
               <div>
                 <span className="text-[11px] text-brand-muted block">WhatsApp Desk:</span>
                 <a
-                  href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
+                  href={whatsAppUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-brand-secondary hover:text-brand-text transition-colors inline-flex items-center gap-1.5"
@@ -229,7 +218,9 @@ export function Footer() {
                   <span>{siteConfig.contact.whatsappDisplay}</span>
                 </a>
               </div>
+              )}
 
+              {siteConfig.contact.address.label && (
               <div>
                 <span className="text-[11px] text-brand-muted block">Headquarters / Operations:</span>
                 <div className="text-brand-secondary inline-flex items-start gap-1.5 pt-0.5">
@@ -237,12 +228,19 @@ export function Footer() {
                   <span>{siteConfig.contact.address.label}</span>
                 </div>
               </div>
+              )}
 
+              {!siteConfig.contact.email &&
+                !siteConfig.contact.phone &&
+                !whatsAppUrl &&
+                !siteConfig.contact.address.label && (
+                <p className="text-brand-muted">Direct contact details are being finalized.</p>
+              )}
             </div>
           </div>
         </div>
 
-        {/* Bottom Sub-Footer & Regulatory / Placeholder Notice */}
+        {/* Bottom Sub-Footer and Legal Links */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-brand-muted">
           <div>
             © {currentYear} {siteConfig.legalName}. All rights reserved.
@@ -262,13 +260,6 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Explicit Placeholder Notice (per PRD Section 25) */}
-        <div className="mt-6 pt-4 border-t border-brand-border text-center">
-          <p className="text-[11px] text-brand-muted">
-            [Production Notice: Brand contact details, phone numbers, and official office registrations are centralized in{" "}
-            <code className="text-brand-accent">lib/site-config.ts</code> for verification prior to commercial deployment.]
-          </p>
-        </div>
       </div>
     </footer>
   );

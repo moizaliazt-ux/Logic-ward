@@ -32,7 +32,7 @@ export default function CookiePolicyPage() {
           Cookie Policy
         </h1>
         <p className="text-sm text-brand-muted">
-          This Cookie Policy explains how {siteConfig.legalName} (&quot;Logicward&quot;) uses cookies and similar browser storage technologies to maintain platform security and essential functionality.
+          This Cookie Policy describes browser storage used by the Logicward website and how to manage it.
         </p>
       </div>
 
@@ -40,32 +40,37 @@ export default function CookiePolicyPage() {
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-brand-text tracking-tight">1. Strictly Necessary Cookies</h2>
           <p>
-            We use minimal, strictly necessary session cookies required for core website security, load balancing, CSRF protection, and form state preservation. These cookies do not track personal identifying information across external websites.
+            This website does not currently implement inquiry-form persistence or analytics cookies. Hosting infrastructure may use essential technical storage depending on the production configuration; that configuration should be reviewed before launch.
           </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-brand-text tracking-tight">2. Analytics & Performance</h2>
           <p>
-            If aggregated performance metrics are enabled, we collect strictly anonymized page-load timing and core web vital telemetry to optimize edge distribution latency.
+            No analytics or advertising tracking is configured in this website codebase.
           </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-brand-text tracking-tight">3. Managing Browser Storage</h2>
           <p>
-            You can configure your browser preferences to reject or purge cookies at any time. Because our platform relies primarily on static edge generation, disabling cookies will not affect your ability to browse our services, solutions, or insights.
+            You can manage browser storage through your browser settings. Removing essential storage, if added by the hosting configuration, may affect platform behavior.
           </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-brand-text tracking-tight">4. Contact Information</h2>
           <p>
-            For questions regarding our privacy or cookie practices, contact our security officer at:
+            For questions regarding our privacy or cookie practices, use the contact page to find currently available channels.
           </p>
           <div className="p-4 rounded-xl bg-brand-card border border-brand-border text-xs font-mono text-brand-text space-y-1">
-            <div>Email: {siteConfig.contact.email}</div>
-            <div>Phone: {siteConfig.contact.phone}</div>
+            {siteConfig.contact.email && <div>Email: {siteConfig.contact.email}</div>}
+            {siteConfig.contact.phone && <div>Phone: {siteConfig.contact.phone}</div>}
+            {!siteConfig.contact.email && !siteConfig.contact.phone && (
+              <Link href="/contact" className="text-brand-accent underline">
+                Contact page
+              </Link>
+            )}
           </div>
         </section>
       </div>

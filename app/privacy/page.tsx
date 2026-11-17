@@ -40,46 +40,59 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-brand-text tracking-tight">1. Information We Collect</h2>
           <p>
-            When you submit a project inquiry or contact us via our website, email, or WhatsApp, we collect information you voluntarily provide. This typically includes your full name, business email address, telephone/WhatsApp contact, company name, and project specifications.
+            When you submit the project inquiry form with the required consent, the details are sent by email to Logicward&apos;s configured contact mailbox. The mail provider processes the message, and the website does not save inquiry entries to a database. An automatic receipt confirmation is also sent to the email address you provide.
           </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-brand-text tracking-tight">2. How We Use Project Information</h2>
           <p>
-            Information provided is utilized solely to:
+            Submitted inquiry details may be used to:
           </p>
           <ul className="list-disc pl-5 space-y-1 text-brand-muted">
             <li>Review project requirements and prepare technical architectural proposals;</li>
             <li>Communicate regarding your consultation requests and technical questions;</li>
-            <li>Fulfill contractual deliverables and milestones under client agreements;</li>
+            <li>Fulfill contractual deliverables and milestones under client agreements, if an engagement proceeds;</li>
             <li>Comply with applicable legal, accounting, and regulatory obligations.</li>
           </ul>
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-lg font-bold text-brand-text tracking-tight">3. Confidentiality & Non-Disclosure (NDA)</h2>
+          <h2 className="text-lg font-bold text-brand-text tracking-tight">3. Sensitive Information & Confidentiality</h2>
           <p>
-            We adhere strictly to professional confidentiality standards. All proprietary business concepts, technical specifications, and proprietary data submitted through technical consultations are treated as strictly confidential. Formal bilateral Non-Disclosure Agreements (NDAs) are routinely executed prior to code audits or repository onboarding.
+            Do not include passwords, sensitive personal information, or proprietary material in this form. Before sharing sensitive project details through any channel, confirm the recipient and applicable confidentiality terms. If you choose to use a third-party service such as WhatsApp, that service’s policies also apply.
           </p>
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-lg font-bold text-brand-text tracking-tight">4. Zero Monetization of Data</h2>
+          <h2 className="text-lg font-bold text-brand-text tracking-tight">4. Website Tracking & Data Sharing</h2>
           <p>
-            We do not sell, rent, trade, or monetize client contact lists, project specifications, or behavioral telemetry to any third party, advertising network, or data broker.
+            The website currently has no analytics or advertising tracking integration. Inquiry emails are transmitted through the configured mail provider and received at Logicward&apos;s contact mailbox. If an inquiry leads to an engagement, client data handling should be governed by applicable written terms.
           </p>
         </section>
 
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-brand-text tracking-tight">5. Contact Information</h2>
           <p>
-            For privacy inquiries or data requests, please contact our administrative desk at:
+            For privacy inquiries or data requests, use the contact page to find currently available channels.
           </p>
           <div className="p-4 rounded-xl bg-brand-card border border-brand-border text-xs font-mono text-brand-text space-y-1">
-            <div>Email: {siteConfig.contact.email}</div>
-            <div>Phone: {siteConfig.contact.phone}</div>
-            <div>Address: {siteConfig.contact.address.city}, {siteConfig.contact.address.country} ({siteConfig.contact.address.label})</div>
+            {siteConfig.contact.email && <div>Email: {siteConfig.contact.email}</div>}
+            {siteConfig.contact.phone && <div>Phone: {siteConfig.contact.phone}</div>}
+            {siteConfig.contact.address.label && (
+              <div>
+                Address: {siteConfig.contact.address.city}
+                {siteConfig.contact.address.city && siteConfig.contact.address.country ? ", " : ""}
+                {siteConfig.contact.address.country} ({siteConfig.contact.address.label})
+              </div>
+            )}
+            {!siteConfig.contact.email &&
+              !siteConfig.contact.phone &&
+              !siteConfig.contact.address.label && (
+                <Link href="/contact" className="text-brand-accent underline">
+                  Contact page
+                </Link>
+              )}
           </div>
         </section>
       </div>

@@ -21,7 +21,7 @@ import { ConversionCTA } from "@/components/home/ConversionCTA";
 export const metadata: Metadata = {
   title: "Management Solutions & Custom ERP Systems",
   description:
-    "Tailored enterprise platforms: ERP, CRM, School Management, HRM/Payroll, Inventory, POS, Gym, Agriculture, and Executive BI Dashboards adapted to your workflow.",
+    "Example outlines for ERP, CRM, education, HRM, inventory, POS, booking, and reporting systems. Project requirements and scope are confirmed individually.",
 };
 
 export default function SolutionsPage() {
@@ -55,7 +55,7 @@ export default function SolutionsPage() {
   return (
     <div className="flex flex-col w-full bg-brand-surface  text-brand-text">
       {/* Header Banner */}
-      <section className="relative py-16 md:py-24 bg-brand-surface  text-brand-text border-b border-brand-border">
+      <section className="page-hero relative py-16 md:py-24 bg-brand-surface text-brand-text border-b border-brand-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono uppercase tracking-wider bg-brand-card  text-brand-accent border border-brand-border">
@@ -66,7 +66,7 @@ export default function SolutionsPage() {
               Business Management Systems & Custom ERPs
             </h1>
             <p className="text-base sm:text-lg text-brand-secondary leading-relaxed">
-              Eliminate disconnected spreadsheets and rigid per-user SaaS licenses. We engineer purpose-built operational software tailored to your company&apos;s actual approval matrices, tax rules, and daily workflows.
+              Explore example system architectures for common operational needs. The modules, integrations, and delivery approach for any project depend on discovery and written scope.
             </p>
           </div>
         </div>
@@ -75,133 +75,120 @@ export default function SolutionsPage() {
       {/* Scope Disclaimer Notice (PRD § 7) */}
       <div className="bg-brand-card border-b border-brand-border py-3.5 px-4 text-center">
         <p className="text-xs text-brand-muted max-w-4xl mx-auto">
-          <strong className="text-brand-text">Implementation Note:</strong> Our management solutions are custom-configured around your exact organizational hierarchies, approval matrices, and reporting logic. We deliver tailored software without rigid vendor lock-in.
+          <strong className="text-brand-text">Scope note:</strong> The modules and workflows below are planning examples, not a guarantee of implementation, compatibility, security controls, schedule, or outcome. Feasibility and terms are confirmed for each project.
         </p>
       </div>
 
-      {/* Main Solutions Deep Dive */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-16">
-        {solutionsData.map((solution) => (
-          <div
+      <section className="mx-auto w-full max-w-7xl space-y-10 px-4 py-16 sm:px-6 lg:px-8">
+        {solutionsData.slice(0, 1).map((solution, index) => (
+          <article
             key={solution.id}
             id={solution.slug}
-            className="rounded-2xl bg-brand-card border border-brand-border p-8 sm:p-10 lg:p-12 relative overflow-hidden scroll-mt-24 shadow-sm space-y-8"
+            className="scroll-mt-24 border-y border-brand-border py-8 sm:py-10"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-              {/* Left Column: Solution Identity & Adaptation */}
-              <div className="lg:col-span-5 space-y-6">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-xl bg-brand-elevated border border-brand-border">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
+              <div className="space-y-6 lg:col-span-5">
+                <div className="flex items-center gap-4">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-border bg-brand-card">
                     {getIcon(solution.id)}
-                  </div>
+                  </span>
                   <div>
-                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-brand-surface  text-brand-accent border border-brand-border font-semibold">
+                    <p className="font-mono text-[11px] uppercase tracking-wider text-brand-muted">
+                      Featured system / {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <p className="mt-1 text-xs font-mono text-brand-accent">
                       {solution.badge}
-                    </span>
-                    <h2 className="text-2xl font-bold text-brand-text tracking-tight mt-1">
-                      {solution.title}
-                    </h2>
+                    </p>
                   </div>
                 </div>
-
-                <p className="text-xs font-mono font-medium text-brand-accent">
-                  {solution.tagline}
-                </p>
-
-                <p className="text-sm text-brand-secondary leading-relaxed">
-                  {solution.shortSummary}
-                </p>
-
-                <div className="p-4 rounded-xl bg-brand-surface border border-brand-border space-y-2">
-                  <span className="text-xs font-semibold text-brand-text uppercase tracking-wider block">
-                    Workflow Adaptation:
-                  </span>
-                  <p className="text-xs text-brand-secondary leading-relaxed">
+                <div>
+                  <h2 className="text-2xl font-semibold tracking-tight text-brand-text sm:text-3xl">
+                    {solution.title}
+                  </h2>
+                  <p className="mt-2 text-sm text-brand-accent">{solution.tagline}</p>
+                  <p className="mt-4 text-sm leading-7 text-brand-secondary">
+                    {solution.shortSummary}
+                  </p>
+                </div>
+                <div className="border-l-2 border-brand-accent pl-4">
+                  <p className="text-[11px] font-mono uppercase tracking-wider text-brand-muted">
+                    Workflow considerations
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-brand-secondary">
                     {solution.workflowAdaptation}
                   </p>
                 </div>
-
-                {/* Target Industry & Tech Stack */}
-                <div className="space-y-3 pt-2">
-                  <div>
-                    <span className="text-[11px] font-mono uppercase text-brand-muted block">
-                      TARGET SECTORS:
-                    </span>
-                    <span className="text-xs font-medium text-brand-text">
-                      {solution.targetIndustry}
-                    </span>
-                  </div>
-
-                  <div>
-                    <span className="text-[11px] font-mono uppercase text-brand-muted block mb-1">
-                      CORE ARCHITECTURE:
-                    </span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {solution.technicalHighlights.map((tech, idx) => (
-                        <span
-                          key={idx}
-                          className="px-2.5 py-1 rounded text-[11px] font-mono bg-brand-surface border border-brand-border  text-brand-secondary"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                <div className="space-y-2">
+                  <p className="text-[11px] font-mono uppercase tracking-wider text-brand-muted">
+                    Example sectors
+                  </p>
+                  <p className="text-sm text-brand-secondary">{solution.targetIndustry}</p>
                 </div>
-
-                <div className="pt-2 flex items-center gap-4">
-                  <Link
-                    href={`/solutions/${solution.slug}`}
-                    className="px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-brand-background bg-brand-accent hover:bg-brand-accent-hover transition-colors inline-flex items-center gap-1.5 shadow-sm"
-                  >
-                    <span>Full Architecture Specification</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="text-xs font-semibold text-brand-accent hover:underline"
-                  >
-                    Request Scoping →
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right Column: Core Modules & Key Capabilities */}
-              <div className="lg:col-span-7 space-y-8">
-                {/* Core Modules Grid */}
-                <div className="space-y-3">
-                  <span className="text-xs font-semibold text-brand-text uppercase tracking-wider block">
-                    Core Functional Modules:
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {solution.coreModules.map((module, idx) => (
-                      <div
-                        key={idx}
-                        className="p-3.5 rounded-xl bg-brand-surface border border-brand-border flex items-center gap-2.5"
+                <div className="space-y-2">
+                  <p className="text-[11px] font-mono uppercase tracking-wider text-brand-muted">
+                    Technical options to assess
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {solution.technicalHighlights.map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-md border border-brand-border px-2.5 py-1 text-[10px] font-mono text-brand-muted"
                       >
-                        <CheckCircle2 className="w-4 h-4 text-brand-accent flex-shrink-0" />
-                        <span className="text-xs font-medium text-brand-text">{module}</span>
-                      </div>
+                        {tech}
+                      </span>
                     ))}
                   </div>
                 </div>
+              </div>
 
-                {/* Key Capabilities */}
-                <div className="space-y-3">
-                  <span className="text-xs font-semibold text-brand-text uppercase tracking-wider block">
-                    Operational Impact:
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {solution.keyCapabilities.map((cap, idx) => (
-                      <div
-                        key={idx}
-                        className="p-4 rounded-xl border border-brand-border  bg-brand-card space-y-1.5"
+              <div className="space-y-8 lg:col-span-7">
+                <div>
+                  <h3 className="text-xs font-mono uppercase tracking-wider text-brand-muted">
+                    Possible system modules
+                  </h3>
+                  <ul className="mt-3 grid grid-cols-1 gap-x-6 sm:grid-cols-2">
+                    {solution.coreModules.map((module) => (
+                      <li
+                        key={module}
+                        className="flex gap-2 border-t border-brand-border py-3 text-sm text-brand-secondary"
                       >
-                        <h3 className="text-xs font-bold text-brand-text">
-                          {cap.title}
-                        </h3>
-                        <p className="text-xs text-brand-secondary leading-relaxed">
-                          {cap.detail}
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-accent" aria-hidden="true" />
+                        <span>{module}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {solution.mainWorkflows[0] && (
+                  <div className="border-t border-brand-border pt-5">
+                    <h3 className="text-xs font-mono uppercase tracking-wider text-brand-muted">
+                      Example workflow · {solution.mainWorkflows[0].title}
+                    </h3>
+                    <ol className="mt-4 flex flex-wrap items-center gap-2">
+                      {solution.mainWorkflows[0].steps.map((step, stepIndex) => (
+                        <li key={step} className="flex items-center gap-2">
+                          <span className="rounded-lg border border-brand-border bg-brand-card px-3 py-2 text-xs text-brand-text">
+                            {step}
+                          </span>
+                          {stepIndex < solution.mainWorkflows[0].steps.length - 1 && (
+                            <ArrowRight className="h-3.5 w-3.5 text-brand-accent" aria-hidden="true" />
+                          )}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
+                <div className="border-t border-brand-border pt-5">
+                  <h3 className="text-xs font-mono uppercase tracking-wider text-brand-muted">
+                    Design considerations
+                  </h3>
+                  <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    {solution.keyCapabilities.map((capability) => (
+                      <div key={capability.title}>
+                        <h4 className="text-sm font-semibold text-brand-text">
+                          {capability.title}
+                        </h4>
+                        <p className="mt-1 text-sm leading-6 text-brand-secondary">
+                          {capability.detail}
                         </p>
                       </div>
                     ))}
@@ -209,8 +196,115 @@ export default function SolutionsPage() {
                 </div>
               </div>
             </div>
-          </div>
+            <div className="mt-7 flex flex-wrap gap-3 border-t border-brand-border pt-5">
+              <Link
+                href={`/solutions/${solution.slug}`}
+                className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-brand-accent px-4 text-sm font-semibold text-brand-background transition-colors hover:bg-brand-accent-hover"
+              >
+                Explore system details
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex min-h-11 items-center text-sm font-medium text-brand-secondary transition-colors hover:text-brand-text"
+              >
+                Discuss project scope
+              </Link>
+            </div>
+          </article>
         ))}
+
+        <div className="divide-y divide-brand-border border-y border-brand-border">
+          {solutionsData.slice(1).map((solution, index) => (
+            <article
+              key={solution.id}
+              id={solution.slug}
+              className="scroll-mt-24 py-8 sm:py-10"
+            >
+              <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
+                <div className="space-y-5 lg:col-span-4">
+                  <div className="flex items-start gap-3">
+                    <span className="pt-1 font-mono text-xs text-brand-muted">
+                      {String(index + 2).padStart(2, "0")}
+                    </span>
+                    <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-brand-border bg-brand-card">
+                      {getIcon(solution.id)}
+                    </span>
+                    <div>
+                      <p className="text-[10px] font-mono uppercase tracking-wider text-brand-accent">
+                        {solution.badge}
+                      </p>
+                      <h2 className="mt-1 text-xl font-semibold tracking-tight text-brand-text">
+                        {solution.title}
+                      </h2>
+                    </div>
+                  </div>
+                  <p className="text-sm leading-6 text-brand-secondary">
+                    {solution.shortSummary}
+                  </p>
+                  <div className="space-y-2 border-l border-brand-border pl-3">
+                    <p className="text-[11px] font-mono uppercase tracking-wider text-brand-muted">
+                      Workflow considerations
+                    </p>
+                    <p className="text-sm leading-6 text-brand-secondary">
+                      {solution.workflowAdaptation}
+                    </p>
+                  </div>
+                  <p className="text-xs leading-5 text-brand-muted">
+                    <span className="font-semibold text-brand-secondary">Example sectors:</span>{" "}
+                    {solution.targetIndustry}
+                  </p>
+                </div>
+
+                <div className="lg:col-span-4">
+                  <h3 className="text-[11px] font-mono uppercase tracking-wider text-brand-muted">
+                    Possible modules
+                  </h3>
+                  <ul className="mt-2 divide-y divide-brand-border border-y border-brand-border">
+                    {solution.coreModules.map((module) => (
+                      <li key={module} className="py-2.5 text-sm text-brand-secondary">
+                        {module}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {solution.technicalHighlights.map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-md border border-brand-border px-2 py-1 text-[10px] font-mono text-brand-muted"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-4 lg:col-span-4">
+                  <h3 className="text-[11px] font-mono uppercase tracking-wider text-brand-muted">
+                    Design considerations
+                  </h3>
+                  {solution.keyCapabilities.map((capability) => (
+                    <div key={capability.title} className="border-t border-brand-border pt-3">
+                      <h4 className="text-sm font-semibold text-brand-text">
+                        {capability.title}
+                      </h4>
+                      <p className="mt-1 text-sm leading-6 text-brand-secondary">
+                        {capability.detail}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <Link
+                href={`/solutions/${solution.slug}`}
+                className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand-accent transition-colors hover:text-brand-text"
+              >
+                Explore system details
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </article>
+          ))}
+        </div>
       </section>
 
       <ConversionCTA />

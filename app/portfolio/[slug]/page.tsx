@@ -15,6 +15,8 @@ import { siteConfig } from "@/lib/site-config";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { ConversionCTA } from "@/components/home/ConversionCTA";
 
+export const instant = false;
+
 export async function generateStaticParams() {
   return portfolioProjects.map((p) => ({ slug: p.slug }));
 }
@@ -72,7 +74,7 @@ export default async function CaseStudyDetailPage({
       <BreadcrumbJsonLd items={breadcrumbs} />
 
       {/* Hero Header */}
-      <section className="relative py-14 md:py-20 bg-brand-surface  text-brand-text border-b border-brand-border">
+      <section className="page-hero relative py-14 md:py-20 bg-brand-surface text-brand-text border-b border-brand-border">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
           <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-brand-muted flex-wrap">

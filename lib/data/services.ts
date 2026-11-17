@@ -224,7 +224,7 @@ export const detailedServices: ServiceItem[] = [
         },
         {
           title: "Complete Intellectual Property Ownership",
-          detail: "You own 100% of the source code, database schemas, and infrastructure configs upon project completion.",
+          detail: "Ownership, repository access, and handover terms are recorded in the written project agreement.",
         },
         {
           title: "Role-Based Security & Audit Logs",
@@ -271,7 +271,7 @@ export const detailedServices: ServiceItem[] = [
       },
       {
         question: "Do we own the intellectual property and code?",
-        answer: "Yes, 100%. Upon final milestone delivery, all source code, database architectures, documentation, and deployment assets are fully transferred to your company without proprietary lock-in.",
+        answer: "Ownership, repository access, documentation, and handover terms are agreed in writing for each engagement, including any treatment of third-party or pre-existing materials.",
       },
       {
         question: "Can this system integrate with our existing accounting or POS software?",
@@ -279,7 +279,7 @@ export const detailedServices: ServiceItem[] = [
       },
       {
         question: "What happens if we need changes after launch?",
-        answer: "We provide warranty coverage post-launch for bug fixes and offer flexible monthly maintenance SLAs or dedicated development retainers for continuous feature iterations.",
+        answer: "Warranty coverage and duration, defect handling, maintenance, and any response targets must be stated in the written project or support agreement.",
       },
     ],
     relatedServiceSlugs: ["crm-systems", "erp-solutions", "ai-workflow-automation", "custom-web-applications"],
@@ -335,7 +335,7 @@ export const detailedServices: ServiceItem[] = [
     ],
     suitableFor: [
       "B2B service firms receiving high volumes of repetitive inquiries",
-      "E-commerce brands needing 24/7 customer support triage",
+      "E-commerce teams planning customer support triage",
       "Logistics and accounting teams processing thousands of invoices monthly",
       "Agencies wanting automated client reporting and onboarding pipelines",
     ],
@@ -631,7 +631,7 @@ export const detailedServices: ServiceItem[] = [
       },
       {
         question: "Do you guarantee #1 ranking on Google?",
-        answer: "No. We explicitly do not make false guarantees. Google's search algorithms use hundreds of proprietary signals. We provide rigorous, data-backed optimization according to Google's published Search Quality Guidelines to maximize your visibility ethically and sustainably.",
+        answer: "No. Search rankings depend on many factors outside a site's implementation. Technical and content work can address identifiable issues, but no ranking or traffic result is promised.",
       },
       {
         question: "How do you measure SEO success?",
@@ -801,11 +801,11 @@ export const detailedServices: ServiceItem[] = [
     faqs: [
       {
         question: "How do your writers understand our complex technical software?",
-        answer: "We assign writers with technical backgrounds who review your product documentation, conduct focused stakeholder interviews, and test your software firsthand before drafting copy.",
+        answer: "Content review methods—such as reviewing product documentation or speaking with stakeholders—are selected for the project scope and available access.",
       },
       {
         question: "Do you use AI tools to generate our website copy?",
-        answer: "We do not produce unedited, generic AI copy. While we may use assistive tools for research synthesis or keyword clustering, all final copy is strategically written, fact-checked, and polished by human writers with domain expertise.",
+        answer: "Any use of AI assistance, human review, and fact-checking is defined for the content engagement. Technical claims should be supported by sources and approved before publication.",
       },
       {
         question: "Can you write case studies if client names must remain confidential under NDA?",
@@ -813,7 +813,7 @@ export const detailedServices: ServiceItem[] = [
       },
       {
         question: "How many revision rounds are included?",
-        answer: "All copy projects include two comprehensive rounds of revisions to ensure voice, technical precision, and positioning align seamlessly with your vision.",
+        answer: "Revision rounds and approval steps are defined in the written project scope; no standard number is implied here.",
       },
     ],
     relatedServiceSlugs: ["business-websites-ecommerce", "seo-growth-strategy", "custom-software-development"],
@@ -861,7 +861,7 @@ export function getServiceBySlug(slug: string): ServiceItem | undefined {
               detail: "Confirm supported APIs, data ownership, and failure handling with each relevant provider.",
             },
             {
-              title: "100% Intellectual Property Handoff",
+              title: "Ownership & Handover",
               detail: "Code and project asset ownership and handover follow the terms agreed in the project contract.",
             },
             {
@@ -917,7 +917,7 @@ export function getServiceBySlug(slug: string): ServiceItem | undefined {
           },
           {
             question: `Do we own all the code and assets for ${sub.title}?`,
-            answer: `Yes, 100%. Upon final project sign-off, all source code, assets, and documentation are transferred fully to your organization with zero proprietary licensing restrictions.`,
+            answer: `Ownership, repository access, and handover terms for code, assets, and documentation are defined in the written project agreement.`,
           },
           {
             question: "How do you manage communication with remote international clients?",

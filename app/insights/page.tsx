@@ -14,7 +14,7 @@ export default function InsightsPage() {
   return (
     <div className="flex flex-col w-full bg-brand-background  text-brand-text">
       {/* Header Banner */}
-      <section className="relative py-16 md:py-20 bg-brand-surface border-b border-brand-border">
+      <section className="page-hero relative py-16 md:py-20 bg-brand-surface border-b border-brand-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-[0.72px] bg-brand-card  text-brand-text border border-brand-border">
@@ -25,7 +25,7 @@ export default function InsightsPage() {
               Insights, Frameworks & Case Notes
             </h1>
             <p className="text-base sm:text-lg text-brand-muted leading-relaxed">
-              No generic fluff or superficial marketing listicles. We share pragmatic architectural frameworks, total cost of ownership models, and lessons learned building production software.
+              Practical writing on architecture, cost trade-offs, automation, and web engineering. Articles offer general guidance, not measured client outcomes or performance guarantees.
             </p>
           </div>
         </div>

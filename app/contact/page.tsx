@@ -1,13 +1,13 @@
 import React from "react";
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact/ContactForm";
-import { siteConfig } from "@/lib/site-config";
+import { getWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import {
   Mail,
   Phone,
   MapPin,
   Clock,
-  ShieldCheck,
+  AlertCircle,
   ExternalLink,
 } from "lucide-react";
 
@@ -18,10 +18,19 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const whatsAppUrl = getWhatsAppUrl();
+  const hasDirectContact = Boolean(
+    siteConfig.contact.email ||
+      siteConfig.contact.phone ||
+      siteConfig.contact.address.label ||
+      siteConfig.contact.workingHours ||
+      whatsAppUrl,
+  );
+
   return (
     <div className="flex flex-col w-full bg-brand-background  text-brand-text">
       {/* Header Banner */}
-      <section className="relative py-16 md:py-20 bg-brand-surface border-b border-brand-border">
+      <section className="page-hero relative py-16 md:py-20 bg-brand-surface border-b border-brand-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-[0.72px] bg-brand-card  text-brand-text border border-brand-border">
@@ -49,6 +58,7 @@ export default function ContactPage() {
           {/* Right Direct Details (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
             {/* WhatsApp Quick Channel Card */}
+            {whatsAppUrl && (
             <div className="p-6 rounded-[24px] bg-brand-card border border-brand-border space-y-4 shadow-md shadow-brand-background/20">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-brand-background border border-brand-border  text-brand-text flex items-center justify-center">
@@ -65,11 +75,11 @@ export default function ContactPage() {
               </div>
 
               <p className="text-xs text-brand-muted leading-relaxed">
-                Need a rapid preliminary conversation? Reach our technical desk directly on WhatsApp for quick scoping questions and availability.
+                Open WhatsApp to start a conversation. Review the prefilled draft there, then choose whether to send it.
               </p>
 
               <a
-                href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
+                href={whatsAppUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-3 rounded-lg font-semibold text-brand-background  bg-brand-accent hover:bg-brand-accent-hover transition-colors text-xs text-center inline-flex items-center justify-center gap-2 shadow-md shadow-brand-background/20"
@@ -78,6 +88,7 @@ export default function ContactPage() {
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
+            )}
 
             {/* Direct Channels */}
             <div className="p-6 rounded-[24px] bg-brand-card border border-brand-border space-y-5 shadow-md shadow-brand-background/20">
@@ -86,70 +97,85 @@ export default function ContactPage() {
               </h3>
 
               <div className="space-y-4 text-xs font-mono">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-brand-background border border-brand-border  text-brand-text flex-shrink-0 mt-0.5">
-                    <Mail className="w-4 h-4" />
+                {siteConfig.contact.email && (
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-lg bg-brand-background border border-brand-border text-brand-text flex-shrink-0 mt-0.5">
+                      <Mail className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-brand-muted block text-[11px]">Official Email</span>
+                      <a
+                        href={`mailto:${siteConfig.contact.email}`}
+                        className="text-brand-text hover:text-brand-text font-medium transition-colors"
+                      >
+                        {siteConfig.contact.email}
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <span className="text-brand-muted block text-[11px]">Official Email</span>
-                    <a
-                      href={`mailto:${siteConfig.contact.email}`}
-                      className="text-brand-text hover:text-brand-text font-medium transition-colors"
-                    >
-                      {siteConfig.contact.email}
-                    </a>
-                  </div>
-                </div>
+                )}
 
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-brand-background border border-brand-border  text-brand-text flex-shrink-0 mt-0.5">
-                    <Phone className="w-4 h-4" />
+                {siteConfig.contact.phone && (
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-lg bg-brand-background border border-brand-border text-brand-text flex-shrink-0 mt-0.5">
+                      <Phone className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-brand-muted block text-[11px]">Direct Telephone</span>
+                      <a
+                        href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
+                        className="text-brand-text hover:text-brand-text font-medium transition-colors"
+                      >
+                        {siteConfig.contact.phone}
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <span className="text-brand-muted block text-[11px]">Direct Telephone</span>
-                    <a
-                      href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
-                      className="text-brand-text hover:text-brand-text font-medium transition-colors"
-                    >
-                      {siteConfig.contact.phone}
-                    </a>
-                  </div>
-                </div>
+                )}
 
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-brand-background border border-brand-border  text-brand-text flex-shrink-0 mt-0.5">
-                    <MapPin className="w-4 h-4" />
+                {siteConfig.contact.address.label && (
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-lg bg-brand-background border border-brand-border text-brand-text flex-shrink-0 mt-0.5">
+                      <MapPin className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-brand-muted block text-[11px]">Operational Hub</span>
+                      <p className="text-brand-text leading-relaxed">
+                        {siteConfig.contact.address.city}
+                        {siteConfig.contact.address.city && siteConfig.contact.address.country ? ", " : ""}
+                        {siteConfig.contact.address.country} ({siteConfig.contact.address.label})
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <span className="text-brand-muted block text-[11px]">Operational Hub</span>
-                    <p className="text-brand-text leading-relaxed">
-                      {siteConfig.contact.address.city}, {siteConfig.contact.address.country} ({siteConfig.contact.address.label})
-                    </p>
-                  </div>
-                </div>
+                )}
 
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-brand-background border border-brand-border  text-brand-text flex-shrink-0 mt-0.5">
-                    <Clock className="w-4 h-4" />
+                {siteConfig.contact.workingHours && (
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-lg bg-brand-background border border-brand-border text-brand-text flex-shrink-0 mt-0.5">
+                      <Clock className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-brand-muted block text-[11px]">Engineering Hours</span>
+                      <p className="text-brand-text leading-relaxed">
+                        {siteConfig.contact.workingHours}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <span className="text-brand-muted block text-[11px]">Engineering Hours</span>
-                    <p className="text-brand-text leading-relaxed">
-                      {siteConfig.contact.workingHours}
-                    </p>
-                  </div>
-                </div>
+                )}
+                {!hasDirectContact && (
+                  <p className="text-brand-muted">
+                    Verified direct contact details are not currently published.
+                  </p>
+                )}
               </div>
             </div>
 
-            {/* Bilateral NDA Notice */}
+            {/* Sensitive Information Notice */}
             <div className="p-6 rounded-[24px] bg-brand-card border border-brand-border space-y-3 shadow-md shadow-brand-background/20">
               <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.72px] text-brand-text">
-                <ShieldCheck className="w-4 h-4" />
-                <span>NDA & Confidentiality</span>
+                <AlertCircle className="w-4 h-4" />
+                <span>Sharing Sensitive Information</span>
               </div>
               <p className="text-xs text-brand-muted leading-relaxed">
-                Prior to receiving sensitive business datasets, proprietary workflow schemas, or legacy code access, we execute a bilateral Non-Disclosure Agreement (NDA) under standard international legal governance.
+                Do not include passwords, sensitive personal information, or proprietary material in this form. Before sharing sensitive project details through any channel, confirm the recipient and applicable confidentiality terms.
               </p>
             </div>
           </div>

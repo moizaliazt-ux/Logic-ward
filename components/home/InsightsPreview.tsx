@@ -29,41 +29,61 @@ export function InsightsPreview() {
           </Link>
         </div>
 
-        {/* 3 Featured Articles Grid (PRD § 5.12) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {articlesData.slice(0, 3).map((article) => (
-            <Link
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
+          {articlesData.slice(0, 1).map((article) => (
+            <article
               key={article.id}
-              href={`/insights/${article.slug}`}
-              className="p-7 rounded-2xl bg-brand-card border border-brand-border hover:border-brand-accent/50 hover:shadow-sm transition-all flex flex-col justify-between space-y-5 group"
+              className="border-y border-brand-border py-7 sm:py-9 lg:col-span-7"
             >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between text-xs text-brand-muted font-mono">
-                  <span className="px-2.5 py-0.5 rounded bg-brand-surface  text-brand-accent border border-brand-border font-semibold">
-                    {article.category}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" />
-                    <span>{getArticleReadTime(article)}</span>
-                  </span>
-                </div>
-
-                <div className="space-y-2">
-                  <h3 className="text-lg font-bold text-brand-text group-hover:text-brand-accent transition-colors leading-snug">
-                    {article.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-brand-secondary leading-relaxed line-clamp-3">
-                    {article.excerpt}
-                  </p>
-                </div>
+              <div className="flex items-center gap-4 text-xs font-mono text-brand-muted">
+                <span className="text-brand-accent">{article.category}</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+                  {getArticleReadTime(article)}
+                </span>
               </div>
-
-              <div className="pt-4 border-t border-brand-border flex items-center justify-between text-xs font-semibold text-brand-accent">
-                <span>Read Full Article</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </Link>
+              <h3 className="mt-5 max-w-3xl text-2xl font-semibold leading-tight tracking-tight text-brand-text sm:text-3xl">
+                <Link
+                  href={`/insights/${article.slug}`}
+                  className="transition-colors hover:text-brand-accent"
+                >
+                  {article.title}
+                </Link>
+              </h3>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-brand-secondary">
+                {article.excerpt}
+              </p>
+              <Link
+                href={`/insights/${article.slug}`}
+                className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand-accent hover:text-brand-text"
+              >
+                Read the article
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </article>
           ))}
+
+          <div className="divide-y divide-brand-border border-y border-brand-border lg:col-span-5">
+            {articlesData.slice(1, 4).map((article) => (
+              <article key={article.id} className="py-5">
+                <div className="flex items-center gap-3 text-[11px] font-mono text-brand-muted">
+                  <span className="text-brand-accent">{article.category}</span>
+                  <span>{getArticleReadTime(article)}</span>
+                </div>
+                <h3 className="mt-2 text-base font-semibold leading-snug text-brand-text">
+                  <Link
+                    href={`/insights/${article.slug}`}
+                    className="transition-colors hover:text-brand-accent"
+                  >
+                    {article.title}
+                  </Link>
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-brand-secondary">
+                  {article.excerpt}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

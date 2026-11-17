@@ -17,9 +17,11 @@ import {
   getAllServiceSlugs,
   getRelatedServices,
 } from "@/lib/data/services";
-import { siteConfig } from "@/lib/site-config";
+import { getWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { ConversionCTA } from "@/components/home/ConversionCTA";
+
+export const instant = false;
 
 export async function generateStaticParams() {
   const slugs = getAllServiceSlugs();
@@ -69,6 +71,9 @@ export default async function ServiceDetailPage({
   }
 
   const relatedServices = getRelatedServices(service.relatedServiceSlugs);
+  const whatsAppUrl = getWhatsAppUrl(
+    `Hello Logicward, I am interested in scoping ${service.title}.`,
+  );
 
   const breadcrumbs = [
     { name: "Home", url: siteConfig.url },
@@ -87,7 +92,7 @@ export default async function ServiceDetailPage({
       <BreadcrumbJsonLd items={breadcrumbs} />
 
       {/* 1. Breadcrumbs & 2. Service-Specific Hero & CTA (PRD § 6.2) */}
-      <section className="relative py-14 md:py-20 bg-brand-surface  text-brand-text border-b border-brand-border">
+      <section className="page-hero relative py-14 md:py-20 bg-brand-surface text-brand-text border-b border-brand-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Breadcrumb Navigation */}
           <nav
@@ -122,19 +127,18 @@ export default async function ServiceDetailPage({
                 {service.heroSubheadline}
               </p>
 
-              {/* Scope Checklist */}
               <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-mono text-brand-secondary">
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-brand-accent" />
-                  <span>Contractual IP Handover</span>
+                  <span>Deliverables set in scope</span>
                 </span>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-brand-accent" />
-                  <span>Documented TRD Specifications</span>
+                  <span>Review cadence agreed</span>
                 </span>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-brand-accent" />
-                  <span>Staging Demonstrations</span>
+                  <span>Handover terms documented</span>
                 </span>
               </div>
 
@@ -146,22 +150,24 @@ export default async function ServiceDetailPage({
                   <span>Request Scoping for this Service</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-                <a
-                  href={`https://wa.me/${siteConfig.contact.whatsappNumber}?text=Hello%20Logicward,%20I%20am%20interested%20in%20scoping%20${encodeURIComponent(service.title)}.`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-5 py-3 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-text bg-brand-card border border-brand-border hover:bg-brand-elevated transition-colors inline-flex items-center gap-2"
-                >
-                  <PhoneCall className="w-4 h-4 text-brand-accent" />
-                  <span>WhatsApp Inquiry</span>
-                </a>
+                {whatsAppUrl && (
+                  <a
+                    href={whatsAppUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-3 rounded-lg text-sm font-semibold text-brand-secondary hover:text-brand-text bg-brand-card border border-brand-border hover:bg-brand-elevated transition-colors inline-flex items-center gap-2"
+                  >
+                    <PhoneCall className="w-4 h-4 text-brand-accent" />
+                    <span>WhatsApp Inquiry</span>
+                  </a>
+                )}
               </div>
             </div>
 
             {/* Quick Service Specification Card */}
             <div className="lg:col-span-4 p-6 rounded-2xl bg-brand-card border border-brand-border text-xs font-mono space-y-4 shadow-md">
               <span className="text-brand-accent uppercase font-bold tracking-wider block">
-                DELIVERY FRAMEWORK
+                SCOPE & DELIVERY NOTES
               </span>
               <div className="space-y-2.5 text-brand-secondary">
                 <div className="flex justify-between border-b border-brand-border pb-1.5">
@@ -170,15 +176,15 @@ export default async function ServiceDetailPage({
                 </div>
                 <div className="flex justify-between border-b border-brand-border pb-1.5">
                   <span className="text-brand-muted">ENGAGEMENT:</span>
-                  <span className="text-brand-text font-semibold">Fixed Milestone / Sprint</span>
+                  <span className="text-brand-text font-semibold">Agreed per project</span>
                 </div>
                 <div className="flex justify-between border-b border-brand-border pb-1.5">
-                  <span className="text-brand-muted">IP TRANSFER:</span>
-                  <span className="text-brand-accent font-semibold">100% Client Title</span>
+                  <span className="text-brand-muted">OWNERSHIP:</span>
+                  <span className="text-brand-text font-semibold">Written agreement</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-brand-muted">REVIEWS:</span>
-                  <span className="text-brand-text font-semibold">Bi-Weekly Staging Demos</span>
+                  <span className="text-brand-text font-semibold">Agreed cadence</span>
                 </div>
               </div>
             </div>
@@ -364,24 +370,24 @@ export default async function ServiceDetailPage({
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <ol className="divide-y divide-brand-border border-y border-brand-border">
               {service.process.map((step) => (
-                <div
+                <li
                   key={step.step}
-                  className="p-5 rounded-xl bg-brand-surface border border-brand-border space-y-2"
+                  className="grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-2 py-5 sm:grid-cols-[3rem_minmax(12rem,0.8fr)_2fr] sm:gap-6"
                 >
-                  <span className="text-xl font-mono font-bold text-brand-accent">
-                    0{step.step}
+                  <span className="pt-1 font-mono text-sm text-brand-accent">
+                    {String(step.step).padStart(2, "0")}
                   </span>
-                  <h4 className="text-sm font-bold text-brand-text">
+                  <h4 className="text-sm font-semibold text-brand-text">
                     {step.title}
                   </h4>
-                  <p className="text-xs text-brand-secondary leading-relaxed">
+                  <p className="col-start-2 text-sm leading-6 text-brand-secondary sm:col-start-auto">
                     {step.summary}
                   </p>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
 
           {/* 9. Relevant case study or clearly labelled demonstration (PRD § 6.2 part 9) */}
@@ -462,26 +468,28 @@ export default async function ServiceDetailPage({
                 </Link>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="divide-y divide-brand-border border-y border-brand-border">
                 {relatedServices.map((rel) => (
                   <Link
                     key={rel.slug}
                     href={`/services/${rel.slug}`}
-                    className="p-6 rounded-2xl bg-brand-card border border-brand-border hover:border-brand-accent/50 hover:shadow-sm transition-all space-y-3 block group"
+                    className="group grid min-h-24 grid-cols-1 gap-2 py-5 transition-colors hover:bg-brand-card/60 sm:grid-cols-[minmax(12rem,0.8fr)_2fr_auto] sm:items-center sm:gap-6 sm:px-3"
                   >
-                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-brand-surface  text-brand-muted border border-brand-border">
-                      {rel.categoryName}
+                    <span className="space-y-1">
+                      <span className="block text-[10px] font-mono uppercase tracking-wider text-brand-muted">
+                        {rel.categoryName}
+                      </span>
+                      <span className="block text-base font-semibold text-brand-text transition-colors group-hover:text-brand-accent">
+                        {rel.title}
+                      </span>
                     </span>
-                    <h4 className="text-base font-bold text-brand-text group-hover:text-brand-accent transition-colors">
-                      {rel.title}
-                    </h4>
-                    <p className="text-xs text-brand-secondary leading-relaxed line-clamp-2">
+                    <span className="text-sm leading-6 text-brand-secondary">
                       {rel.shortDescription}
-                    </p>
-                    <div className="pt-2 text-xs font-semibold text-brand-accent inline-flex items-center gap-1">
-                      <span>Inspect Details</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </div>
+                    </span>
+                    <ArrowRight
+                      aria-hidden="true"
+                      className="hidden h-4 w-4 text-brand-muted transition-transform group-hover:translate-x-1 group-hover:text-brand-accent sm:block"
+                    />
                   </Link>
                 ))}
               </div>

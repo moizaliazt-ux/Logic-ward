@@ -17,7 +17,7 @@ import {
   PenTool,
   PhoneCall,
 } from "lucide-react";
-import { siteConfig } from "@/lib/site-config";
+import { getWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import { serviceCategories } from "@/lib/data/services";
 import { industriesData } from "@/lib/data/industries";
 import { solutionsData } from "@/lib/data/solutions";
@@ -36,6 +36,7 @@ export function Navbar() {
 
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const whatsAppUrl = getWhatsAppUrl();
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -78,12 +79,12 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full pt-3 px-3 sm:px-6">
+    <header className="sticky top-0 z-50 w-full border-b border-brand-border bg-brand-background px-4 sm:px-6">
       <nav
-        className={`max-w-7xl mx-auto rounded-xl transition-all duration-300 border ${
+        className={`mx-auto max-w-7xl transition-all duration-300 ${
           scrolled
-            ? "bg-brand-surface border-brand-border shadow-md py-2.5 px-4 sm:px-6"
-            : "bg-brand-surface border-brand-border shadow-sm py-3 px-5 sm:px-6"
+            ? "py-2.5"
+            : "py-4"
         }`}
         aria-label="Main Navigation"
       >
@@ -112,6 +113,12 @@ export function Navbar() {
               className="relative"
               onMouseEnter={() => setServicesDropdownOpen(true)}
               onMouseLeave={() => setServicesDropdownOpen(false)}
+              onFocus={() => setServicesDropdownOpen(true)}
+              onBlur={(event) => {
+                if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) {
+                  setServicesDropdownOpen(false);
+                }
+              }}
             >
               <Link
                 href="/services"
@@ -147,7 +154,7 @@ export function Navbar() {
                         href="/services"
                         className="text-xs font-semibold text-brand-text hover:text-brand-accent inline-flex items-center gap-1 group"
                       >
-                        <span>View All 40+ Services</span>
+                        <span>Explore the service directory</span>
                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                       </Link>
                     </div>
@@ -205,6 +212,12 @@ export function Navbar() {
               className="relative"
               onMouseEnter={() => setSolutionsDropdownOpen(true)}
               onMouseLeave={() => setSolutionsDropdownOpen(false)}
+              onFocus={() => setSolutionsDropdownOpen(true)}
+              onBlur={(event) => {
+                if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) {
+                  setSolutionsDropdownOpen(false);
+                }
+              }}
             >
               <Link
                 href="/solutions"
@@ -232,7 +245,7 @@ export function Navbar() {
                     {solutionsData.slice(0, 6).map((sol) => (
                       <Link
                         key={sol.id}
-                        href={`/solutions#${sol.id}`}
+                        href={`/solutions#${sol.slug}`}
                         className="px-3 py-1.5 rounded-lg text-xs text-brand-secondary hover:text-brand-text hover:bg-brand-elevated transition-colors block"
                       >
                         {sol.title}
@@ -257,6 +270,12 @@ export function Navbar() {
               className="relative"
               onMouseEnter={() => setIndustriesDropdownOpen(true)}
               onMouseLeave={() => setIndustriesDropdownOpen(false)}
+              onFocus={() => setIndustriesDropdownOpen(true)}
+              onBlur={(event) => {
+                if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) {
+                  setIndustriesDropdownOpen(false);
+                }
+              }}
             >
               <Link
                 href="/industries"
@@ -321,6 +340,12 @@ export function Navbar() {
               className="relative"
               onMouseEnter={() => setCompanyDropdownOpen(true)}
               onMouseLeave={() => setCompanyDropdownOpen(false)}
+              onFocus={() => setCompanyDropdownOpen(true)}
+              onBlur={(event) => {
+                if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) {
+                  setCompanyDropdownOpen(false);
+                }
+              }}
             >
               <Link
                 href="/company"
@@ -364,7 +389,7 @@ export function Navbar() {
                       href="/contact"
                       className="px-3 py-1.5 rounded-lg text-xs text-brand-secondary hover:text-brand-text hover:bg-brand-elevated transition-colors block"
                     >
-                      Careers & Inquiries
+                      Project inquiries
                     </Link>
                   </div>
                 </div>
@@ -398,16 +423,18 @@ export function Navbar() {
 
           {/* Action Buttons: WhatsApp & Start a Project CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <a
-              href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-mono font-medium text-brand-secondary hover:text-brand-text px-3 py-2 rounded-lg border border-brand-border  bg-brand-card hover:bg-brand-elevated transition-colors flex items-center gap-1.5"
-              title="Direct WhatsApp Inquiry"
-            >
-              <PhoneCall className="w-3.5 h-3.5 text-brand-accent" />
-              <span>WhatsApp</span>
-            </a>
+            {whatsAppUrl && (
+              <a
+                href={whatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-mono font-medium text-brand-secondary hover:text-brand-text px-3 py-2 rounded-lg border border-brand-border bg-brand-card hover:bg-brand-elevated transition-colors flex items-center gap-1.5"
+                title="Direct WhatsApp Inquiry"
+              >
+                <PhoneCall className="w-3.5 h-3.5 text-brand-accent" />
+                <span>WhatsApp</span>
+              </a>
+            )}
 
             <Link
               href="/contact"
@@ -428,9 +455,10 @@ export function Navbar() {
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-brand-muted hover:text-brand-text hover:bg-brand-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
+              className="min-h-11 min-w-11 rounded-lg text-brand-muted transition-colors hover:text-brand-text hover:bg-brand-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -439,8 +467,12 @@ export function Navbar() {
       </nav>
 
       {/* Mobile Drawer with Accessible Accordions */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden mt-2 max-w-7xl mx-auto rounded-2xl bg-brand-card border border-brand-border p-5 space-y-4 shadow-md">
+      <div
+        id="mobile-navigation"
+        hidden={!mobileMenuOpen}
+        className="lg:hidden mx-auto max-h-[calc(100dvh-5rem)] max-w-7xl overflow-y-auto rounded-b-2xl border border-t-0 border-brand-border bg-brand-card p-5 shadow-md"
+      >
+          <div className="space-y-4">
           <div className="space-y-1 text-sm">
             <Link
               href="/"
@@ -456,6 +488,8 @@ export function Navbar() {
               <button
                 onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
                 className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-brand-secondary hover:text-brand-text"
+                aria-expanded={mobileServicesOpen}
+                aria-controls="mobile-services"
               >
                 <span>Services (All Disciplines)</span>
                 <ChevronDown
@@ -464,8 +498,7 @@ export function Navbar() {
                   }`}
                 />
               </button>
-              {mobileServicesOpen && (
-                <div className="pl-4 py-1 space-y-1 border-l border-brand-border ml-3 text-xs text-brand-muted">
+              <div id="mobile-services" hidden={!mobileServicesOpen} className="pl-4 py-1 space-y-1 border-l border-brand-border ml-3 text-xs text-brand-muted">
                   {serviceCategories.map((cat) => (
                     <Link
                       key={cat.id}
@@ -479,10 +512,9 @@ export function Navbar() {
                     href="/services"
                     className="block py-1.5 font-semibold text-brand-accent"
                   >
-                    View All 40+ Services →
+                    Explore all service areas →
                   </Link>
-                </div>
-              )}
+              </div>
             </div>
 
             {/* Mobile Solutions Accordion */}
@@ -490,6 +522,8 @@ export function Navbar() {
               <button
                 onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
                 className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-brand-secondary hover:text-brand-text"
+                aria-expanded={mobileSolutionsOpen}
+                aria-controls="mobile-solutions"
               >
                 <span>Solutions & Platforms</span>
                 <ChevronDown
@@ -498,12 +532,11 @@ export function Navbar() {
                   }`}
                 />
               </button>
-              {mobileSolutionsOpen && (
-                <div className="pl-4 py-1 space-y-1 border-l border-brand-border ml-3 text-xs text-brand-muted">
+              <div id="mobile-solutions" hidden={!mobileSolutionsOpen} className="pl-4 py-1 space-y-1 border-l border-brand-border ml-3 text-xs text-brand-muted">
                   {solutionsData.slice(0, 5).map((sol) => (
                     <Link
                       key={sol.id}
-                      href={`/solutions#${sol.id}`}
+                      href={`/solutions#${sol.slug}`}
                       className="block py-1.5 hover:text-brand-text"
                     >
                       {sol.title}
@@ -515,8 +548,7 @@ export function Navbar() {
                   >
                     View All 10 Solutions →
                   </Link>
-                </div>
-              )}
+              </div>
             </div>
 
             {/* Mobile Industries Accordion */}
@@ -524,6 +556,8 @@ export function Navbar() {
               <button
                 onClick={() => setMobileIndustriesOpen(!mobileIndustriesOpen)}
                 className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-brand-secondary hover:text-brand-text"
+                aria-expanded={mobileIndustriesOpen}
+                aria-controls="mobile-industries"
               >
                 <span>Target Industries</span>
                 <ChevronDown
@@ -532,8 +566,7 @@ export function Navbar() {
                   }`}
                 />
               </button>
-              {mobileIndustriesOpen && (
-                <div className="pl-4 py-1 space-y-1 border-l border-brand-border ml-3 text-xs text-brand-muted">
+              <div id="mobile-industries" hidden={!mobileIndustriesOpen} className="pl-4 py-1 space-y-1 border-l border-brand-border ml-3 text-xs text-brand-muted">
                   {industriesData.map((ind) => (
                     <Link
                       key={ind.id}
@@ -543,8 +576,7 @@ export function Navbar() {
                       {ind.name}
                     </Link>
                   ))}
-                </div>
-              )}
+              </div>
             </div>
 
             <Link
@@ -599,18 +631,20 @@ export function Navbar() {
             >
               Start a Project
             </Link>
-            <a
-              href={`https://wa.me/${siteConfig.contact.whatsappNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-2 text-center text-xs font-mono rounded-lg bg-brand-surface border border-brand-border  text-brand-secondary flex items-center justify-center gap-1.5"
-            >
-              <PhoneCall className="w-3.5 h-3.5 text-brand-accent" />
-              <span>WhatsApp Direct</span>
-            </a>
+            {whatsAppUrl && (
+              <a
+                href={whatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2 text-center text-xs font-mono rounded-lg bg-brand-surface border border-brand-border text-brand-secondary flex items-center justify-center gap-1.5"
+              >
+                <PhoneCall className="w-3.5 h-3.5 text-brand-accent" />
+                <span>WhatsApp Direct</span>
+              </a>
+            )}
           </div>
-        </div>
-      )}
+      </div>
+      </div>
     </header>
   );
 }

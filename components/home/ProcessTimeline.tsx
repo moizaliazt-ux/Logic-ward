@@ -16,7 +16,7 @@ export function ProcessTimeline() {
       title: "Discover",
       subtitle: "Users, Goals & Constraints",
       description:
-        "We interview your stakeholders, audit existing operational bottlenecks, inspect legacy databases, and clarify core business objectives before writing any code.",
+        "Understand the people, current workflows, systems, constraints, and outcomes the project needs to address.",
     },
     {
       step: "02",
@@ -24,7 +24,7 @@ export function ProcessTimeline() {
       title: "Define",
       subtitle: "Scope & Acceptance Criteria",
       description:
-        "We document detailed technical requirements (TRD), database schema normalizations, API contracts, milestone roadmaps, and agreed acceptance criteria.",
+        "Agree the requirements, boundaries, dependencies, deliverables, and acceptance criteria that belong in the project scope.",
     },
     {
       step: "03",
@@ -32,7 +32,7 @@ export function ProcessTimeline() {
       title: "Design",
       subtitle: "Flows & Prototypes",
       description:
-        "We create clickable desktop and mobile Figma prototypes, establishing design tokens, typography hierarchy, and validated user journeys for client approval.",
+        "Map user journeys, data flows, and interface structure; create prototypes when they help resolve important decisions.",
     },
     {
       step: "04",
@@ -40,7 +40,7 @@ export function ProcessTimeline() {
       title: "Build",
       subtitle: "Iterative Sprints & Demos",
       description:
-        "Bi-weekly development sprints with continuous integration. You test working software increments directly on private staging servers and provide feedback early.",
+        "Implement against the agreed scope. The review cadence, release approach, and any staging environment are confirmed for the engagement.",
     },
     {
       step: "05",
@@ -48,7 +48,7 @@ export function ProcessTimeline() {
       title: "Validate & Launch",
       subtitle: "QA, Security & Handover",
       description:
-        "Quality assurance, agreed security checks, data migration, deployment planning, and source-code and IP handover.",
+        "Test against agreed acceptance criteria and plan release, data migration, and handover where they are included in scope.",
     },
     {
       step: "06",
@@ -56,62 +56,53 @@ export function ProcessTimeline() {
       title: "Improve",
       subtitle: "Support & Enhancements",
       description:
-        "Monitoring, backups, security updates, and enhancements can be scoped under a defined post-launch support agreement.",
+        "Maintenance, monitoring, backups, and enhancements can be discussed separately and provided only under agreed support terms.",
     },
   ];
 
   return (
-    <section className="py-20 md:py-28 bg-brand-surface border-b border-brand-border">
+    <section className="border-b border-brand-border bg-brand-surface py-20 md:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
           <span className="text-xs font-mono font-semibold uppercase tracking-wider text-brand-accent">
-            PREDICTABLE ENGINEERING LIFECYCLE
+            PROJECT DELIVERY APPROACH
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-brand-text tracking-tight">
-            Our 6-Stage Delivery Process
+            A clear path from discovery to handover
           </h2>
           <p className="text-sm sm:text-base text-brand-secondary leading-relaxed">
-            A documented delivery approach helps surface risks, manage scope, and coordinate work against the schedule agreed for each project.
+            The sequence is a planning framework. Activities, deliverables, timing, and review points depend on the written project scope.
           </p>
         </div>
 
-        {/* 6 Step Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
-          {steps.map((item, index) => (
-            <div
-              key={index}
-              className="p-7 rounded-2xl bg-brand-card border border-brand-border hover:border-brand-accent/50 hover:shadow-sm transition-all flex flex-col justify-between space-y-4 group"
+        <ol className="divide-y divide-brand-border border-y border-brand-border">
+          {steps.map((item) => (
+            <li
+              key={item.step}
+              className="grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-3 py-5 sm:grid-cols-[3rem_minmax(11rem,0.8fr)_2fr] sm:items-start sm:gap-6 sm:py-6"
             >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-brand-elevated border border-brand-border flex items-center justify-center group-hover:border-brand-accent transition-colors">
-                    {item.icon}
-                  </div>
-                  <span className="text-2xl font-bold font-mono text-brand-secondary group-hover:text-brand-accent/30 transition-colors">
-                    {item.step}
-                  </span>
-                </div>
-
+              <span className="pt-1 font-mono text-sm text-brand-accent">
+                {item.step}
+              </span>
+              <div className="flex items-start gap-3">
+                <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-brand-border bg-brand-card">
+                  {item.icon}
+                </span>
                 <div>
-                  <h3 className="text-lg font-bold text-brand-text group-hover:text-brand-accent transition-colors">
+                  <h3 className="text-base font-semibold text-brand-text">
                     {item.title}
                   </h3>
-                  <p className="text-xs font-semibold text-brand-accent uppercase tracking-wider mt-0.5">
+                  <p className="mt-1 text-[11px] font-mono uppercase tracking-wide text-brand-muted">
                     {item.subtitle}
                   </p>
                 </div>
-
-                <p className="text-xs sm:text-sm text-brand-secondary leading-relaxed">
-                  {item.description}
-                </p>
               </div>
-
-              <div className="pt-3 border-t border-brand-border text-[11px] font-mono text-brand-muted">
-                Stage {item.step} Deliverables Signed Off Prior to Next Phase
-              </div>
-            </div>
+              <p className="col-start-2 text-sm leading-6 text-brand-secondary sm:col-start-auto">
+                {item.description}
+              </p>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

@@ -66,19 +66,25 @@ export function ServiceCategoriesGrid() {
             href="/services"
             className="text-sm font-semibold text-brand-accent hover:text-brand-accent inline-flex items-center gap-1.5 group flex-shrink-0"
           >
-            <span>Explore all 40+ services directory</span>
+            <span>Explore the full service directory</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
         {/* Category Navigation Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 scrollbar-none border-b border-brand-border mb-10">
+        <div
+          role="group"
+          aria-label="Select a service discipline"
+          className="flex items-center gap-2 overflow-x-auto pb-4 scrollbar-none border-b border-brand-border mb-10"
+        >
           {serviceCategories.map((cat) => {
             const isActive = cat.id === activeCategory;
             return (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
+                aria-pressed={isActive}
+                aria-controls="featured-service-list"
                 className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium whitespace-nowrap transition-all flex items-center gap-2 border ${
                   isActive
                     ? "bg-brand-background border-brand-border  text-brand-text font-semibold shadow-sm"
@@ -122,7 +128,7 @@ export function ServiceCategoriesGrid() {
 
             <div className="space-y-3 pt-2 border-t border-brand-border">
               <span className="text-xs font-semibold uppercase tracking-wider text-brand-text block">
-                Delivery Planning:
+                Engagement planning:
               </span>
               <ul className="space-y-2 text-xs sm:text-sm text-brand-secondary">
                 <li className="flex items-center gap-2">
@@ -135,51 +141,47 @@ export function ServiceCategoriesGrid() {
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-brand-accent flex-shrink-0" />
-                  <span>100% intellectual property & code ownership transfer</span>
+                  <span>Ownership terms recorded in the project agreement</span>
                 </li>
               </ul>
             </div>
 
             <div className="pt-2">
               <Link
-                href={`/services/${selectedCategory.featuredSlug}`}
+                href={`/services#${selectedCategory.id}`}
                 className="w-full py-3 rounded-lg text-xs font-bold uppercase tracking-wider text-brand-background bg-brand-accent hover:bg-brand-accent-hover transition-colors flex items-center justify-center gap-2 shadow-sm"
               >
-                <span>View Discipline Architecture Blueprint</span>
+                <span>Browse this discipline</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
 
-          {/* Right Column: Multi-Card Sub-Service Grid */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {selectedCategory.services.slice(0, 6).map((service) => (
+          <div
+            id="featured-service-list"
+            className="lg:col-span-7 divide-y divide-brand-border border-y border-brand-border"
+          >
+            {selectedCategory.services.slice(0, 6).map((service, index) => (
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                className="p-5 rounded-2xl bg-brand-card border border-brand-border hover:border-brand-accent/50 hover:shadow-sm transition-all flex flex-col justify-between space-y-4 group"
+                className="group grid min-h-24 grid-cols-[2.25rem_1fr_auto] items-start gap-4 py-5 transition-colors hover:bg-brand-surface/70 sm:px-3"
               >
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-surface  text-brand-accent border border-brand-border font-semibold">
-                      ENGINEERING BLUEPRINT
-                    </span>
-                    <span className="text-xs text-brand-muted font-mono">
-                      PRODUCTION READY
-                    </span>
-                  </div>
-                  <h4 className="text-base font-bold text-brand-text group-hover:text-brand-accent transition-colors">
+                <span className="pt-1 font-mono text-xs text-brand-muted">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="space-y-2">
+                  <span className="block text-base font-semibold text-brand-text transition-colors group-hover:text-brand-accent">
                     {service.title}
-                  </h4>
-                  <p className="text-xs text-brand-secondary leading-relaxed line-clamp-2">
+                  </span>
+                  <span className="block text-sm leading-relaxed text-brand-secondary">
                     {service.description}
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-brand-border flex items-center justify-between text-xs text-brand-accent font-semibold">
-                  <span>Inspect Service Details</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </div>
+                  </span>
+                </span>
+                <ArrowRight
+                  aria-hidden="true"
+                  className="mt-1 h-4 w-4 text-brand-muted transition-transform group-hover:translate-x-1 group-hover:text-brand-accent"
+                />
               </Link>
             ))}
           </div>

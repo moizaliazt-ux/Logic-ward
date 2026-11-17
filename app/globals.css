@@ -41,25 +41,6 @@
   --tracking-hero-heading: -1.86px;
 
   /* =========================================================================
-     PRD Section 14.4 Spacing Scale
-     ========================================================================= */
-  --spacing-5: 5px;
-  --spacing-6: 6px;
-  --spacing-8: 8px;
-  --spacing-10: 10px;
-  --spacing-12: 12px;
-  --spacing-16: 16px;
-  --spacing-20: 20px;
-  --spacing-24: 24px;
-  --spacing-32: 32px;
-  --spacing-48: 48px;
-  --spacing-64: 64px;
-  --spacing-80: 80px;
-  --spacing-96: 96px;
-  --spacing-112: 112px;
-  --spacing-128: 128px;
-
-  /* =========================================================================
      PRD Section 14.4 Border Radii (Consistent 12px - 20px)
      ========================================================================= */
   --radius-sm: 4px;
@@ -79,6 +60,10 @@
     --foreground: #f5f7fa;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--background);
     color: var(--foreground);
@@ -86,7 +71,25 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    min-width: 320px;
   }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+.page-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--color-brand-surface);
 }
 
 ::-webkit-scrollbar {
@@ -94,12 +97,12 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #111318;
+  background: #171f2b;
 }
 ::-webkit-scrollbar-thumb {
   background: #303947;
   border-radius: 9999px;
-  border: 2px solid #111318;
+  border: 2px solid #171f2b;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #8792a2;
@@ -112,11 +115,15 @@
 
 ::selection {
   color: #f5f7fa;
-  background: rgb(25 197 216 / 25%);
+  background: rgb(25 197 216 / 22%);
 }
 
 /* Respect reduced motion preferences (PRD Section 14.5 & 19) */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

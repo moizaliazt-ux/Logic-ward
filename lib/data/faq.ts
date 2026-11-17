@@ -11,7 +11,7 @@ export const generalAgencyFAQs: FAQItem[] = [
     category: "Engagements & Pricing",
     question: "How do you scope and price projects?",
     answer:
-      "We operate under two transparent engagement models: Fixed-Scope Milestone Pricing (ideal for well-defined websites, management systems, and initial software versions) and Dedicated Engineering Retainers (for ongoing product development, continuous feature iterations, and monthly IT support). Every proposal includes an itemized breakdown of deliverables, technical milestones, and payment schedules with zero hidden fees.",
+      "The engagement model and budget depend on the requirements and delivery constraints. A written proposal should define its deliverables, assumptions, schedule, review points, and fees before work begins.",
   },
   {
     id: "international-delivery-model",
@@ -25,7 +25,7 @@ export const generalAgencyFAQs: FAQItem[] = [
     category: "Security & Legal",
     question: "Who owns the code and intellectual property once a project is finished?",
     answer:
-      "You do—100%. Upon settlement of final milestone payments, full ownership of the source code repository, database schemas, architecture diagrams, and deployment keys is transferred to your organization. We never impose proprietary vendor lock-in or licensing penalties.",
+      "Ownership, licensing, repository access, and handover terms are defined in the written project agreement, including any treatment of third-party or pre-existing materials.",
   },
   {
     id: "ai-automation-scoping",

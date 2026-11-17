@@ -19,6 +19,8 @@ import { siteConfig } from "@/lib/site-config";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { ConversionCTA } from "@/components/home/ConversionCTA";
 
+export const instant = false;
+
 export async function generateStaticParams() {
   return articlesData.map((a) => ({ slug: a.slug }));
 }
@@ -97,7 +99,7 @@ export default async function ArticleDetailPage({
       <BreadcrumbJsonLd items={breadcrumbs} />
 
       {/* Hero Header */}
-      <section className="relative py-14 md:py-20 bg-brand-surface border-b border-brand-border">
+      <section className="page-hero relative py-14 md:py-20 bg-brand-surface border-b border-brand-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Breadcrumbs */}
           <nav
@@ -142,56 +144,68 @@ export default async function ArticleDetailPage({
               {article.excerpt}
             </p>
 
-            {article.author && (
-              <div className="flex items-center gap-3 pt-3 border-t border-brand-border">
-                <div className="w-10 h-10 rounded-full bg-brand-background border border-brand-border flex items-center justify-center font-bold text-xs font-mono text-brand-text">
-                  LW
-                </div>
-                <div className="text-xs font-mono">
-                  <div className="font-semibold text-brand-text">{article.author.name}</div>
-                  <div className="text-brand-muted">{article.author.role}</div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </section>
 
+      <nav
+        aria-label="Article sections"
+        className="mx-auto w-full max-w-7xl px-4 pt-8 sm:px-6 lg:hidden"
+      >
+        <details className="rounded-xl border border-brand-border bg-brand-card">
+          <summary className="flex min-h-12 cursor-pointer items-center gap-2 px-4 text-sm font-semibold text-brand-text">
+            <BookOpen className="h-4 w-4 text-brand-accent" aria-hidden="true" />
+            On this page
+          </summary>
+          <ul className="space-y-2 border-t border-brand-border px-4 py-4 text-sm">
+            {article.tableOfContents.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  className="block py-1 text-brand-secondary transition-colors hover:text-brand-accent"
+                >
+                  {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      </nav>
+
       {/* Main Content Layout */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
           {/* Main Article Body */}
-          <article className="lg:col-span-8 space-y-12">
-            {/* Article summary */}
-            <div className="p-6 rounded-[24px] bg-brand-card border border-brand-border space-y-3 shadow-md shadow-brand-background/20">
-              <span className="text-xs font-mono uppercase tracking-[0.72px] text-brand-text flex items-center gap-1.5">
+          <article className="space-y-10 lg:col-span-8 lg:pr-8">
+            <div className="max-w-[72ch] border-l-2 border-brand-accent py-1 pl-4">
+              <span className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-[0.72px] text-brand-text">
                 <Sparkles className="w-3.5 h-3.5" />
                 In brief
               </span>
-              <p className="text-xs sm:text-sm text-brand-muted">{article.excerpt}</p>
+              <p className="mt-2 text-sm leading-6 text-brand-secondary">{article.excerpt}</p>
             </div>
 
             {/* Structured Sections */}
-            <div className="space-y-12 text-brand-muted leading-relaxed text-sm sm:text-base">
+            <div className="max-w-[72ch] space-y-12 text-base leading-7 text-brand-secondary">
               {article.contentSections.map((sec) => (
                 <div key={sec.id} id={sec.id} className="space-y-4 scroll-mt-24">
-                  <h2 className="text-xl sm:text-2xl font-bold text-brand-text tracking-tight">
+                  <h2 className="text-2xl font-semibold leading-tight tracking-tight text-brand-text sm:text-3xl">
                     {sec.heading}
                   </h2>
-                  <div className="space-y-4 text-brand-muted">
+                  <div className="space-y-5 text-brand-secondary">
                     {sec.paragraphs.map((p, pIdx) => (
                       <p key={pIdx}>{p}</p>
                     ))}
                   </div>
                   {sec.callout && (
-                    <div className="p-5 rounded-xl bg-brand-background border border-brand-border space-y-2 mt-4">
-                      <div className="text-xs font-mono font-bold text-brand-text uppercase tracking-wider">
+                    <aside className="mt-5 space-y-2 border-t border-brand-border pt-4">
+                      <div className="text-xs font-mono font-bold uppercase tracking-wider text-brand-text">
                         {sec.callout.title}
                       </div>
-                      <p className="text-xs text-brand-muted leading-relaxed">
+                      <p className="text-sm leading-6 text-brand-secondary">
                         {sec.callout.body}
                       </p>
-                    </div>
+                    </aside>
                   )}
                 </div>
               ))}
@@ -200,25 +214,27 @@ export default async function ArticleDetailPage({
           </article>
 
           {/* Right Sticky Sidebar */}
-          <div className="lg:col-span-4 space-y-6">
+          <aside className="hidden space-y-6 lg:col-span-4 lg:block">
             {/* Table of Contents */}
-            <div className="p-6 rounded-[24px] bg-brand-card border border-brand-border space-y-4 sticky top-24 shadow-md shadow-brand-background/20">
+            <div className="sticky top-24 space-y-4 rounded-2xl border border-brand-border bg-brand-card p-6">
               <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.72px] text-brand-text">
                 <BookOpen className="w-4 h-4" />
                 <span>Table of Contents</span>
               </div>
-              <ul className="space-y-2 text-xs font-mono">
-                {article.tableOfContents.map((item) => (
-                  <li key={item.id}>
-                    <a
-                      href={`#${item.id}`}
-                      className="text-brand-muted hover:text-brand-text transition-colors block py-0.5 truncate"
-                    >
-                      {item.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <nav aria-label="Article sections">
+                <ul className="space-y-2 text-sm">
+                  {article.tableOfContents.map((item) => (
+                    <li key={item.id}>
+                      <a
+                        href={`#${item.id}`}
+                        className="block py-0.5 text-brand-muted transition-colors hover:text-brand-accent"
+                      >
+                        {item.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
 
               <div className="pt-4 border-t border-brand-border space-y-3">
                 <span className="text-[11px] font-mono text-brand-muted block">
@@ -240,21 +256,21 @@ export default async function ArticleDetailPage({
               <div className="pt-4 border-t border-brand-border">
                 <div className="p-4 rounded-xl bg-brand-background border border-brand-border space-y-2">
                   <h4 className="text-xs font-bold text-brand-text tracking-tight">
-                    Discuss this architecture with our team
+                    Discuss this topic
                   </h4>
                   <p className="text-[11px] text-brand-muted">
-                    Discuss the ideas in this article with the Logicward team.
+                    Send a project inquiry if you want to explore a related question.
                   </p>
                   <Link
                     href="/contact"
                     className="w-full py-2 rounded-lg text-xs font-semibold text-brand-background  bg-brand-accent hover:bg-brand-accent-hover transition-colors block text-center"
                   >
-                    Schedule Consultation
+                    Open the inquiry form
                   </Link>
                 </div>
               </div>
             </div>
-          </div>
+          </aside>
         </div>
       </section>
 

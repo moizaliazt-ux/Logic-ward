@@ -13,6 +13,8 @@ import {
 import { solutionsData } from "@/lib/data/solutions";
 
 export function SolutionsPreview() {
+  const featuredSolution = solutionsData[0];
+
   const getIcon = (id: string) => {
     switch (id) {
       case "erp-enterprise":
@@ -44,7 +46,7 @@ export function SolutionsPreview() {
               Business Systems Tailored to Your Workflows
             </h2>
             <p className="text-sm sm:text-base text-brand-secondary leading-relaxed">
-              We engineer modular ERPs, CRMs, institutional management, and point-of-sale software adapted around your exact organizational hierarchies, tax requirements, and operational logic.
+              Explore example ERP, CRM, institutional, and point-of-sale system outlines. Actual modules, integrations, and requirements are confirmed during project scoping.
             </p>
           </div>
 
@@ -52,73 +54,90 @@ export function SolutionsPreview() {
             href="/solutions"
             className="text-sm font-semibold text-brand-accent hover:text-brand-accent inline-flex items-center gap-1.5 group flex-shrink-0"
           >
-            <span>View all 10 business solution architectures</span>
+            <span>Browse all {solutionsData.length} solution outlines</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
-        {/* 6 Featured Solutions Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {solutionsData.slice(0, 6).map((solution) => (
-            <div
-              key={solution.id}
-              className="p-7 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-accent/50 hover:bg-brand-elevated hover:shadow-sm transition-all flex flex-col justify-between space-y-5 group"
-            >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-brand-card border border-brand-border flex items-center justify-center group-hover:border-brand-accent transition-colors shadow-2xs">
-                    {getIcon(solution.id)}
-                  </div>
-                  <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded bg-brand-card text-brand-secondary border border-brand-border">
-                    {solution.badge}
-                  </span>
-                </div>
-
-                <div className="space-y-1.5">
-                  <h3 className="text-lg font-bold text-brand-text group-hover:text-brand-accent transition-colors">
-                    {solution.title}
-                  </h3>
-                  <p className="text-xs text-brand-accent font-medium">
-                    {solution.tagline}
-                  </p>
-                  <p className="text-xs text-brand-secondary leading-relaxed pt-1">
-                    {solution.shortSummary}
-                  </p>
-                </div>
-
-                {/* Core Module Bullets */}
-                <div className="pt-2 border-t border-brand-border space-y-1.5">
-                  <span className="text-[11px] font-semibold text-brand-text uppercase tracking-wider block">
-                    Core Capabilities:
-                  </span>
-                  <ul className="space-y-1 text-xs text-brand-muted">
-                    {solution.coreModules.slice(0, 3).map((mod, idx) => (
-                      <li key={idx} className="flex items-start gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-brand-accent mt-0.5 flex-shrink-0" />
-                        <span className="line-clamp-1">{mod}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <article className="lg:col-span-5 rounded-2xl border border-brand-border bg-brand-surface p-7 sm:p-9 flex flex-col justify-between gap-8">
+            <div className="space-y-6">
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-xs font-mono uppercase tracking-wider text-brand-muted">
+                  Featured system / 01
+                </span>
+                <span className="grid h-11 w-11 place-items-center rounded-xl border border-brand-border bg-brand-card">
+                  {getIcon(featuredSolution.id)}
+                </span>
               </div>
 
-              <div className="pt-4 border-t border-brand-border flex items-center justify-between">
-                <Link
-                  href={`/solutions#${solution.id}`}
-                  className="text-xs font-bold text-brand-accent hover:underline inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform"
-                >
-                  <span>Explore System Modules</span>
-                  <ArrowRight className="w-3 h-3" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="text-xs text-brand-muted hover:text-brand-text font-medium"
-                >
-                  Request Scoping →
-                </Link>
+              <div className="space-y-3">
+                <span className="text-xs font-mono font-semibold uppercase tracking-wider text-brand-accent">
+                  {featuredSolution.badge}
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-brand-text">
+                  {featuredSolution.title}
+                </h3>
+                <p className="text-sm font-medium text-brand-secondary">
+                  {featuredSolution.tagline}
+                </p>
+                <p className="text-sm leading-relaxed text-brand-secondary">
+                  {featuredSolution.shortSummary}
+                </p>
               </div>
+
+              <ul className="space-y-3 border-t border-brand-border pt-5 text-sm text-brand-secondary">
+                {featuredSolution.coreModules.slice(0, 4).map((module) => (
+                  <li key={module} className="flex items-start gap-2.5">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-accent" />
+                    <span>{module}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          ))}
+
+            <div className="flex flex-wrap items-center gap-4 border-t border-brand-border pt-5">
+              <Link
+                href={`/solutions/${featuredSolution.slug}`}
+                className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-brand-accent px-4 text-sm font-semibold text-brand-background transition-colors hover:bg-brand-accent-hover"
+              >
+                View system detail
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/contact"
+                className="text-sm font-medium text-brand-secondary transition-colors hover:text-brand-text"
+              >
+                Discuss project scope
+              </Link>
+            </div>
+          </article>
+
+          <div className="lg:col-span-7 divide-y divide-brand-border border-y border-brand-border">
+            {solutionsData.slice(1, 6).map((solution, index) => (
+              <Link
+                key={solution.id}
+                href={`/solutions#${solution.slug}`}
+                className="group flex min-h-24 items-center gap-4 py-5 transition-colors hover:bg-brand-surface/70 sm:gap-6 sm:px-4"
+              >
+                <span className="w-8 flex-shrink-0 font-mono text-xs text-brand-muted">
+                  {String(index + 2).padStart(2, "0")}
+                </span>
+                <span className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg border border-brand-border bg-brand-card group-hover:border-brand-accent/50">
+                  {getIcon(solution.id)}
+                </span>
+                <span className="min-w-0 flex-1 space-y-1">
+                  <span className="block font-semibold text-brand-text transition-colors group-hover:text-brand-accent">
+                    {solution.title}
+                  </span>
+                  <span className="block text-xs leading-relaxed text-brand-muted line-clamp-2">
+                    {solution.shortSummary}
+                  </span>
+                </span>
+                <ArrowRight className="h-4 w-4 flex-shrink-0 text-brand-muted transition-transform group-hover:translate-x-1 group-hover:text-brand-accent" />
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>

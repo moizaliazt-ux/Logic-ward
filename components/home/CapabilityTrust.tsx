@@ -1,67 +1,60 @@
 import React from "react";
 import {
+  FileCheck2,
   Layers,
-  Sparkles,
-  Cpu,
-  GitBranch,
+  ShieldCheck,
 } from "lucide-react";
 
 export function CapabilityTrust() {
   const capabilities = [
     {
+      icon: <FileCheck2 className="w-5 h-5 text-brand-accent" />,
+      title: "Scope before implementation",
+      description:
+        "Requirements, assumptions, deliverables, and acceptance criteria are defined for the engagement before work begins.",
+    },
+    {
       icon: <Layers className="w-5 h-5 text-brand-accent" />,
-      title: "Contractual Code & IP Ownership",
+      title: "Architecture shaped by the work",
       description:
-        "Subject to agreed contract terms, custom source code, schemas, and configurations transfer to your company upon milestone completion. Zero proprietary vendor lock-in.",
+        "Technical choices account for workflows, integrations, data needs, security boundaries, and ongoing maintenance.",
     },
     {
-      icon: <Cpu className="w-5 h-5 text-brand-accent" />,
-      title: "Performance-Engineered Architecture",
+      icon: <ShieldCheck className="w-5 h-5 text-brand-accent" />,
+      title: "Evidence over hype",
       description:
-        "Built with Next.js App Router and caching strategies selected for the page content, hosting, and operational requirements.",
-    },
-    {
-      icon: <Sparkles className="w-5 h-5 text-brand-accent" />,
-      title: "Pragmatic, Scoped Automation",
-      description:
-        "We prioritize practical workflow automation with schema validation, structured APIs, and human review thresholds where operational accuracy is essential.",
-    },
-    {
-      icon: <GitBranch className="w-5 h-5 text-brand-accent" />,
-      title: "Milestone-Driven Governance",
-      description:
-        "Project roadmaps are broken into discrete functional sprints demonstrated on private staging servers before milestone sign-off and payment release.",
+        "Reference work is labeled clearly. Performance and business outcomes are published only when supported by evidence.",
     },
   ];
 
   return (
-    <section className="py-14 border-b border-brand-border  bg-brand-card text-brand-text">
+    <section className="border-b border-brand-border bg-brand-card py-14 text-brand-text">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-10">
+        <div className="mb-9 max-w-2xl">
           <span className="text-xs font-mono uppercase tracking-wider text-brand-accent font-semibold">
-            ENGINEERING STANDARDS & INTEGRITY
+            HOW WE APPROACH THE WORK
           </span>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-brand-text mt-1.5">
-            How We Partner With Ambitious Organizations
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-brand-text sm:text-3xl">
+            Clear decisions, grounded in your requirements
           </h2>
-          <p className="text-xs sm:text-sm text-brand-secondary mt-2">
-            We operate with engineering rigor, clear communication, and transparent accountability—grounded in verifiable delivery practices.
+          <p className="mt-2 text-sm leading-relaxed text-brand-secondary">
+            Project scope, implementation choices, and commercial terms are confirmed for each engagement rather than assumed.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {capabilities.map((item, index) => (
+        <div className="grid grid-cols-1 divide-y divide-brand-border border-y border-brand-border md:grid-cols-3 md:divide-x md:divide-y-0">
+          {capabilities.map((item) => (
             <div
-              key={index}
-              className="p-6 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-accent/40 hover:bg-brand-elevated hover:shadow-sm transition-all space-y-3 group"
+              key={item.title}
+              className="py-5 md:px-6 md:py-6 first:md:pl-0 last:md:pr-0"
             >
-              <div className="w-10 h-10 rounded-xl bg-brand-card border border-brand-border flex items-center justify-center group-hover:border-brand-accent transition-colors shadow-2xs">
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-brand-border bg-brand-surface">
                 {item.icon}
               </div>
-              <h3 className="text-base font-bold text-brand-text group-hover:text-brand-accent transition-colors">
+              <h3 className="text-base font-semibold text-brand-text">
                 {item.title}
               </h3>
-              <p className="text-xs sm:text-sm text-brand-secondary leading-relaxed">
+              <p className="mt-2 text-sm leading-relaxed text-brand-secondary">
                 {item.description}
               </p>
             </div>

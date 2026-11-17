@@ -5,7 +5,7 @@ import { ConversionCTA } from "@/components/home/ConversionCTA";
 import { Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Services Directory — 40+ Full-Spectrum IT & Engineering Capabilities",
+  title: "Services Directory — Software & Engineering Capabilities",
   description:
     "Explore our complete service portfolio across 7 disciplines: Custom Software & ERP, AI Automation, Web & E-Commerce, Mobile Apps, Growth & SEO, IT Infrastructure, and Content.",
 };
@@ -14,7 +14,7 @@ export default function ServicesPage() {
   return (
     <div className="flex flex-col w-full bg-brand-surface  text-brand-text">
       {/* Header Banner */}
-      <section className="relative py-16 md:py-24 bg-brand-surface  text-brand-text border-b border-brand-border">
+      <section className="page-hero relative py-16 md:py-24 bg-brand-surface text-brand-text border-b border-brand-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono uppercase tracking-wider bg-brand-card  text-brand-accent border border-brand-border">
@@ -25,7 +25,7 @@ export default function ServicesPage() {
               Services & Engineering Capabilities
             </h1>
             <p className="text-base sm:text-lg text-brand-muted leading-relaxed">
-              Explore our structured service directory organized across 7 core disciplines. Every capability is delivered with modular code, documented scoping, and contractual IP ownership.
+              Explore service topics across seven disciplines. Deliverables, documentation, ownership, review cadence, and commercial terms are confirmed for each engagement in writing.
             </p>
           </div>
         </div>

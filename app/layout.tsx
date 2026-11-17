@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — Full-Service IT, Software & Digital Growth Agency`,
+    default: `${siteConfig.name} — Software, Digital Products & Business Systems`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "IT Infrastructure & Networking",
     "Digital Marketing & SEO",
     "AEO Answer Engine Optimization",
-    "Software Agency Lahore Karachi",
+    "Software Engineering Agency",
   ],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
@@ -48,15 +48,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteConfig.url,
-    title: `${siteConfig.name} — Technology That Moves Your Business Forward`,
+    title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
     siteName: siteConfig.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — Full-Service IT & Digital Solutions Agency`,
+    title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
-    creator: "@logicward",
   },
   robots: {
     index: true,
@@ -80,6 +79,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
     >
       <head>
         <OrganizationJsonLd />
